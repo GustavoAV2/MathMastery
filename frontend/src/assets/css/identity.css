@@ -1,0 +1,52 @@
+﻿#friend-form {
+    margin: 5px;
+    margin-top: 0px;
+}
+.user-card {
+    display: flex;
+    width: 100%;
+    height: 85vh;
+}
+.added-friends-container {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    border: solid 1px black;
+}
+
+.preview-friend-container {
+    cursor: pointer;
+    margin-top: 1px;
+    padding-left: 10px;
+    padding-top: 10px;
+    display: flex;
+    border: solid 1px black;
+    background-color: whitesmoke;
+}
+
+.preview-friend-container img {
+    margin: 5px;
+}
+
+.preview-friend-container:hover {
+    border: solid 1px blueviolet;
+}
+
+.preview-friend-container {
+    cursor: pointer;
+    padding-left: 10px;
+    padding-top: 10px;
+    display: flex;
+    border-bottom: solid 1px black;
+}
+
+.search-user {
+    width: 100%;
+    height: 90vh;
+    position: relative;
+}
+
+.search-user h1 {
+    text-align: center;
+}

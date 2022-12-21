@@ -1,0 +1,33 @@
+﻿/* ALL PROJECT STYLE */
+
+#train_button {
+    transition: 1.5s;
+}
+
+#train_button:hover {
+    font-size: 63px;
+}
+
+.w3-card{
+    cursor: pointer;
+}
+.w3-card img {
+    height: 60px;
+    transition: 0.5s;
+}
+.w3-card:hover h3 {
+    transition: 0.5s;
+}
+
+.w3-card:hover img {
+    height: 80px
+}
+.w3-card:hover h3 {
+    color: #673FD7;
+    text-shadow: rgb(0 0 0 / 25%) 0 3px 8px;
+}
+
+.w3-row-padding a:hover{
+    color: black;
+}
+

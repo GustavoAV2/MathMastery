@@ -1,0 +1,105 @@
+﻿.control-cont {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.centralize {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#seconds {
+    font-size: 10px;
+}
+.loading {
+    text-shadow: rgb(0 0 0 / 25%) 0 3px 8px;
+    border: solid #673FD7;
+    background-color: #673FD7;
+    border-radius: 8px;
+    transition: 0.8s;
+}
+#dumb {
+    margin: 20px;
+    height: 100px;
+    width: 100px;
+}
+#nerd {
+    margin: 20px;
+    height: 100px;
+    width: 100px;
+}
+.loading label {
+    font-size: 24px;
+}
+#options {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type=text]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type=text] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.number {
+    font-size: 60px;
+    width: 40px;
+    margin: 5px;
+    padding: 5px;
+    border: none;
+    border-bottom: solid;
+    border-width: 0 0 2px;
+    outline: 0;
+}
+
+.number:focus {
+    border: none;
+    border-bottom: solid;
+    border-bottom-color: #673FD7;
+}
+
+@media only screen and (max-device-width: 900px) {
+    .option-result {
+    }
+    #nerd {
+        margin: 10px;
+        height: 30px;
+        width: 30px;
+    }
+    #dumb {
+        margin: 10px;
+        height: 30px;
+        width: 30px;
+    }
+    #dumb-label {
+        font-size: 25px;
+    }
+    #nerd-label {
+        font-size: 25px;
+    }
+    #options {
+        flex-direction: column-reverse;
+    }
+}
+
+.fade-in {
+    transition: all .75s ease;
+    animation: slideMe .1s ease-in;
+}
+
+@keyframes slideMe {
+    0%{
+        transform: translateX(-500px);
+    }
+    100% {
+        transform: translateX(100px);
+    }
+}
+
