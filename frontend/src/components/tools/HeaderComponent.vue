@@ -10,21 +10,21 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link">Home</a>
+                            <router-link to="/" class="nav-link">Home</router-link>
                         </li>
                         
                         <template v-if="token != null">
                             <li class="nav-item">
-                                <a class="nav-link">Profile</a>
+                                <router-link to="/profile" class="nav-link">Profile</router-link>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link">Friends</a>
+                                <router-link to="/friends" class="nav-link">Friends</router-link>
                             </li>
                         </template> 
 
                         <li class="nav-item">
-                            <a class="nav-link">Challenges</a>
+                            <router-link to="/mathgame/create" class="nav-link">Challenges</router-link>
                         </li>
                     </ul>
                     
@@ -48,7 +48,7 @@
                                 <router-link to="/register" class="nav-link text-dark">Register</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link to="/sing" class="nav-link text-dark">Login</router-link>
+                                <router-link to="/sign" class="nav-link text-dark">Login</router-link>
                             </li>
                         </template> 
                     </ul>
@@ -116,6 +116,7 @@ export default {
     padding:0px;
 }
 .nav-link {
+    cursor: pointer;
     text-decoration: none;
     color: black;
 }

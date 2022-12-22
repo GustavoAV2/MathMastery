@@ -2,9 +2,6 @@
   <WebHeader current-page="sign" />
   <div class="container-fluid text-center mt-5" id="sign-container">
     <div class="row">
-      <div class="col-12 h1">Math WebSite</div>
-    </div>
-    <div class="row">
       <div class="col-12 h5">Registrar</div>
     </div>
     <div class="row mt-2 form-container">
@@ -35,6 +32,7 @@
                 placeholder="Nome de usuário">
             </div>
           </div>
+          
           <template v-if="hidden">
             <div class="row mb-3">
               <div class="col-12">
@@ -42,33 +40,7 @@
                   placeholder="Senha">
               </div>
             </div>
-            <div class="row mb-3">
-              <div class="col-12">
-                <input type="password" class="form-inputs" v-model="confirm_password" id="user-confirm-password-input"
-                  placeholder="Confirme a senha">
-              </div>
-            </div>
           </template>
-
-          <template v-else>
-            <div class="row mb-3">
-              <div class="col-12">
-                <input type="text" class="form-inputs" v-model="user.password" id="user-password-input"
-                  placeholder="Senha" disabled>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-12">
-                <input type="text" class="form-inputs" v-model="confirm_password" id="user-confirm-password-input"
-                  placeholder="Confirme a senha" disabled>
-              </div>
-            </div>
-          </template>
-
-          <div id="checkbox-container">
-            <input type="checkbox" @change="hidden = !hidden">
-            <label>Exibir senha</label>
-          </div>
 
           <div class="row mb-3">
             <div class="col-12">

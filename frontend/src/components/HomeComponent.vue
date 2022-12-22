@@ -2,8 +2,7 @@
     <div style="width: 100%; height: 100%;">
         <header class="w3-container w3-theme w3-padding" id="myHeader">
           <div class="w3-center">
-          <h4>Voce esta pronto?</h4>
-          <h1 class="w3-xxxlarge w3-animate-bottom">TREINE SEU CEREBRO!</h1>
+          <h1 class="w3-xxxlarge w3-animate-bottom">Voce esta pronto?</h1>
             <div class="w3-padding-32">
                 <template  v-if="token != null">
                     <a>
@@ -54,7 +53,7 @@
                     <div class="w3-third" id="normal-submit">
                         <div class="w3-card w3-container" style="min-height:460px">
                             <h3>Normal</h3>
-                            <img src="/img/ICONS/black-hole-1.png"/>
+                            <img src="@/assets/img/ICONS/black-hole-1.png"/>
                             <hr />
                             <h4>Addition and subtraction</h4>
                             <h4>No time to resolve</h4>
@@ -67,7 +66,7 @@
                     <div class="w3-third">
                         <div class="w3-card w3-container" id="hard-submit" style="min-height:460px">
                             <h3>Hard</h3>
-                            <img src="/img/ICONS/black-hole-2.png"/>
+                            <img src="@/assets/img/ICONS/black-hole-2.png"/>
                             <hr />
                             <h4>Subtraction, addition and division</h4>
                             <h4>Time to resolve</h4>
@@ -80,7 +79,7 @@
                     <div class="w3-third" id="genius-submit">
                         <div class="w3-card w3-container" style="min-height:460px">
                             <h3>Genius</h3>
-                            <img src="/img/ICONS/black-hole-3.png"/>
+                            <img src="@/assets/img/ICONS/black-hole-3.png"/>
                             <hr />
                             <h4>Subtraction, addition, division and multiplication</h4>
                             <h4>Time to resolve</h4>
@@ -93,21 +92,21 @@
             <template v-else>
                 <a>
                     <div class="w3-third">
-                            <div class="w3-card w3-container" style="min-height:460px">
-                                <h3>Normal</h3>
-                                <img src="/img/ICONS/black-hole-1.png"/>
-                                <hr />
-                                <h4>Addition and subtraction</h4>
-                                <h4>No time to resolve</h4>
-                                <h4>Multiple choice</h4>
-                                <h4>Five challenges</h4>
-                            </div>
+                        <div class="w3-card w3-container" style="min-height:460px">
+                            <h3>Normal</h3>
+                            <img src="@/assets/img/ICONS/black-hole-1.png"/>
+                            <hr />
+                            <h4>Addition and subtraction</h4>
+                            <h4>No time to resolve</h4>
+                            <h4>Multiple choice</h4>
+                            <h4>Five challenges</h4>
+                        </div>
                     </div>
     
                     <div class="w3-third">
-                        <div class="w3-card w3-container" style="min-height:460px">
+                        <div class="w3-card w3-container" style="min-height:460px;">
                             <h3>Hard</h3>
-                            <img src="/img/ICONS/black-hole-2.png"/>
+                            <img src="@/assets/img/ICONS/black-hole-2.png"/>
                             <hr />
                             <h4>Subtraction, addition and division</h4>
                             <h4>Time to resolve</h4>
@@ -119,7 +118,7 @@
                     <div class="w3-third">
                       <div class="w3-card w3-container" style="min-height:460px">
                           <h3>Genius</h3>
-                          <img src="/img/ICONS/black-hole-3.png"/>
+                          <img src="@/assets/img/ICONS/black-hole-3.png"/>
                           <hr />
                           <h4>Subtraction, addition, division and multiplication</h4>
                           <h4>Time to resolve</h4>

@@ -1,5 +1,4 @@
 <template>
-    <link rel="stylesheet" href="~/css/identity.css" asp-append-version="true" />
     <WebHeader current-page="home" />
     <Friends />
 </template>
@@ -14,5 +13,6 @@
 </script>
 
 <style>
+@import '@/assets/css/identity.css';
 </style>
   

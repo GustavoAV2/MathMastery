@@ -13,5 +13,6 @@
 </script>
 
 <style>
+  @import '@/assets/css/create_game.css';
+  @import '@/assets/css/game.css';
 </style>
-  

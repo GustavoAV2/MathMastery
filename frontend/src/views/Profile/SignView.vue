@@ -2,9 +2,6 @@
   <WebHeader current-page="sign" />
   <div class="container-fluid text-center mt-5" id="sign-container">
     <div class="row">
-      <div class="col-12 h1">Math WebSite</div>
-    </div>
-    <div class="row">
       <div class="col-12 h5">Entrar</div>
     </div>
     <div class="row mt-2">
@@ -20,12 +17,7 @@
               <input class="form-inputs" type="password" v-model="user.password" id="user-password-input" placeholder="Senha">
             </div>
           </div>
-          <div class="row mb-3">
-            <div class="col-12">
-              <label class="form-check-label mx-2" for="rememberme-check">Mantenha-me conectado</label>
-              <input type="checkbox" class="form-check-input mt-1" id="rememberme-check">
-            </div>
-          </div>
+
           <div class="row mb-3">
             <div class="col-12"> 
               <button id="submit-button" class="btn btn-dark" @click="loginUser()">Entrar</button>

@@ -1,5 +1,4 @@
 <template>
-<link rel="stylesheet" href="~/css/create_game.css" asp-append-version="true" />
 <div class="container">
     <section class="jumbotron text-center">
         <p style="font-size: 20px;">{{game.resolvedProblems}} / {{game.maxChallenges}}</p>
@@ -62,3 +61,7 @@ export default {
     }
 }
 </script>
+
+<style>
+@import '@/assets/css/create_game.css';
+</style>
