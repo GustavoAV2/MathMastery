@@ -18,6 +18,14 @@
             </div>
           </div>
 
+          <div>
+            <transition v-if="message.content" name="slide" mode="out-in" appear>
+              <div>
+                {{ message.content }}
+              </div>
+            </transition>
+          </div>
+          
           <div class="row mb-3">
             <div class="col-12"> 
               <button id="submit-button" class="btn btn-dark" @click="loginUser()">Entrar</button>
@@ -31,13 +39,7 @@
         Não possui cadastro? <router-link to="/register" id="register-link">Registrar</router-link>
       </div>
     </div>
-    <div>
-        <transition v-if="message.content" name="slide" mode="out-in" appear>
-          <div :class="message.type" role="alert">
-            {{ message.content }}
-          </div>
-        </transition>
-    </div>
+    
   </div>
 </template>
 
@@ -53,8 +55,8 @@ export default {
       return{
           loading: false,
           user:{
-              email:null,
-              password:null
+            email:null,
+            password:null
           }
       }
   },
@@ -62,16 +64,17 @@ export default {
       loginUser(){
           this.loading = true
           User.login(this.user).then(response => {
-              if (response.data.access_token){
-                localStorage.setItem('token', response.data.access_token)
+              console.log(response);
+              if (response.data){
+                localStorage.setItem('token', response.data)
                 this.$router.push('/')
               }
               else{
-                this.generateMessage("Credenciais incorretas!", "alert alert-danger")
+                this.generateMessage("Credenciais incorretas!")
               }
           }).
           catch(() => {
-              this.generateMessage("Credenciais incorretas!", "alert alert-danger")
+              this.generateMessage("Credenciais incorretas!")
           }).
           finally(() => this.loading = false)
       }

@@ -6,22 +6,28 @@
             <div class="w3-padding-32">
                 <template  v-if="token != null">
                     <a>
-                        <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" style="font-weight:900;">
-                            Iniciar!
-                        </button>
+                        <router-link to="/sign">
+                            <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" style="font-weight:900;">
+                                Iniciar!
+                            </button>
+                        </router-link>
                     </a>
                 </template>
 
                 <template v-else>
                     <a>
-                        <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" style="font-weight:900;">
-                            Iniciar!
-                        </button>
+                        <router-link to="/sign">
+                            <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" style="font-weight:900;">
+                                Iniciar!
+                            </button>
+                        </router-link>
                     </a>
                     <a>
-                        <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" style="font-weight:900;">
-                            Login
-                        </button>
+                        <router-link to="/sign">
+                            <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" style="font-weight:900;">
+                                Login
+                            </button>
+                        </router-link>
                     </a>
                 </template>
             </div>

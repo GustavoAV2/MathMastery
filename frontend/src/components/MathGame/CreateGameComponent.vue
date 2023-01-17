@@ -67,7 +67,7 @@
             </template>
 
             <br />
-            <button type="submit" class="button-36" role="button">Iniciar desafio</button>
+            <button class="button-36" @click="createGame(info)">Iniciar desafio</button>
         </div>
     </form>
 </div>
@@ -75,6 +75,7 @@
 
 <script>    
 import User from '@/services/users'
+import Game from '@/services/game'
 
 export default {
     data(){
@@ -111,6 +112,14 @@ export default {
                 console.log("Genius Checked")
                 this.info = "genius";
             }
+        },
+        createGame(info){
+            Game.createGame(info).then(response => {
+                console.log(response);
+            }).
+            catch(() => {
+                this.generateMessage("Nao foi possivel iniciar a sessao!", "alert alert-danger")
+            })
         }
     }
 }

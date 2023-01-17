@@ -86,7 +86,6 @@ export default {
         password: null,
         birthdate: null,
         username: null,
-        genre: null,
         first_name: null,
         last_name: null,
       }
