@@ -10,15 +10,15 @@ namespace HttpHost.Models.GameModels
         public Random _random;
         public int FirstNumber { get; set; }
         public int LastNumber { get; set; }
-        public Operation Operation { get; set; }
+        public ChallengeOperation Operation { get; set; }
 
-        public Challenge(Operation operation, int maxNumber)
+        public Challenge(ChallengeOperation operation, int maxNumber, int firstNumber = 0, int lastNumber = 0)
         {
             _random = new Random();
             Operation = operation;
             MaxNumber = maxNumber;
-            FirstNumber = GenerateValueByOperation(MaxNumber);
-            LastNumber = GenerateValueByOperation(FirstNumber);
+            FirstNumber = firstNumber > 0 ? firstNumber : GenerateValueByOperation(MaxNumber);
+            LastNumber = lastNumber > 0 ? lastNumber : GenerateValueByOperation(FirstNumber);
         }
         public float ActualResult
         {
@@ -26,13 +26,13 @@ namespace HttpHost.Models.GameModels
             {
                 switch (Operation)
                 {
-                    case Operation.Sum:
+                    case ChallengeOperation.Sum:
                         return FirstNumber + LastNumber;
-                    case Operation.Subtract:
+                    case ChallengeOperation.Subtract:
                         return FirstNumber - LastNumber;
-                    case Operation.Division:
+                    case ChallengeOperation.Division:
                         return FirstNumber / LastNumber;
-                    case Operation.Multiply:
+                    case ChallengeOperation.Multiply:
                         return FirstNumber * LastNumber;
                     default:
                         return FirstNumber + LastNumber;

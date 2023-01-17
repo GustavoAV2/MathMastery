@@ -36,10 +36,6 @@ namespace HttpHost
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>();
-            }).ConfigureServices(services =>
-            {
-                services.AddDbContext<UserDb>(opt => opt.UseInMemoryDatabase("MemoryDatabase"));
-                services.AddDbContext<FriendDb>(opt => opt.UseInMemoryDatabase("MemoryDatabase"));
             });
     }
 }

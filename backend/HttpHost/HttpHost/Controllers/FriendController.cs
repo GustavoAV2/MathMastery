@@ -4,8 +4,10 @@ using HttpHost.Models;
 using HttpHost.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using HttpHost.Middlewares.Identification;
+using Microsoft.AspNetCore.Authorization;
 
-namespace AutomationsAPI.HttpHost.Controllers
+namespace HttpHost.Controllers
 {
     [ApiController]
     [Route("/friend")]
@@ -21,6 +23,7 @@ namespace AutomationsAPI.HttpHost.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("/friend")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -37,37 +40,13 @@ namespace AutomationsAPI.HttpHost.Controllers
             return Ok(friends);
         }
 
-        [HttpGet]
-        [Route("/friend/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetUserFriendsById([FromRoute] string id, int page = 0)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-                return BadRequest();
-
-            var sw = Stopwatch.StartNew();
-
-            Friend? friend = await _friendDb.All.FindAsync(id);
-            _logger.LogInformation("Get friend by id. Time to search >", sw.ElapsedMilliseconds);
-
-            if (friend != null)
-            {
-                return Ok(friend);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
-
         [HttpPost]
+        [Authorize]
         [Route("/friend")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> PostFriend(FriendDto friend)
+        public async Task<IActionResult> RequestFriend(FriendDto friend)
         {
             var newFriend = new Friend(
                    requesterId : friend.RequesterId, 
@@ -81,36 +60,22 @@ namespace AutomationsAPI.HttpHost.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [Route("/friend/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> ConfirmFriend(string id, string requesterId)
+        public async Task<IActionResult> ConfirmFriend(string receiverId, string requesterId)
         {
-            var friend = _friendDb.All.Where(f => f.RequesterId == requesterId).Single();
+            var foundFriendRequisition = _friendDb.Friend.
+                Where(f => f.RequesterId == requesterId && f.ReceiverId == receiverId).FirstOrDefault();
 
-            if (friend is null) return NotFound();
+            if (foundFriendRequisition is null) return NotFound();
 
-            friend.ConfirmationDate = DateTime.Now;
+            foundFriendRequisition.ConfirmationDate = DateTime.Now;
             await _friendDb.SaveChangesAsync();
 
-            return Ok(friend);
-        }
-
-        [HttpDelete]
-        [Route("/friend")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> PutUser(string id)
-        {
-            if (await _friendDb.All.FindAsync(id) is Friend friend)
-            {
-                _friendDb.All.Remove(friend);
-                await _friendDb.SaveChangesAsync();
-                return Ok(friend);
-            }
-            return NotFound();
+            return Ok(foundFriendRequisition);
         }
     }
 }

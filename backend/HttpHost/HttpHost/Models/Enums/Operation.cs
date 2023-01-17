@@ -1,6 +1,6 @@
 ﻿namespace HttpHost.Models.Enums
 {
-    public enum Operation
+    public enum ChallengeOperation
     {
         Sum = '+',
         Subtract = '-',

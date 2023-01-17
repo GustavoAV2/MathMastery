@@ -12,9 +12,10 @@ namespace HttpHost.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasKey(t => t.Id);
+            modelBuilder.Entity<Users>().HasKey(t => t.Id);
         }
 
-        public DbSet<User> All => Set<User>();
+        public DbSet<Users> User { get; set; }
+        public DbSet<Users> All => Set<Users>();
     }
 }
