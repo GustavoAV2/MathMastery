@@ -7,6 +7,7 @@ import FriendsView from '../views/Profile/FriendsView.vue'
 import SignView from '../views/Profile/SignView.vue'
 import RegisterView from '../views/Profile/RegisterView.vue'
 
+import ErrorView from '../views/ErrorView.vue'
 import GameView from '../views/MathGame/GameView.vue'
 import CreateGameView from '../views/MathGame/CreateGameView.vue'
 import GameResultView from '../views/MathGame/GameResultView.vue'
@@ -46,7 +47,7 @@ const router = createRouter({
       component: CreateGameView
     },
     {
-      path: '/mathgame',
+      path: '/mathgame/:difficulty',
       name: 'mathgame',
       component: GameView
     },
@@ -59,6 +60,11 @@ const router = createRouter({
       path: '/mathgame/test',
       name: 'test_game',
       component: ChallengeForTestView
+    },
+    {
+      path: '/error',
+      name: 'error',
+      component: ErrorView
     },
     { 
       path: '/:pathMatch(.*)*', 
