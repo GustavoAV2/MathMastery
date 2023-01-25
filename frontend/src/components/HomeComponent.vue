@@ -139,23 +139,14 @@
 </template>
 
 <script >
-import User from '@/services/users'
-
 export default {
     data(){
         return{
             token: null,
-            user: {"username": ""}
         }
     },
     mounted() {
         this.token = localStorage.getItem("token");
-        if (this.token != null){
-            User.getByToken(this.token).then(response => {
-                console.log(response.data)
-                this.user = response.data;
-            }).catch(()=>{})
-        }
     }
 }
 </script>
