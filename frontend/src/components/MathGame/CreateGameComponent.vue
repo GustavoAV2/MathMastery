@@ -1,82 +1,77 @@
 <template>
 <div class="container">
-    <form asp-action="Index" asp-controller="MathGame" method="post">
-        <div style="display: flex; flex-direction: column; justify-content: center;">
-           <h2>Dificuldade:</h2>
+    <div style="display: flex; flex-direction: column; justify-content: center;">
+        <h2>Dificuldade:</h2>
 
-            <label class="form-control" style="padding: 15px; display: flex; justify-content: space-evenly; flex-direction: row;">
-                <div class="btn-group btn-group-toggle" style="width: 100%; height: 100%;" data-toggle="buttons">
-                    <label class="btn btn-secondary active">
-                        <input type="radio" v-on:focus="setInfo(1)" name="difficulty" id="option1" autocomplete="off" value="easy">
-                        <p>Facil</p>
-                    </label>
-                    <label class="btn btn-success">
-                        <input type="radio" checked v-on:focus="setInfo(2)" name="difficulty" id="option2" autocomplete="off" value="normal">
-                        <p>Normal</p> 
-                    </label>
-                    <label class="btn btn-danger">
-                        <input type="radio" v-on:focus="setInfo(3)" name="difficulty" id="option3" autocomplete="off" value="hard">
-                        <p>Dificil</p>
-                    </label>
-                    <label class="btn btn-dark">
-                        <input type="radio" v-on:focus="setInfo(4)" name="difficulty" id="option4" autocomplete="off" value="genius">
-                        <p>Genial</p>
-                    </label>
-                </div>
-            </label>
+        <label class="form-control" style="padding: 15px; display: flex; justify-content: space-evenly; flex-direction: row;">
+            <div class="btn-group btn-group-toggle" style="width: 100%; height: 100%;" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                    <input type="radio" v-on:focus="setInfo(1)" name="difficulty" id="option1" autocomplete="off" value="easy">
+                    <p>Facil</p>
+                </label>
+                <label class="btn btn-success">
+                    <input type="radio" checked v-on:focus="setInfo(2)" name="difficulty" id="option2" autocomplete="off" value="normal">
+                    <p>Normal</p> 
+                </label>
+                <label class="btn btn-danger">
+                    <input type="radio" v-on:focus="setInfo(3)" name="difficulty" id="option3" autocomplete="off" value="hard">
+                    <p>Dificil</p>
+                </label>
+                <label class="btn btn-dark">
+                    <input type="radio" v-on:focus="setInfo(4)" name="difficulty" id="option4" autocomplete="off" value="genius">
+                    <p>Genial</p>
+                </label>
+            </div>
+        </label>
 
-            <br />
-            <template v-if="info == 'easy'">
-                <div class="card border-primary mb-3 fade-in" id="easy-info">
-                    <div class="card-header">Como funciona essa dificuldade?</div>
-                    <div class="card-body text-primary">
-                        <h5 class="card-title">Facil</h5>
-                        <p class="card-text">Addition and subtraction, no time to resolve, multiple choice, five challenges.</p>
-                    </div>
+        <br />
+        <template v-if="info == 'easy'">
+            <div class="card border-primary mb-3 fade-in" id="easy-info">
+                <div class="card-header">Como funciona essa dificuldade?</div>
+                <div class="card-body text-primary">
+                    <h5 class="card-title">Facil</h5>
+                    <p class="card-text">Addition and subtraction, no time to resolve, multiple choice, five challenges.</p>
                 </div>
-            </template>
-            
-            <template v-if="info == 'normal'">
-                <div class="card border-success mb-3 fade-in" id="normal-info">
-                    <div class="card-header">Como funciona essa dificuldade?</div>
-                    <div class="card-body text-success">
-                        <h5 class="card-title">Normal</h5>
-                        <p class="card-text">Addition and subtraction, no time to resolve, multiple choice, five challenges.</p>
-                    </div>
+            </div>
+        </template>
+        
+        <template v-if="info == 'normal'">
+            <div class="card border-success mb-3 fade-in" id="normal-info">
+                <div class="card-header">Como funciona essa dificuldade?</div>
+                <div class="card-body text-success">
+                    <h5 class="card-title">Normal</h5>
+                    <p class="card-text">Addition and subtraction, no time to resolve, multiple choice, five challenges.</p>
                 </div>
-            </template>
+            </div>
+        </template>
 
-            <template v-if="info == 'hard'">
-                <div class="card border-danger mb-3 fade-in" id="hard-info">
-                    <div class="card-header">Como funciona essa dificuldade?</div>
-                    <div class="card-body text-danger">
-                        <h5 class="card-title">Dificil</h5>
-                        <p class="card-text">Addition, subtraction and division, <strong>time to resolve</strong>, multiple choice, five challenges.</p>
-                    </div>
+        <template v-if="info == 'hard'">
+            <div class="card border-danger mb-3 fade-in" id="hard-info">
+                <div class="card-header">Como funciona essa dificuldade?</div>
+                <div class="card-body text-danger">
+                    <h5 class="card-title">Dificil</h5>
+                    <p class="card-text">Addition, subtraction and division, <strong>time to resolve</strong>, multiple choice, five challenges.</p>
                 </div>
-            </template>
+            </div>
+        </template>
 
-            <template v-if="info == 'genius'">
-                <div class="card border-dark mb-3 fade-in" id="genius-info">
-                    <div class="card-header">Como funciona essa dificuldade?</div>
-                    <div class="card-body text-dark">
-                        <h5 class="card-title">Genial</h5>
-                        <p class="card-text">Addition, subtraction, division and multiplication, <strong>time to resolve, no multiple choice</strong>, five challenges.</p>
-                    </div>
+        <template v-if="info == 'genius'">
+            <div class="card border-dark mb-3 fade-in" id="genius-info">
+                <div class="card-header">Como funciona essa dificuldade?</div>
+                <div class="card-body text-dark">
+                    <h5 class="card-title">Genial</h5>
+                    <p class="card-text">Addition, subtraction, division and multiplication, <strong>time to resolve, no multiple choice</strong>, five challenges.</p>
                 </div>
-            </template>
+            </div>
+        </template>
 
-            <br />
-            <button class="button-36" @click="createGame(info)">Iniciar desafio</button>
-        </div>
-    </form>
+        <br />
+        <button class="button-36" @click="createGame(info)">Iniciar desafio</button>
+    </div>
 </div>
 </template>
 
 <script>    
-import User from '@/services/users'
-import Game from '@/services/game'
-
 export default {
     data(){
         return{
@@ -87,12 +82,6 @@ export default {
     },
     mounted() {
         this.token = localStorage.getItem("token");
-        if (this.token != null){
-            User.getByToken(this.token).then(response => {
-                console.log(response.data)
-                this.user = response.data;
-            }).catch(()=>{})
-        }
     },
     methods:{
         setInfo(infoNum){
@@ -114,12 +103,7 @@ export default {
             }
         },
         createGame(info){
-            Game.createGame(info).then(response => {
-                console.log(response);
-            }).
-            catch(() => {
-                this.generateMessage("Nao foi possivel iniciar a sessao!", "alert alert-danger")
-            })
+            this.$router.push('/mathgame/' + info)
         }
     }
 }
