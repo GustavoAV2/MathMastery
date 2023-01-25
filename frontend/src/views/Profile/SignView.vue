@@ -18,12 +18,10 @@
             </div>
           </div>
 
-          <div>
-            <transition v-if="message.content" name="slide" mode="out-in" appear>
-              <div>
-                {{ message.content }}
-              </div>
-            </transition>
+          <div v-if="message.content">
+            <div>
+              {{ message.content }}
+            </div>
           </div>
           
           <div class="row mb-3">
@@ -52,29 +50,29 @@ export default {
   components:{WebHeader},
   mixins:[alertMixin],
   data(){
-      return{
-          loading: false,
-          user:{
-            email:null,
-            password:null
-          }
+    return{
+      loading: false,
+      user:{
+        email:null,
+        password:null
       }
+    }
   },
   methods: {
       loginUser(){
           this.loading = true
           User.login(this.user).then(response => {
-              console.log(response);
-              if (response.data){
-                localStorage.setItem('token', response.data)
-                this.$router.push('/')
-              }
-              else{
-                this.generateMessage("Credenciais incorretas!")
-              }
+            console.log(response);
+            if (response.data){
+              localStorage.setItem('token', response.data)
+              this.$router.push('/')
+            }
+            else{
+              this.generateMessage("Credenciais incorretas!")
+            }
           }).
           catch(() => {
-              this.generateMessage("Credenciais incorretas!")
+            this.generateMessage("Credenciais incorretas!")
           }).
           finally(() => this.loading = false)
       }
