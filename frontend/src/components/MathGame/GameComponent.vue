@@ -1,12 +1,13 @@
 <template>
 
 <div class="container">
+    <template v-if="loading == false">
     <section class="jumbotron text-center">
-        <p style="font-size: 20px;">{{resolvedProblems}} / {{game.maxChallenges}}</p>
+        <p style="font-size: 20px;">{{game.challengesPlayed + 1}} / 5</p>
 
         <div style="margin-top:8%" class="container">
             <h1 class="jumbotron-heading">
-                {{game.firstNumber}} {{operation}} {{game.lastNumber}}
+                {{game.challenge.firstNumber}} {{operation}} {{game.challenge.lastNumber}}
             </h1>
             <p class="lead text-muted">Solve this challenge if you can!</p>
         </div>
@@ -15,24 +16,17 @@
     <div class="container" style="width: 50%;">
         <div class="control-cont">
             <div id="loading" class="loading centralize">
-                <h4 style="padding: 0px; font-size: 5px; color:white;"><strong id="seconds">30s</strong></h4>
+                <h4 style="padding: 0px; font-size: 5px; color:white;"><strong id="seconds">{{seconds}}s</strong></h4>
             </div>
         </div>
     </div>
 
-    <template v-if="difficulty == GameDifficulty.Hard || difficulty == GameDifficulty.Genius">
+    <template v-if="difficulty == 'hard' || difficulty == 'genius'">
         <section class ="jumbotron text-center">
             <div id="options">
-                <form id="form-high-level">
-                    <input v-for="ex in result_examples" type="text" class="number" placeholder="0" onkeydown="limit(this);" onkeyup="limit(this);">
-
-                    <input type="hidden" name="FirstNumber" value=@game.FirstNumber>
-                    <input type="hidden" name="LastNumber" value=@game.LastNumber>
-                    <input type="hidden" name="Operation" value=@game.Operation>
-                    <input type="hidden" name="ChallengesSolve" value=@game.ChallengesSolve>
-                    <input type="hidden" name="ChallengesUnsolved" value=@game.ChallengesUnsolved>
-                    <input type="hidden" name="result" id="result" value="0">
-                </form>
+                <div id="form-high-level">
+                    <input v-for="index in lenOfResult" :id="index" v-on:input="limit(index)" type="text" class="number" placeholder="0">
+                </div>
             </div>
         </section>
     </template>
@@ -41,119 +35,176 @@
         <section class ="jumbotron text-center">
             <div id="options">
                 <p>
-                    <form v-for="result in results">
-                        <input type="hidden" name="firstNumber" value={{game.firstNumber}}>
-                        <input type="hidden" name="lastNumber" value={{game.lastNumber}}>
-                        <input type="hidden" name="operation" value={{game.operation}}>
-                        <input type="hidden" name="challengesSolve" value={{game.challengesSolve}}>
-                        <input type="hidden" name="challengesUnsolved" value={{game.challengesUnsolved}}>
-                        <input type="hidden" name="result" id="result" value={{result}}>
-                        <button class="btn-alternative btn-dark" >@result</button>
-                    </form>
+                    <div v-for="result in results">
+                        <button class="btn-alternative btn-dark" >{{result}}</button>
+                    </div>
                 </p>
             </div>
         </section>
     </template>
+    
     <div style="padding-right: 20%; padding-left: 20%;">
         <div style="display: flex; flex-direction: row; align-content: space-around; justify-content: space-evenly;">
             <div>
-                <img id="dumb" src="/img/dumb.png" alt="Dumb" /> 
+                <img id="dumb" src="../../assets/img/dumb.png" alt="Dumb" /> 
                 <strong id="dumb-label" style="font-size: 45px;">{{game.challengesUnsolved}}</strong>
             </div>
             <div>
-                <img id="nerd" src="/img/right.png" alt="Right" />
-                <strong id="nerd-label" style="font-size: 45px;">{{game.ChallengesSolve}}</strong>
+                <img id="nerd" src="../../assets/img/right.png" alt="Right" />
+                <strong id="nerd-label" style="font-size: 45px;">{{game.challengesSolve}}</strong>
             </div>
         </div>
     </div>
+    </template>
+
+    <template v-else>
+        <div class="loading-container">
+            <div class="spinner-border" role="status">
+                <span class="sr-only"></span>
+            </div>
+        </div>
+    </template>
 </div>
 </template>
 
 <script >
-import User from '@/services/users'
-
+import Game from '@/services/game'
 export default {
+    props:{
+        difficulty: String,
+    },
     data(){
         return{
-            token: null,
-            user: {"username": ""},
-            game: {}
+            loading: true,
+            seconds: 30,
+            width: 100,
+            game: {
+                challenge: {
+                    operation: "",
+                    firstNumber: "",
+                    lastNumber: "",
+                    actualResult: ""
+                },
+                challengesSolve: "",
+                challengesUnsolved: "",
+                challengesPlayed: ""                
+            },
+            inputResult: ""
+        }
+    },
+    computed:{
+        operation(){
+            if (this.game.challenge.operation == 'Sum'){
+                return "+";
+            }
+            if (this.game.challenge.operation == 'Subtract'){
+                return "-";
+            }
+            if (this.game.challenge.operation == 'Multiply'){
+                return "x";
+            }
+            return "÷";
+        },
+        lenOfResult(){
+            return this.game.challenge.actualResult.toString().length;
+        }
+    },
+    methods:{
+        limit(index){
+            var inputs = document.getElementsByClassName("number");
+
+            for (var i = 0; i < inputs.length; i++) {
+                var input = inputs[i];
+                if (input.id == index.toString()){
+                    if (input.value.length > 1){
+                        input.value = input.value.substr(1,2);
+                    }
+                }
+                if (input.id > index){
+                    inputs[i].focus();
+                    break;
+                }
+                else if (input.id == inputs.length){
+                    this.setInputResult();
+                    this.sendActualGameAndRequestNextGame();
+                    this.setNewProgressBar();
+                    var firstInput = document.getElementsByClassName("number")[0];
+                    firstInput.focus();
+                }
+            }
+        },
+        setNewProgressBar(){
+            this.seconds = 30;
+            this.width = 100;
+            var div = document.getElementById("loading");
+            div.style.width = "100%";
+            div.style.backgroundColor = "#673FD7";
+            div.style.border = "solid #673FD7";   
+        },
+        setInputResult() {
+            this.inputResult = "";
+            var inputs = document.getElementsByClassName("number");
+            for (var i = 0; i < inputs.length; i++) {
+                this.inputResult += inputs[i].value;
+                inputs[i].value = "";
+            }
+        },
+        sendActualGameAndRequestNextGame(){
+            this.game.result = parseInt(this.inputResult);
+            var game = { ...this.game, ...this.game.challenge}
+            game.difficulty = this.difficulty;
+            Game.nextGame(game).then(response => {
+                this.game = response.data
+                if (this.game.challengesPlayed >= 5){
+                    localStorage.setItem('challengesSolve', this.game.challengesSolve);
+                    localStorage.setItem('challengesUnsolved', this.game.challengesUnsolved);
+                    this.$router.push("/mathgame/result");
+                }
+            }).
+            catch(() => {
+                this.$router.push("/error");
+            })
+        },
+        runProgressBar(){
+            const div = document.getElementById("loading");
+            if (this.seconds > 1) {
+                this.seconds = this.seconds - 1;
+                this.width = this.width - 3;
+                div.style.width = this.width + "%";
+            }
+            else {
+                this.seconds = "";
+                div.style.width = "0%";
+                div.style.backgroundColor = "white";
+                div.style.border = "none";   
+            }
+        },
+        async runGame(){
+            while (this.seconds != 0){
+                await new Promise(r => setTimeout(r, 1000));
+                this.runProgressBar();
+            }
+            if (this.seconds == 0){
+                this.setInputResult();
+                this.sendActualGameAndRequestNextGame();
+                this.setNewProgressBar();
+            }
+        }
+    },
+    async created(){
+        while(this.game.challengesPlayed < 5){
+            this.loading = false;
+            await this.runGame();
         }
     },
     mounted() {
-        this.token = localStorage.getItem("token");
-        if (this.token != null){
-            User.getByToken(this.token).then(response => {
-                console.log(response.data)
-                this.user = response.data;
-            }).catch(()=>{})
-        }
+        Game.createGame(this.difficulty).then(response => {
+            this.game = response.data;
+        }).
+        catch(() => {
+            this.$router.push("/error");
+        });
     }
 }
 </script>
-<!-- 
-<script>
-    function limit(element, id) {
-        var max_chars = 1;
-        if (element.value.length > max_chars) {
-            element.value = element.value.substr(1, 2);
-        }
-    }
 
-    function setResult() {
-        var value = "";
-        var inputs = document.getElementsByClassName("number");
-        for (var i = 0; i < inputs.length; i++) {
-            value += inputs[i].value;
-        }
-        document.getElementById("result").value = value;
-    }
-
-    function setAutoSubmitInInput() {
-        var inputs = document.getElementsByClassName("number");
-        inputs[inputs.length - 1].addEventListener("input", () => {
-            setResult();
-            document.getElementById("form-high-level").submit();
-        })
-    }
-
-    function intervalSeconds() {
-        const second_label = document.getElementById("seconds");
-        if (seconds > 1) {
-            seconds = seconds - 1;
-            second_label.innerHTML = seconds + "s";
-        }
-        else {
-            second_label.innerHTML = "";
-            clearInterval(intervalSeconds);
-        }
-    }
-
-    function intervalFunction() {
-        const div = document.getElementById("loading");
-
-        if (width > 1) {
-            width = width - 1;
-            div.style.width = width + "%";
-            console.log(width);
-        }
-        else {
-            div.style.width = "0%";
-            div.style.backgroundColor = "white";
-            div.style.border = "none";
-            setResult();
-            document.getElementById("form-high-level").submit();
-            clearInterval(intervalFunction);
-        }
-    }
-
-    if (document.getElementById("form-high-level")) {
-        setAutoSubmitInInput();
-    }
-
-    var seconds = 30;
-    var width = 100;
-
-    setInterval(intervalFunction, 300);
-    setInterval(intervalSeconds, 1000);
-</script> -->
