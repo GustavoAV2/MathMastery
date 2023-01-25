@@ -1,6 +1,8 @@
 <template>
     <WebHeader current-page="home" />
-    <Game />
+    <template v-if="difficulty != ''">
+      <Game :difficulty="difficulty"/>
+    </template>
 </template>
   
 <script>
@@ -9,6 +11,14 @@
   
   export default {
     components:{WebHeader, Game},
+    data(){
+      return {
+        difficulty: ""
+      }
+    },
+    mounted() {
+      this.difficulty = this.$route.params.difficulty;
+    }
   }
 </script>
 
