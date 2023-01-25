@@ -71,10 +71,10 @@ export default {
     },
     methods:{
         logout(){
+            localStorage.clear();
             User.logout(this.token).then(response => {
                 console.log(response.data)
             }).catch(()=>{});
-            localStorage.clear();
         }
     },
     mounted() {
