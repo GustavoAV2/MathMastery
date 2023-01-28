@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "m/EKlc4nsfwkcs/9a2MEoejgVXD3toeAdrgMv0YLzaE=",
+  "Hash": "JFF+3hilEQMVGMILysccOMhyletTHtxpomNXkP8O3o8=",
   "Source": "HttpHost",
   "BasePath": "_content/HttpHost",
   "Mode": "Default",
@@ -16,6 +16,40 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\gustavo.voltolini\\OneDrive - Anheuser-Busch InBev\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost\\obj\\Debug\\net6.0\\scopedcss\\bundle\\HttpHost.styles.css",
+      "SourceId": "HttpHost",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\gustavo.voltolini\\OneDrive - Anheuser-Busch InBev\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
+      "BasePath": "_content/HttpHost",
+      "RelativePath": "HttpHost.styles.css",
+      "AssetKind": "All",
+      "AssetMode": "CurrentProject",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ApplicationBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\gustavo.voltolini\\OneDrive - Anheuser-Busch InBev\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost\\obj\\Debug\\net6.0\\scopedcss\\bundle\\HttpHost.styles.css"
+    },
+    {
+      "Identity": "C:\\Users\\gustavo.voltolini\\OneDrive - Anheuser-Busch InBev\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\HttpHost.bundle.scp.css",
+      "SourceId": "HttpHost",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\gustavo.voltolini\\OneDrive - Anheuser-Busch InBev\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
+      "BasePath": "_content/HttpHost",
+      "RelativePath": "HttpHost.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\gustavo.voltolini\\OneDrive - Anheuser-Busch InBev\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\HttpHost.bundle.scp.css"
+    },
     {
       "Identity": "C:\\Users\\gustavo.voltolini\\OneDrive - Anheuser-Busch InBev\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost\\wwwroot\\css\\site.css",
       "SourceId": "HttpHost",

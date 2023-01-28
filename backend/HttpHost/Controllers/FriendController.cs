@@ -48,9 +48,9 @@ namespace HttpHost.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RequestFriend(FriendDto friend)
         {
-            var newFriend = new Friend(
+            var newFriend = new Friends(
                    requesterId : friend.RequesterId, 
-                   receiverId : friend.ReceiverId, 
+                   receiverId : friend.ReceiverId,
                    status : friend.Status
                 );
             _friendDb.All.Add(newFriend);
@@ -61,14 +61,15 @@ namespace HttpHost.Controllers
 
         [HttpPut]
         [Authorize]
-        [Route("/friend/{id}")]
+        [Route("/friend")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> ConfirmFriend(string receiverId, string requesterId)
+        public async Task<IActionResult> ConfirmFriend(FriendDto friend)
         {
             var foundFriendRequisition = _friendDb.Friend.
-                Where(f => f.RequesterId == requesterId && f.ReceiverId == receiverId).FirstOrDefault();
+                Where(f => f.RequesterId == friend.RequesterId 
+                && f.ReceiverId == friend.ReceiverId).FirstOrDefault();
 
             if (foundFriendRequisition is null) return NotFound();
 

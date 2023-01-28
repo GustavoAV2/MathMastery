@@ -158,3 +158,7 @@ C:\Users\gustavo.voltolini\OneDrive - Anheuser-Busch InBev\Desktop\MyCode\MathWe
 C:\Users\gustavo.voltolini\OneDrive - Anheuser-Busch InBev\Desktop\MyCode\MathWebsite\backend\HttpHost\obj\Debug\net6.0\HttpHost.csproj.CopyComplete
 C:\Users\gustavo.voltolini\OneDrive - Anheuser-Busch InBev\Desktop\MyCode\MathWebsite\backend\HttpHost\obj\Debug\net6.0\HttpHost.genruntimeconfig.cache
 C:\Users\gustavo.voltolini\OneDrive - Anheuser-Busch InBev\Desktop\MyCode\MathWebsite\backend\HttpHost\obj\Debug\net6.0\ref\HttpHost.dll
+C:\Users\gustavo.voltolini\OneDrive - Anheuser-Busch InBev\Desktop\MyCode\MathWebsite\backend\HttpHost\obj\Debug\net6.0\HttpHost.RazorAssemblyInfo.cache
+C:\Users\gustavo.voltolini\OneDrive - Anheuser-Busch InBev\Desktop\MyCode\MathWebsite\backend\HttpHost\obj\Debug\net6.0\HttpHost.RazorAssemblyInfo.cs
+C:\Users\gustavo.voltolini\OneDrive - Anheuser-Busch InBev\Desktop\MyCode\MathWebsite\backend\HttpHost\obj\Debug\net6.0\scopedcss\HttpHost\Pages\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\gustavo.voltolini\OneDrive - Anheuser-Busch InBev\Desktop\MyCode\MathWebsite\backend\HttpHost\obj\Debug\net6.0\scopedcss\projectbundle\HttpHost.bundle.scp.css

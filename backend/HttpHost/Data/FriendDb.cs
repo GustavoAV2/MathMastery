@@ -13,9 +13,9 @@ namespace HttpHost.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Friend>().HasKey(t => t.Id);
+            modelBuilder.Entity<Friends>().HasKey(t => t.Id);
         }
-        public DbSet<Friend> Friend { get; set; }
-        public DbSet<Friend> All => Set<Friend>();
+        public DbSet<Friends> Friend { get; set; }
+        public DbSet<Friends> All => Set<Friends>();
     }
 }

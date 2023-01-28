@@ -33,7 +33,7 @@ namespace HttpHost.Controllers
         }
 
         [HttpGet]
-        [Route("/game/create")]
+        [Route("/game/create/{difficulty}")]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -52,7 +52,9 @@ namespace HttpHost.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult NextChallenge(GameDto gameDto)
         {
-            var game = GenerateGame(gameDto.Difficulty);
+            var game = GenerateGame(
+                    gameDto.Difficulty, gameDto.ChallengesSolve, gameDto.ChallengesUnsolved
+                );
             game.SetChallenge(gameDto.FirstNumber, gameDto.LastNumber, gameDto.Operation);
 
             if (game.Challenge.VerifySolution(gameDto.Result))
@@ -64,41 +66,23 @@ namespace HttpHost.Controllers
             return Ok(game);
         }
 
-        [HttpPost]
-        [Route("/game/result")]
-        [Authorize]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> PostResultChallenge(GameDto gameDto, int userId)
-        {
-            var foundUser = await _userDb.All.FindAsync(userId);
-            if (foundUser is null) return NotFound();
-
-            foundUser.NumberUnresolvedAccounts = gameDto.ChallengesUnsolved.Value;
-            foundUser.NumberResolvedAccounts = gameDto.ChallengesSolve.Value;
-
-            await _userDb.SaveChangesAsync();
-            return Ok(gameDto);
-        }
-
-        private IGame GenerateGame(string difficulty, int fNumber = 0, int lNumber = 0)
+        private IGame GenerateGame(string difficulty, int challengeSolve = 0, int challengeUnsolved = 0)
         {
             if (difficulty == "normal")
             {
-                return new NormalGame(0, 0);
+                return new NormalGame(challengeSolve, challengeUnsolved);
             }
             else if (difficulty == "hard")
             {
-                return new HardGame(0, 0);
+                return new HardGame(challengeSolve, challengeUnsolved);
             }
             else if (difficulty == "genius")
             {
-                return new GeniusGame(0, 0);
+                return new GeniusGame(challengeSolve, challengeUnsolved);
             }
             else
             {
-                return new EasyGame(0, 0);
+                return new EasyGame(challengeSolve, challengeUnsolved);
             }
         }
     }

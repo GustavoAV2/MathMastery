@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\gustavo.voltolini\\OneDrive - Anheuser-Busch InBev\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\HttpHost.bundle.scp.css",
+      "PackagePath": "staticwebassets\\HttpHost.bundle.scp.css"
+    },
+    {
       "Id": "C:\\Users\\gustavo.voltolini\\OneDrive - Anheuser-Busch InBev\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

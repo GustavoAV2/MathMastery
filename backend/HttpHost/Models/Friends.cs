@@ -1,6 +1,6 @@
 ﻿namespace HttpHost.Models
 {
-    public class Friend
+    public class Friends
     {
         public string Id { get; set; }
         public string RequesterId { get; set; }
@@ -9,7 +9,7 @@
         public DateTime? ConfirmationDate { get; set; }
         public char Status { get; set; }
 
-        public Friend(string requesterId, string receiverId, char status)
+        public Friends(string requesterId, string receiverId, char status)
         {
             Id = Guid.NewGuid().ToString();
             RequesterId = requesterId;

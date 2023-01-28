@@ -1,15 +1,14 @@
 using System.Diagnostics;
-using HttpHost.Middlewares.Identification;
 using HttpHost.Data;
 using HttpHost.Models;
 using HttpHost.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using HttpHost.Dto.Headers;
 using Microsoft.AspNetCore.Authorization;
 
 namespace HttpHost.Controllers
@@ -67,7 +66,7 @@ namespace HttpHost.Controllers
                     {
                         Subject = new ClaimsIdentity(new[]
                         {
-                            new Claim("Id", Guid.NewGuid().ToString()),
+                            new Claim("Id", foundUser.Id.ToString()),
                             new Claim(JwtRegisteredClaimNames.Sub, foundUser.UserName),
                             new Claim(JwtRegisteredClaimNames.Email, foundUser.UserName),
                             new Claim(JwtRegisteredClaimNames.Jti,
@@ -79,10 +78,32 @@ namespace HttpHost.Controllers
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
                     };
                     var tokenHandler = new JwtSecurityTokenHandler();
-                    var token = tokenHandler.CreateToken(tokenDescriptor);
-                    var stringToken = tokenHandler.WriteToken(token);
-                    return Ok(stringToken);
+                    //var token = tokenHandler.CreateToken(tokenDescriptor);
+                    var tokenJwt = tokenHandler.CreateEncodedJwt(tokenDescriptor);
+                    return Ok(tokenJwt);
                 }
+            return Unauthorized();
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("/user/me")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> Identity([FromHeader] AuthHeaderDto headerDto)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            if (headerDto.Authorization != null)
+            {
+                var tokenString = headerDto.Authorization.Replace("Bearer ", "");
+                var token = tokenHandler.ReadJwtToken(tokenString);
+                var id = token.Payload["Id"];
+                var foundUser = await _userDb.All.FindAsync(id);
+                if (foundUser != null)
+                {
+                    return Ok(foundUser);
+                }
+            }
             return Unauthorized();
         }
 
@@ -112,6 +133,37 @@ namespace HttpHost.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("/user/friend/{usernameOrEmail}")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetUserByUsernameOrEmail([FromRoute] string usernameOrEmail)
+        {
+            Users foundUser;
+
+            if (string.IsNullOrWhiteSpace(usernameOrEmail))
+                return BadRequest();
+
+            if (usernameOrEmail.Contains("@"))
+            {
+                foundUser = _userDb.User.Where
+                    (user => user.Email == usernameOrEmail).FirstOrDefault();
+            }
+            else
+            {
+                foundUser = _userDb.User.Where
+                    (user => user.UserName == usernameOrEmail).FirstOrDefault();
+            }
+
+            if (foundUser != null)
+            {
+                return Ok(foundUser);
+            }
+            return NotFound();
+        }
+
         [HttpPost]
         [Route("/user")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -136,7 +188,7 @@ namespace HttpHost.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> PutUser(int id, UserDto inputUser)
+        public async Task<IActionResult> PutUser(string id, UserDto inputUser)
         {
             var foundUser = await _userDb.All.FindAsync(id);
 
@@ -150,6 +202,24 @@ namespace HttpHost.Controllers
             await _userDb.SaveChangesAsync();
 
             return Ok(foundUser);
+        }
+
+        [HttpPut]
+        [Authorize]
+        [Route("/user/game/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> PutGameUserStatus(string id, UserGameStatusDto statusDto)
+        {
+            var foundUser = await _userDb.All.FindAsync(id);
+            if (foundUser is null) return NotFound();
+
+            foundUser.NumberUnresolvedAccounts = statusDto.NumberUnresolvedAccounts + foundUser.NumberUnresolvedAccounts;
+            foundUser.NumberResolvedAccounts = statusDto.NumberResolvedAccounts + foundUser.NumberResolvedAccounts;
+
+            await _userDb.SaveChangesAsync();
+            return Ok();
         }
 
         [HttpDelete]
