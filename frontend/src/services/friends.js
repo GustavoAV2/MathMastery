@@ -6,5 +6,8 @@ export default{
     },
     putFriendRequest(friendRequest){
         return http.put('/friend' + friendRequest)
+    },
+    getFriendsByUserId(userId){
+        return http.get('/friend/' + userId)
     }
 }

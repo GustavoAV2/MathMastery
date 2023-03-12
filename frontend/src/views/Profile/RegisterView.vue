@@ -10,13 +10,13 @@
 
           <div class="row mb-3">
             <div class="col-12">
-              <input class="form-inputs" type="text" v-model="user.first_name" placeholder="Primeiro nome">
+              <input class="form-inputs" type="text" v-model="user.firstName" placeholder="Primeiro nome">
             </div>
           </div>
 
           <div class="row mb-3">
             <div class="col-12">
-              <input class="form-inputs" type="text" v-model="user.last_name" placeholder="Último nome">
+              <input class="form-inputs" type="text" v-model="user.lastName" placeholder="Último nome">
             </div>
           </div>
 
@@ -41,6 +41,23 @@
               </div>
             </div>
           </template>
+
+          <template v-else>
+            <div class="row mb-3">
+              <div class="col-12">
+                <input type="text" class="form-inputs" v-model="user.password" id="user-password-input"
+                  placeholder="Senha">
+              </div>
+
+            </div>
+          </template>
+
+          <div class="row mb-3">
+            <div class="col-12">
+              <input type="text" class="form-inputs" v-model="confirm_password" id="user-password-input"
+                placeholder="Confirme sua senha">
+            </div>
+          </div>
 
           <div class="row mb-3">
             <div class="col-12">
@@ -86,13 +103,14 @@ export default {
         password: null,
         birthdate: null,
         username: null,
-        first_name: null,
-        last_name: null,
+        firstName: null,
+        lastName: null,
       }
     }
   },
   methods: {
     save() {
+      console.log(this.user)
       if (this.confirm_password == this.user.password) {
         User.create(this.user).then(() => {
           this.generateMessage("Cadastro efetuado! Redirecionando para login.", "alert alert-success");

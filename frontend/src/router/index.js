@@ -4,6 +4,7 @@ import PageNotFound from '../views/PageNotFound.vue'
 
 import ProfileView from '../views/Profile/ProfileView.vue'
 import FriendsView from '../views/Profile/FriendsView.vue'
+import FriendsRequestView from '../views/Profile/FriendsRequestView.vue'
 import SignView from '../views/Profile/SignView.vue'
 import RegisterView from '../views/Profile/RegisterView.vue'
 
@@ -40,6 +41,11 @@ const router = createRouter({
       path: '/friends',
       name: 'friends',
       component: FriendsView
+    },
+    {
+      path: '/friends/request',
+      name: 'friendRequest',
+      component: FriendsRequestView
     },
     {
       path: '/mathgame/create',
