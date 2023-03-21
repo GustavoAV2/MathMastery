@@ -40,6 +40,23 @@ namespace HttpHost.Controllers
             return Ok(friends);
         }
 
+        [HttpGet]
+        [Authorize]
+        [Route("/friend/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public IActionResult GetFriendsByUserId(string userId)
+        {
+            var foundFriendRequisition = _friendDb.Friend.
+                Where(f => f.ReceiverId == userId && f.ConfirmationDate != null).ToArray();
+
+            if (!foundFriendRequisition.Any())
+            {
+                return NotFound();
+            }
+            return Ok(foundFriendRequisition);
+        }
+
         [HttpPost]
         [Authorize]
         [Route("/friend")]

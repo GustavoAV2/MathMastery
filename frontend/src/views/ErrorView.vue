@@ -9,7 +9,7 @@
   
   <script>
   import WebHeader from '../components/tools/HeaderComponent.vue';
-  import HomeComponent from '../components/HomeComponent.vue';
+  import HomeComponent from '../components/HomeComponent2.vue';
   
   export default {
     components:{WebHeader, HomeComponent},

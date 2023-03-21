@@ -1,31 +1,26 @@
 <template>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom">
             <div class="container-fluid">
-                <a class="navbar-brand">Math WebSite</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <router-link to="/" class="nav-link">Home</router-link>
+                            <router-link to="/" class="nav-link">Inicio</router-link>
                         </li>
                         
                         <template v-if="token != null">
                             <li class="nav-item">
-                                <router-link to="/profile" class="nav-link">Profile</router-link>
+                                <router-link to="/profile" class="nav-link">Perfil</router-link>
                             </li>
 
                             <li class="nav-item">
-                                <router-link to="/friends" class="nav-link">Friends</router-link>
+                                <router-link to="/friends" class="nav-link">Amigos</router-link>
                             </li>
                         </template> 
-
-                        <li class="nav-item">
-                            <router-link to="/mathgame/create" class="nav-link">Challenges</router-link>
-                        </li>
                     </ul>
                     
                     <ul class="navbar-nav">
@@ -97,10 +92,15 @@ export default {
 .nav-link {
     cursor: pointer;
     text-decoration: none;
-    color: black;
+    color: #FFFFFF;
 }
-
+.navbar-brand{
+    color: #E67E22;
+}
 .nav-link:hover {
-    color: gray;
+    color: #1ABC9C;
+}
+header{
+    background-color: black;
 }
 </style>

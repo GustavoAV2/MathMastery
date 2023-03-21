@@ -78,7 +78,6 @@ namespace HttpHost.Controllers
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
                     };
                     var tokenHandler = new JwtSecurityTokenHandler();
-                    //var token = tokenHandler.CreateToken(tokenDescriptor);
                     var tokenJwt = tokenHandler.CreateEncodedJwt(tokenDescriptor);
                     return Ok(tokenJwt);
                 }

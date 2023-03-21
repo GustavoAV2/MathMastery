@@ -1,140 +1,48 @@
 <template>
-    <div style="width: 100%; height: 100%;">
-        <header class="w3-container w3-theme w3-padding" id="myHeader">
-          <div class="w3-center">
-          <h1 class="w3-xxxlarge w3-animate-bottom">Voce esta pronto?</h1>
-            <div class="w3-padding-32">
-                <template  v-if="token != null">
-                    <a>
-                        <router-link to="/sign">
-                            <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" style="font-weight:900;">
-                                Iniciar!
-                            </button>
-                        </router-link>
-                    </a>
-                </template>
-
-                <template v-else>
-                    <a>
-                        <router-link to="/sign">
-                            <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" style="font-weight:900;">
-                                Iniciar!
-                            </button>
-                        </router-link>
-                    </a>
-                    <a>
-                        <router-link to="/sign">
-                            <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" style="font-weight:900;">
-                                Login
-                            </button>
-                        </router-link>
-                    </a>
-                </template>
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="home-message">Teste suas habilidades matemáticas!</h1>
+			<p class="lead home-message">Desafie-se com problemas matemáticos de diferentes níveis de dificuldade e expanda seu conhecimento.</p>
+			<hr class="my-4">
+			<p class="home-message">Registre-se para começar a resolver problemas.</p>
+		</div>
+	</div>
+    <div class="container">
+        <hr class="my-4 cards-divisor">
+        <div class="row">
+            <div class="col-sm">
+                <h3>Normal</h3>
+                <img src="@/assets/img/ICONS/black-hole-1.png"/>
+                <hr class="my-4 cards-divisor"/>
+                <h4>Adição e subtração</h4>
+                <h4>Sem tempo para resolver</h4>
+                <h4>Multiplas escolhas</h4>
+                <h4>Cinco desafios</h4>
             </div>
-          </div>
-        </header>
-    
-        <!-- Modal -->
-        <div id="id01" class="w3-modal">
-            <div class="w3-modal-content w3-card-4 w3-animate-top">
-              <header class="w3-container w3-theme-l1"> 
-                <span onclick="document.getElementById('id01').style.display='none'"
-                class="w3-button w3-display-topright">×</span>
-                <h4>Oh snap! We just showed you a modal..</h4>
-                <h5>Because we can <i class="fa fa-smile-o"></i></h5>
-              </header>
-              <div class="w3-padding">
-                <p>Cool huh? Ok, enough teasing around..</p>
-                <p>Go to our <a class="w3-btn" href="/w3css/default.asp">W3.CSS Tutorial</a> to learn more!</p>
-              </div>
-              <footer class="w3-container w3-theme-l1">
-                <p>Modal footer</p>
-              </footer>
+            <div class="col-sm">
+                <h3>Dificil</h3>
+                <img src="@/assets/img/ICONS/black-hole-2.png"/>
+                <hr class="my-4 cards-divisor"/>
+                <h4>Adição, subtração e divisão</h4>
+                <h4>Tempo para resolver</h4>
+                <h4>Multiplas escolhas</h4>
+                <h4>Cinco desafios</h4>
             </div>
+            <div class="col-sm">
+                <h3>Genial</h3>
+                <img src="@/assets/img/ICONS/black-hole-3.png"/>
+                <hr />
+                <h4>Adição, subtração, divisão e multiplicação</h4>
+                <h4>Tempo para resolver</h4>
+                <h4>Sem multiplas escolhas</h4>
+                <h4>Cinco desafios</h4>
+            </div>  
         </div>
-    
-        <div class="w3-row-padding w3-center w3-margin-top">
-            <template v-if="token != null">
-                <a>
-                    <div class="w3-third" id="normal-submit">
-                        <div class="w3-card w3-container" style="min-height:460px">
-                            <h3>Normal</h3>
-                            <img src="@/assets/img/ICONS/black-hole-1.png"/>
-                            <hr />
-                            <h4>Addition and subtraction</h4>
-                            <h4>No time to resolve</h4>
-                            <h4>Multiple choice</h4>
-                            <h4>Five challenges</h4>
-                        </div>
-                    </div>
-                </a>
-                <a>
-                    <div class="w3-third">
-                        <div class="w3-card w3-container" id="hard-submit" style="min-height:460px">
-                            <h3>Hard</h3>
-                            <img src="@/assets/img/ICONS/black-hole-2.png"/>
-                            <hr />
-                            <h4>Subtraction, addition and division</h4>
-                            <h4>Time to resolve</h4>
-                            <h4>Multiple choice</h4>
-                            <h4>Five challenges</h4>
-                        </div>
-                    </div>
-                </a>
-                <a>
-                    <div class="w3-third" id="genius-submit">
-                        <div class="w3-card w3-container" style="min-height:460px">
-                            <h3>Genius</h3>
-                            <img src="@/assets/img/ICONS/black-hole-3.png"/>
-                            <hr />
-                            <h4>Subtraction, addition, division and multiplication</h4>
-                            <h4>Time to resolve</h4>
-                            <h4>No multiple choice</h4>
-                            <h4>Five challenges</h4>
-                        </div>
-                    </div>
-                </a>
-            </template>
-            <template v-else>
-                <a>
-                    <div class="w3-third">
-                        <div class="w3-card w3-container" style="min-height:460px">
-                            <h3>Normal</h3>
-                            <img src="@/assets/img/ICONS/black-hole-1.png"/>
-                            <hr />
-                            <h4>Addition and subtraction</h4>
-                            <h4>No time to resolve</h4>
-                            <h4>Multiple choice</h4>
-                            <h4>Five challenges</h4>
-                        </div>
-                    </div>
-    
-                    <div class="w3-third">
-                        <div class="w3-card w3-container" style="min-height:460px;">
-                            <h3>Hard</h3>
-                            <img src="@/assets/img/ICONS/black-hole-2.png"/>
-                            <hr />
-                            <h4>Subtraction, addition and division</h4>
-                            <h4>Time to resolve</h4>
-                            <h4>Multiple choice</h4>
-                            <h4>Five challenges</h4>
-                        </div>
-                    </div>
-    
-                    <div class="w3-third">
-                      <div class="w3-card w3-container" style="min-height:460px">
-                          <h3>Genius</h3>
-                          <img src="@/assets/img/ICONS/black-hole-3.png"/>
-                          <hr />
-                          <h4>Subtraction, addition, division and multiplication</h4>
-                          <h4>Time to resolve</h4>
-                          <h4>No multiple choice</h4>
-                          <h4>Five challenges</h4>
-                      </div>
-                    </div>
-                </a>
-            </template>
-        </div>
+        <hr class="my-4 cards-divisor">
+        <router-link to="/register">
+            <button type="button" class="btn btn-primary btn-lg btn-block">Registrar</button>
+        </router-link>
+        <button class="btn btn-game btn-lg btn-block" @click="createGame(info)">Iniciar desafio</button>
     </div>
 </template>
 
@@ -150,3 +58,46 @@ export default {
     }
 }
 </script>
+
+<style scoped>  
+body{
+    color: black;
+}
+.container{
+    color: black;
+}
+.btn-primary {
+    color: #1ABC9C;
+    width: 30%;
+    height: 100px;
+    border-width:1px;
+    border-radius: 0px;
+    border-style:solid;
+    border-color:#1ABC9C;
+    background-color: white;
+}
+.btn-primary:hover {
+    box-shadow: 0px 8px 15px #1ABC9C;
+    color: black;
+    background-color: #17A589;
+}
+.btn-game{
+    color: #8E44AD;
+    height: 100px;
+    width: 70%;
+    border-width:1px;
+    border-radius: 0px;
+    border-style:solid;
+    border-color:#8E44AD;
+    background-color: white;
+    
+}
+.btn-game:hover{
+    box-shadow: 0px 8px 15px #8E44AD;
+    color: black;
+    background-color: #8E44AD;
+}
+.home-message{
+    color: black;
+}
+</style>

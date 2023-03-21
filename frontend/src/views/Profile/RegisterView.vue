@@ -1,88 +1,43 @@
 <template>
   <WebHeader current-page="sign" />
-  <div class="container-fluid text-center mt-5" id="sign-container">
-    <div class="row">
-      <div class="col-12 h5">Registrar</div>
-    </div>
-    <div class="row mt-2 form-container">
-      <div class="col-12">
-        <div class="container">
-
-          <div class="row mb-3">
-            <div class="col-12">
-              <input class="form-inputs" type="text" v-model="user.firstName" placeholder="Primeiro nome">
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <div class="col-12">
-              <input class="form-inputs" type="text" v-model="user.lastName" placeholder="Último nome">
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <div class="col-12">
-              <input class="form-inputs" type="email" v-model="user.email" id="user-email-input" placeholder="Email">
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <div class="col-12">
-              <input type="text" class="form-inputs" v-model="user.username" id="user-username-input"
-                placeholder="Nome de usuário">
-            </div>
-          </div>
-          
-          <template v-if="hidden">
-            <div class="row mb-3">
-              <div class="col-12">
-                <input type="password" class="form-inputs" v-model="user.password" id="user-password-input"
-                  placeholder="Senha">
-              </div>
-            </div>
-          </template>
-
-          <template v-else>
-            <div class="row mb-3">
-              <div class="col-12">
-                <input type="text" class="form-inputs" v-model="user.password" id="user-password-input"
-                  placeholder="Senha">
-              </div>
-
-            </div>
-          </template>
-
-          <div class="row mb-3">
-            <div class="col-12">
-              <input type="text" class="form-inputs" v-model="confirm_password" id="user-password-input"
-                placeholder="Confirme sua senha">
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <div class="col-12">
-              <label for="user-birthdate">Data de nascimento</label><br />
-              <input class="form-inputs" type="date" v-model="user.birthdate" id="user-birthdate">
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-12"> <button class="btn btn-dark" @click="save()">Registrar</button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              Já possui uma conta? <router-link to="/sign" id="sign-link">Entrar</router-link>
-            </div>
-          </div>
-        </div>
+  <div class="container">
+    <h1 class="text-center mt-5">Registro de usuário</h1>
+    <div class="form-fields">
+      <div class="form-group">
+        <label for="primeiro-nome">Primeiro nome:</label>
+        <input type="text" v-model="user.firstName" class="form-control" id="primeiro-nome">
       </div>
+      <div class="form-group">
+        <label for="ultimo-nome">Último nome:</label>
+        <input type="text" v-model="user.lastName" class="form-control" id="ultimo-nome">
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" v-model="user.email" class="form-control" id="email">
+      </div>
+      <div class="form-group">
+        <label for="nome-usuario">Nome de usuário:</label>
+        <input type="text" v-model="user.username" class="form-control" id="nome-usuario">
+      </div>
+      <div class="form-group">
+        <label for="senha">Senha:</label>
+        <input type="password" v-model="user.password" class="form-control" id="senha">
+      </div>
+      <div class="form-group">
+        <label for="confirmar-senha">Confirmar senha:</label>
+        <input type="password" v-model="confirm_password" class="form-control" id="confirmar-senha">
+      </div>
+      <div class="form-group">
+        <label for="data-nascimento">Data de nascimento:</label>
+        <input type="date" v-model="user.birthdate" class="form-control" id="data-nascimento">
+      </div>
+      <hr>
+      <button class="btn register-btn" @click="save()">Registrar</button>
+    </div>
+    <div class="text-center mt-3">
+      <p>Já tem uma conta? <router-link to="/sign">Faça login</router-link>.</p>
     </div>
   </div>
-  <transition v-if="message.content" name="slide" mode="out-in" appear>
-    <div :class="message.type" role="alert">
-      {{ message.content }}
-    </div>
-  </transition>
 </template>
 
 <script>
@@ -131,93 +86,42 @@ export default {
   }
 }
 </script>
-
-<style>
-#sign-container {
-  color: black;
+<style scoped>
+.form-fields {
+  margin: 0 auto;
+  max-width: 600px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px #1ABC9C;
 }
-
-#first-name {
-  margin-right: 10px;
+.form-fields input{
+  font-size: 20px;
+  padding: 10px;
 }
-
-#last-name {
-  margin-left: 10px;
+label {
+  color: #34495E;
+  font-weight: bold;
 }
-
-.form-inputs {
-  width: 30%;
-}
-
-@media only screen and (max-device-width: 900px) {
-  .form-inputs {
-    width: 60%;
-  }
-}
-
-input {
-  background-color: var(--color-background);
+button {
+  background-color: #1ABC9C;
+  color: #FFFFFF;
   border: none;
-  border-bottom: 2px solid black;
-  text-decoration: none;
-  outline: none;
-  color: black;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 20px;
 }
-
-#sign-link {
-  text-decoration: underline;
-  color: black;
-  font-weight: 600;
+.register-btn:hover {
+  color: #1ABC9C;
+  border: 1px solid #1ABC9C;
 }
-
-input:focus {
-  transition: 0.3s;
-  box-shadow: 0 0 0 0;
-  border: 0 none;
-  outline: 0;
-  color: black;
-  border-bottom: 2px solid #5fa8d3;
+.register-btn{
+  border: 1px solid #1ABC9C;
   background-color: white;
-}
-
-/* Transition */
-.alert-danger {
-  margin-right: 150px;
-  margin-left: 150px;
-}
-
-@keyframes slide-in {
-  from {
-    transform: translateY(40px);
-  }
-
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide-out {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(40px);
-  }
-}
-
-.slide-enter-active {
-  animation: slide-in 2s ease;
-  transition: opacity 2s;
-}
-
-.slide-leave-active {
-  animation: slide-out 2s ease;
-  transition: opacity 2s;
-}
-
-.slide-enter,
-.slide-leave-to {
-  opacity: 0;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
 }
 </style>

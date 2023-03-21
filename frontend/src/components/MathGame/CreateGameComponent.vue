@@ -1,73 +1,41 @@
 <template>
 <div class="container">
-    <div style="display: flex; flex-direction: column; justify-content: center;">
-        <h2>Dificuldade:</h2>
+    <h2>Dificuldade:</h2>
+    <div class="container">
+        <hr class="my-4 cards-divisor">
 
-        <label class="form-control" style="padding: 15px; display: flex; justify-content: space-evenly; flex-direction: row;">
-            <div class="btn-group btn-group-toggle" style="width: 100%; height: 100%;" data-toggle="buttons">
-                <label class="btn btn-secondary active">
-                    <input type="radio" v-on:focus="setInfo(1)" name="difficulty" id="option1" autocomplete="off" value="easy">
-                    <p>Facil</p>
-                </label>
-                <label class="btn btn-success">
-                    <input type="radio" checked v-on:focus="setInfo(2)" name="difficulty" id="option2" autocomplete="off" value="normal">
-                    <p>Normal</p> 
-                </label>
-                <label class="btn btn-danger">
-                    <input type="radio" v-on:focus="setInfo(3)" name="difficulty" id="option3" autocomplete="off" value="hard">
-                    <p>Dificil</p>
-                </label>
-                <label class="btn btn-dark">
-                    <input type="radio" v-on:focus="setInfo(4)" name="difficulty" id="option4" autocomplete="off" value="genius">
-                    <p>Genial</p>
-                </label>
+        <div class="row">
+            <div class="col-sm">
+                <h3>Normal</h3>
+                <img src="@/assets/img/ICONS/black-hole-1.png"/>
+                <hr class="my-4 cards-divisor"/>
+                <h4>Adição e subtração</h4>
+                <h4>Sem tempo para resolver</h4>
+                <h4>Multiplas escolhas</h4>
+                <h4>Cinco desafios</h4>
             </div>
-        </label>
-
-        <br />
-        <template v-if="info == 'easy'">
-            <div class="card border-primary mb-3 fade-in" id="easy-info">
-                <div class="card-header">Como funciona essa dificuldade?</div>
-                <div class="card-body text-primary">
-                    <h5 class="card-title">Facil</h5>
-                    <p class="card-text">Addition and subtraction, no time to resolve, multiple choice, five challenges.</p>
-                </div>
+            <div class="col-sm">
+                <h3>Dificil</h3>
+                <img src="@/assets/img/ICONS/black-hole-2.png"/>
+                <hr class="my-4 cards-divisor"/>
+                <h4>Adição, subtração e divisão</h4>
+                <h4>Tempo para resolver</h4>
+                <h4>Multiplas escolhas</h4>
+                <h4>Cinco desafios</h4>
             </div>
-        </template>
-        
-        <template v-if="info == 'normal'">
-            <div class="card border-success mb-3 fade-in" id="normal-info">
-                <div class="card-header">Como funciona essa dificuldade?</div>
-                <div class="card-body text-success">
-                    <h5 class="card-title">Normal</h5>
-                    <p class="card-text">Addition and subtraction, no time to resolve, multiple choice, five challenges.</p>
-                </div>
-            </div>
-        </template>
-
-        <template v-if="info == 'hard'">
-            <div class="card border-danger mb-3 fade-in" id="hard-info">
-                <div class="card-header">Como funciona essa dificuldade?</div>
-                <div class="card-body text-danger">
-                    <h5 class="card-title">Dificil</h5>
-                    <p class="card-text">Addition, subtraction and division, <strong>time to resolve</strong>, multiple choice, five challenges.</p>
-                </div>
-            </div>
-        </template>
-
-        <template v-if="info == 'genius'">
-            <div class="card border-dark mb-3 fade-in" id="genius-info">
-                <div class="card-header">Como funciona essa dificuldade?</div>
-                <div class="card-body text-dark">
-                    <h5 class="card-title">Genial</h5>
-                    <p class="card-text">Addition, subtraction, division and multiplication, <strong>time to resolve, no multiple choice</strong>, five challenges.</p>
-                </div>
-            </div>
-        </template>
-
-        <br />
-        <button class="button-36" @click="createGame(info)">Iniciar desafio</button>
+            <div class="col-sm">
+                <h3>Genial</h3>
+                <img src="@/assets/img/ICONS/black-hole-3.png"/>
+                <hr />
+                <h4>Adição, subtração, divisão e multiplicação</h4>
+                <h4>Tempo para resolver</h4>
+                <h4>Sem multiplas escolhas</h4>
+                <h4>Cinco desafios</h4>
+            </div>  
+        </div>  
     </div>
+    <hr class="my-4 cards-divisor">
+    <button class="" @click="createGame(info)">Iniciar desafio</button>
 </div>
 </template>
 
@@ -108,3 +76,35 @@ export default {
     }
 }
 </script>
+<style>
+.button-36{
+    width: 50%;
+}
+.col-sm{
+    margin:5px;
+    border-width:2px;
+    border-style:solid;
+    border-color:black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.col-sm:hover{
+    margin:5px;
+    border-width:2px;
+    border-style:solid;
+    border-color:#1ABC9C;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+.col-sm img{
+    width: 120px;
+}
+.card {
+    background-color: #FFFFFF;
+    color: #34495E;
+}
+
+.cards-divisor{
+    border-color: black;
+}
+</style>

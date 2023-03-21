@@ -16,6 +16,7 @@
 				</ul>
 			</div>
 			<div class="col-12 col-sm-8">
+                <br>
 				<div class="friend-info">
 					<h2>{{actual_friend.firstName}} {{actual_friend.lastName}}</h2>
 					<p>Email: {{actual_friend.email}}</p>

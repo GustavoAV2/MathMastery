@@ -1,43 +1,22 @@
 <template>
   <WebHeader current-page="sign" />
-  <div class="container-fluid text-center mt-5" id="sign-container">
-    <div class="row">
-      <div class="col-12 h5">Entrar</div>
-    </div>
-    <div class="row mt-2">
-      <div class="col-12">
-        <div class="container">
-          <div class="row mb-3">
-            <div class="col-12">
-              <input class="form-inputs" type="email" v-model="user.email" id="user-email-input" placeholder="Email ou nome de usuário">
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-12"> 
-              <input class="form-inputs" type="password" v-model="user.password" id="user-password-input" placeholder="Senha">
-            </div>
-          </div>
-
-          <div v-if="message.content">
-            <div>
-              {{ message.content }}
-            </div>
-          </div>
-          
-          <div class="row mb-3">
-            <div class="col-12"> 
-              <button id="submit-button" class="btn btn-dark" @click="loginUser()">Entrar</button>
-            </div>
-          </div>
-        </div>
+  <div class="container">
+    <h1 class="text-center mt-5">Entrar</h1>
+    <div class="form-fields">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" v-model="user.email" class="form-control" id="email">
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        Não possui cadastro? <router-link to="/register" id="register-link">Registrar</router-link>
+      <div class="form-group">
+        <label for="senha">Senha:</label>
+        <input type="password" v-model="user.password" class="form-control" id="senha">
       </div>
+      <hr>
+      <button class="btn register-btn" @click="loginUser()">Entrar</button>
     </div>
-    
+    <div class="text-center mt-3">
+      <p>Não tem uma conta? <router-link to="/register">Registre-se</router-link>.</p>
+    </div>
   </div>
 </template>
 
@@ -80,66 +59,42 @@ export default {
 }
 </script>
 
-<style>
-#sign-container {
-  color: black;
+<style scoped>
+.form-fields {
+  margin: 0 auto;
+  max-width: 600px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px #1ABC9C;
 }
-
-.form-inputs{
-  width: 30%;
-  text-align: center;
+.form-fields input{
+  font-size: 20px;
+  padding: 10px;
 }
-input {
-  background-color: var(--color-background);
+label {
+  color: #34495E;
+  font-weight: bold;
+}
+button {
+  background-color: #1ABC9C;
+  color: #FFFFFF;
   border: none;
-  border-bottom: 2px solid black;
-  text-decoration: none;
-  outline: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 20px;
+}
+.register-btn:hover {
+  color: #1ABC9C;
+  border: 1px solid #1ABC9C;
+}
+.register-btn{
+  border: 1px solid #1ABC9C;
+  background-color: white;
   color: black;
-}
-
-#register-link {
-  text-decoration: underline;
-  color: black;
-  font-weight: 600;
-}
-
-@keyframes slide-in {
-  from {
-    transform: translateY(40px);
-  }
-
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide-out {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(40px);
-  }
-}
-.alert{
-  margin-left: 50%;
-  margin-right: 500px;
-}
-.slide-enter-active {
-  animation: slide-in 2s ease;
-  transition: opacity 2s;
-}
-
-.slide-leave-active {
-  animation: slide-out 2s ease;
-  transition: opacity 2s;
-}
-
-.slide-enter,
-.slide-leave-to {
-  opacity: 0;
-  transition: 2s;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
 }
 </style>
