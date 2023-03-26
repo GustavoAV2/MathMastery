@@ -4,13 +4,11 @@
 			<h1 class="home-message">Teste suas habilidades matemáticas!</h1>
 			<p class="lead home-message">Desafie-se com problemas matemáticos de diferentes níveis de dificuldade e expanda seu conhecimento.</p>
 			<hr class="my-4">
-			<p class="home-message">Registre-se para começar a resolver problemas.</p>
 		</div>
 	</div>
     <div class="container">
-        <hr class="my-4 cards-divisor">
         <div class="row">
-            <div class="col-sm">
+            <div class="col-sm" @click="moveToGame('normal')">
                 <h3>Normal</h3>
                 <img src="@/assets/img/ICONS/black-hole-1.png"/>
                 <hr class="my-4 cards-divisor"/>
@@ -19,7 +17,7 @@
                 <h4>Multiplas escolhas</h4>
                 <h4>Cinco desafios</h4>
             </div>
-            <div class="col-sm">
+            <div class="col-sm" @click="moveToGame('hard')">
                 <h3>Dificil</h3>
                 <img src="@/assets/img/ICONS/black-hole-2.png"/>
                 <hr class="my-4 cards-divisor"/>
@@ -28,7 +26,7 @@
                 <h4>Multiplas escolhas</h4>
                 <h4>Cinco desafios</h4>
             </div>
-            <div class="col-sm">
+            <div class="col-sm" @click="moveToGame('genius')">
                 <h3>Genial</h3>
                 <img src="@/assets/img/ICONS/black-hole-3.png"/>
                 <hr />
@@ -40,9 +38,10 @@
         </div>
         <hr class="my-4 cards-divisor">
         <router-link to="/register">
-            <button type="button" class="btn btn-primary btn-lg btn-block">Registrar</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block" @click="moveToGame('normal')">Registrar</button>
         </router-link>
         <button class="btn btn-game btn-lg btn-block" @click="createGame(info)">Iniciar desafio</button>
+        <p class="home-message">Registre-se para rankear seu perfil, adicionar amigos e evoluir com eles.</p>
     </div>
 </template>
 
@@ -51,6 +50,11 @@ export default {
     data(){
         return{
             token: null,
+        }
+    },
+    methods:{
+        moveToGame(difficultyParam){
+            this.$router.push('/mathgame/' + difficultyParam);
         }
     },
     mounted() {
@@ -70,7 +74,7 @@ body{
     color: #1ABC9C;
     width: 30%;
     height: 100px;
-    border-width:1px;
+    border-width:3px;
     border-radius: 0px;
     border-style:solid;
     border-color:#1ABC9C;
@@ -85,7 +89,7 @@ body{
     color: #8E44AD;
     height: 100px;
     width: 70%;
-    border-width:1px;
+    border-width:3px;
     border-radius: 0px;
     border-style:solid;
     border-color:#8E44AD;
