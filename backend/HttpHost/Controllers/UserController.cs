@@ -147,13 +147,13 @@ namespace HttpHost.Controllers
 
             if (usernameOrEmail.Contains("@"))
             {
-                foundUser = _userDb.User.Where
-                    (user => user.Email == usernameOrEmail).FirstOrDefault();
+                foundUser = _userDb.User.
+                    Where(user => user.Email == usernameOrEmail).FirstOrDefault();
             }
             else
             {
-                foundUser = _userDb.User.Where
-                    (user => user.UserName == usernameOrEmail).FirstOrDefault();
+                foundUser = _userDb.User.
+                    Where(user => user.UserName == usernameOrEmail).FirstOrDefault();
             }
 
             if (foundUser != null)

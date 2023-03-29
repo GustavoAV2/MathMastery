@@ -1,10 +1,9 @@
-using System.Diagnostics;
+using HttpHost.Dto;
 using HttpHost.Data;
 using HttpHost.Models;
-using HttpHost.Dto;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HttpHost.Middlewares.Identification;
 using Microsoft.AspNetCore.Authorization;
 
 namespace HttpHost.Controllers
