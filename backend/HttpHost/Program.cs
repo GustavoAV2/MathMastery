@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using HttpHost.Data;
+using HttpHost.Database.Data;
 using HttpHost;
 using Serilog;
 using Serilog.Events;

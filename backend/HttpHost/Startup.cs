@@ -1,4 +1,4 @@
-﻿using HttpHost.Data;
+﻿using HttpHost.Database.Data;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;

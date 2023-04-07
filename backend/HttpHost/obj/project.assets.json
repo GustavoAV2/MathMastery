@@ -1203,6 +1203,36 @@
             "rid": "win"
           }
         }
+      },
+      "HttpHost.Database/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/HttpHost.Database.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HttpHost.Database.dll": {}
+        }
+      },
+      "HttpHost.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/HttpHost.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HttpHost.Domain.dll": {}
+        }
+      },
+      "HttpHost.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/HttpHost.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HttpHost.Services.dll": {}
+        }
       }
     }
   },
@@ -3607,10 +3637,28 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "HttpHost.Database/1.0.0": {
+      "type": "project",
+      "path": "../HttpHost.Database/HttpHost.Database.csproj",
+      "msbuildProject": "../HttpHost.Database/HttpHost.Database.csproj"
+    },
+    "HttpHost.Domain/1.0.0": {
+      "type": "project",
+      "path": "../HttpHost.Domain/HttpHost.Domain.csproj",
+      "msbuildProject": "../HttpHost.Domain/HttpHost.Domain.csproj"
+    },
+    "HttpHost.Services/1.0.0": {
+      "type": "project",
+      "path": "../HttpHost.Services/HttpHost.Services.csproj",
+      "msbuildProject": "../HttpHost.Services/HttpHost.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "HttpHost.Database >= 1.0.0",
+      "HttpHost.Domain >= 1.0.0",
+      "HttpHost.Services >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.13",
       "Microsoft.EntityFrameworkCore.InMemory >= 7.0.1",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.1",
@@ -3619,19 +3667,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gustavo.voltolini\\.nuget\\packages\\": {}
+    "C:\\Users\\Gustavo Voltolini\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gustavo.voltolini\\OneDrive - Anheuser-Busch InBev\\Desktop\\MathWebsite\\backend\\HttpHost\\HttpHost.csproj",
+      "projectUniqueName": "C:\\Users\\Gustavo Voltolini\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost\\HttpHost.csproj",
       "projectName": "HttpHost",
-      "projectPath": "C:\\Users\\gustavo.voltolini\\OneDrive - Anheuser-Busch InBev\\Desktop\\MathWebsite\\backend\\HttpHost\\HttpHost.csproj",
-      "packagesPath": "C:\\Users\\gustavo.voltolini\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gustavo.voltolini\\OneDrive - Anheuser-Busch InBev\\Desktop\\MathWebsite\\backend\\HttpHost\\obj\\",
+      "projectPath": "C:\\Users\\Gustavo Voltolini\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost\\HttpHost.csproj",
+      "packagesPath": "C:\\Users\\Gustavo Voltolini\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Gustavo Voltolini\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\gustavo.voltolini\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Gustavo Voltolini\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3644,7 +3692,17 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Gustavo Voltolini\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost.Database\\HttpHost.Database.csproj": {
+              "projectPath": "C:\\Users\\Gustavo Voltolini\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost.Database\\HttpHost.Database.csproj"
+            },
+            "C:\\Users\\Gustavo Voltolini\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost.Domain\\HttpHost.Domain.csproj": {
+              "projectPath": "C:\\Users\\Gustavo Voltolini\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost.Domain\\HttpHost.Domain.csproj"
+            },
+            "C:\\Users\\Gustavo Voltolini\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost.Services\\HttpHost.Services.csproj": {
+              "projectPath": "C:\\Users\\Gustavo Voltolini\\Desktop\\MyCode\\MathWebsite\\backend\\HttpHost.Services\\HttpHost.Services.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -3699,7 +3757,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
