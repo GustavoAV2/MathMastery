@@ -16,8 +16,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.1" />
   </ItemGroup>
-	
-    <ItemGroup>
-	    <ProjectReference Include="..\HttpHost.Domain\HttpHost.Domain.csproj" />
-    </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HttpHost.Domain\HttpHost.Domain.csproj" />
+  </ItemGroup>
 </Project>
