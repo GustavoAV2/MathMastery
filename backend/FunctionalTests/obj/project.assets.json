@@ -3235,7 +3235,6 @@
         "dependencies": {
           "HttpHost.Database": "1.0.0",
           "HttpHost.Domain": "1.0.0",
-          "HttpHost.Services": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.13",
           "Microsoft.EntityFrameworkCore.InMemory": "7.0.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.1",
@@ -3254,6 +3253,10 @@
       "HttpHost.Database/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "HttpHost.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.1"
+        },
         "compile": {
           "bin/placeholder/HttpHost.Database.dll": {}
         },
@@ -3264,21 +3267,15 @@
       "HttpHost.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.13",
+          "Microsoft.EntityFrameworkCore.InMemory": "7.0.1"
+        },
         "compile": {
           "bin/placeholder/HttpHost.Domain.dll": {}
         },
         "runtime": {
           "bin/placeholder/HttpHost.Domain.dll": {}
-        }
-      },
-      "HttpHost.Services/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "compile": {
-          "bin/placeholder/HttpHost.Services.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/HttpHost.Services.dll": {}
         }
       }
     }
@@ -9716,11 +9713,6 @@
       "type": "project",
       "path": "../HttpHost.Domain/HttpHost.Domain.csproj",
       "msbuildProject": "../HttpHost.Domain/HttpHost.Domain.csproj"
-    },
-    "HttpHost.Services/1.0.0": {
-      "type": "project",
-      "path": "../HttpHost.Services/HttpHost.Services.csproj",
-      "msbuildProject": "../HttpHost.Services/HttpHost.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {

@@ -1,6 +1,6 @@
 using System;
 
-namespace HttpHost.Middlewares.Identification
+namespace HttpHost.Domain.Middlewares.Identification
 {
     public class AdminAttribute : Attribute
     {

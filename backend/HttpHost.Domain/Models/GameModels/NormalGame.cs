@@ -1,4 +1,4 @@
-﻿using HttpHost.Interfaces;
+﻿using HttpHost.Domain.Abstractions;
 using HttpHost.Domain.Models.Enums;
 
 namespace HttpHost.Domain.Models.GameModels

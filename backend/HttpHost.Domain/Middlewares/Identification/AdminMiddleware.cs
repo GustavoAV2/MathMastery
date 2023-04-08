@@ -1,9 +1,10 @@
 using System.Net;
 using System.Text.Json;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Caching.Distributed;
 
-namespace HttpHost.Middlewares.Identification
+namespace HttpHost.Domain.Middlewares.Identification
 {
     public class AdminMiddleware
     {

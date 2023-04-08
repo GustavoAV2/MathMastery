@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -21,7 +21,6 @@
     <Folder Include="HttpHost\obj\Debug\net6.0\" />
 	<ProjectReference Include="..\HttpHost.Domain\HttpHost.Domain.csproj" />
 	<ProjectReference Include="..\HttpHost.Database\HttpHost.Database.csproj" />
-	<ProjectReference Include="..\HttpHost.Services\HttpHost.Services.csproj" />
   </ItemGroup>
 
 </Project>
