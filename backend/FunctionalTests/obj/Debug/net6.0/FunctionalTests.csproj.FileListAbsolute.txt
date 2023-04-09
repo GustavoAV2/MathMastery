@@ -1,7 +1,0 @@
-C:\Users\Gustavo Voltolini\Desktop\MyCode\MathWebsite\backend\FunctionalTests\bin\Debug\net6.0\CoverletSourceRootsMapping
-C:\Users\Gustavo Voltolini\Desktop\MyCode\MathWebsite\backend\FunctionalTests\obj\Debug\net6.0\FunctionalTests.csproj.AssemblyReference.cache
-C:\Users\Gustavo Voltolini\Desktop\MyCode\MathWebsite\backend\FunctionalTests\obj\Debug\net6.0\MvcTestingAppManifest.json
-C:\Users\Gustavo Voltolini\Desktop\MyCode\MathWebsite\backend\FunctionalTests\obj\Debug\net6.0\FunctionalTests.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Gustavo Voltolini\Desktop\MyCode\MathWebsite\backend\FunctionalTests\obj\Debug\net6.0\FunctionalTests.AssemblyInfoInputs.cache
-C:\Users\Gustavo Voltolini\Desktop\MyCode\MathWebsite\backend\FunctionalTests\obj\Debug\net6.0\FunctionalTests.AssemblyInfo.cs
-C:\Users\Gustavo Voltolini\Desktop\MyCode\MathWebsite\backend\FunctionalTests\obj\Debug\net6.0\FunctionalTests.csproj.CoreCompileInputs.cache

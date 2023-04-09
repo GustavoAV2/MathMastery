@@ -1,6 +1,0 @@
-C:\Users\Gustavo Voltolini\Desktop\MyCode\MathWebsite\backend\HttpHost\obj\Debug\net6.0\HttpHost.csproj.AssemblyReference.cache
-C:\Users\Gustavo Voltolini\Desktop\MyCode\MathWebsite\backend\HttpHost\obj\Debug\net6.0\HttpHost.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Gustavo Voltolini\Desktop\MyCode\MathWebsite\backend\HttpHost\obj\Debug\net6.0\HttpHost.AssemblyInfoInputs.cache
-C:\Users\Gustavo Voltolini\Desktop\MyCode\MathWebsite\backend\HttpHost\obj\Debug\net6.0\HttpHost.AssemblyInfo.cs
-C:\Users\Gustavo Voltolini\Desktop\MyCode\MathWebsite\backend\HttpHost\obj\Debug\net6.0\HttpHost.csproj.CoreCompileInputs.cache
-C:\Users\Gustavo Voltolini\Desktop\MyCode\MathWebsite\backend\HttpHost\obj\Debug\net6.0\HttpHost.MvcApplicationPartsAssemblyInfo.cache
