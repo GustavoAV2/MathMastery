@@ -1,7 +1,7 @@
 ﻿using HttpHost.Domain.Models.Enums;
 using System;
 
-namespace HttpHost.Domain.Models.GameModels
+namespace HttpHost.Domain.Models
 {
     public class Challenge
     {

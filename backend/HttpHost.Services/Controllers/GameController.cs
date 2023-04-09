@@ -1,15 +1,13 @@
-using HttpHost.Dto;
+using HttpHost.Domain.Dto;
+using HttpHost.Domain.Models;
 using HttpHost.Database.Data;
-using HttpHost.Models;
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using HttpHost.Interfaces;
-using HttpHost.Middlewares.Identification;
-using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using HttpHost.Domain.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 
-namespace HttpHost.Controllers
+namespace HttpHost.Services.Controllers
 {
     [ApiController]
     public class GameController : ControllerBase

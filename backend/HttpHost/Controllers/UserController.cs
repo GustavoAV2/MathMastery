@@ -1,14 +1,15 @@
-using System.Diagnostics;
-using HttpHost.Database.Data;
-using HttpHost.Models;
+using System.Text;
 using HttpHost.Dto;
+using System.Diagnostics;
+using HttpHost.Domain.Dto;
+using HttpHost.Domain.Models;
+using HttpHost.Database.Data;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
+using HttpHost.Domain.Dto.Headers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using HttpHost.Dto.Headers;
 using Microsoft.AspNetCore.Authorization;
 
 namespace HttpHost.Controllers

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using HttpHost.Database.Data;
 using HttpHost.Domain.Dto;
 using HttpHost.Domain.Abstractions;
-using HttpHost.Domain.Models.GameModels;
+using HttpHost.Domain.Models;
 
 namespace HttpHost.Controllers
 {

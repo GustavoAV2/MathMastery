@@ -1,17 +1,21 @@
+using System.Text;
+using HttpHost.Dto;
+using HttpHost.Domain.Dto;
 using System.Diagnostics;
 using HttpHost.Database.Data;
-using HttpHost.Models;
-using HttpHost.Dto;
+using System.Security.Claims;
+using HttpHost.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using HttpHost.Domain.Dto.Headers;
+using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using HttpHost.Dto.Headers;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 
-namespace HttpHost.Controllers
+namespace HttpHost.Services.Controllers
 {
     [ApiController]
     public class UserController : ControllerBase

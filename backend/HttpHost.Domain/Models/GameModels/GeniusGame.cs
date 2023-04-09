@@ -1,7 +1,7 @@
 ﻿using HttpHost.Domain.Abstractions;
 using HttpHost.Domain.Models.Enums;
 
-namespace HttpHost.Domain.Models.GameModels
+namespace HttpHost.Domain.Models
 {
     public class GeniusGame : IGame
     {

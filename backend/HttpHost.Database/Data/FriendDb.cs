@@ -1,7 +1,5 @@
 ﻿using HttpHost.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HttpHost.Database.Data
 {

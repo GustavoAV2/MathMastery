@@ -1,12 +1,14 @@
-using HttpHost.Dto;
-using HttpHost.Database.Data;
-using HttpHost.Models;
 using System.Diagnostics;
+using HttpHost.Domain.Dto;
+using HttpHost.Domain.Models;
+using HttpHost.Database.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 
-namespace HttpHost.Controllers
+namespace HttpHost.Services.Controllers
 {
     [ApiController]
     [Route("/friend")]

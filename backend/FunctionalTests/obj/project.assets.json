@@ -3268,8 +3268,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.13",
-          "Microsoft.EntityFrameworkCore.InMemory": "7.0.1"
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.13"
         },
         "compile": {
           "bin/placeholder/HttpHost.Domain.dll": {}

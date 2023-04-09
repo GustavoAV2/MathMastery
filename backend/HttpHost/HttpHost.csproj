@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="HttpHost\obj\Debug\net6.0\" />
 	<ProjectReference Include="..\HttpHost.Domain\HttpHost.Domain.csproj" />
 	<ProjectReference Include="..\HttpHost.Database\HttpHost.Database.csproj" />
   </ItemGroup>

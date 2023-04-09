@@ -15,31 +15,3 @@ build_property.SupportLocalizedComponentNames =
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 build_property.MSBuildProjectDirectory = C:\Users\Gustavo Voltolini\Desktop\MyCode\MathWebsite\backend\HttpHost
 build_property._RazorSourceGeneratorDebug = 
-
-[C:/Users/Gustavo Voltolini/Desktop/MyCode/MathWebsite/backend/HttpHost/HttpHost/Pages/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = SHR0cEhvc3RcUGFnZXNcRXJyb3IuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Gustavo Voltolini/Desktop/MyCode/MathWebsite/backend/HttpHost/HttpHost/Pages/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = SHR0cEhvc3RcUGFnZXNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Gustavo Voltolini/Desktop/MyCode/MathWebsite/backend/HttpHost/HttpHost/Pages/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = SHR0cEhvc3RcUGFnZXNcUHJpdmFjeS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Gustavo Voltolini/Desktop/MyCode/MathWebsite/backend/HttpHost/HttpHost/Pages/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = SHR0cEhvc3RcUGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Gustavo Voltolini/Desktop/MyCode/MathWebsite/backend/HttpHost/HttpHost/Pages/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = SHR0cEhvc3RcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Gustavo Voltolini/Desktop/MyCode/MathWebsite/backend/HttpHost/HttpHost/Pages/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = SHR0cEhvc3RcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Gustavo Voltolini/Desktop/MyCode/MathWebsite/backend/HttpHost/HttpHost/Pages/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = SHR0cEhvc3RcUGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-l1uj6y1oya

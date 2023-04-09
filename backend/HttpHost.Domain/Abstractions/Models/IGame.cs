@@ -1,5 +1,5 @@
 ﻿using HttpHost.Domain.Models.Enums;
-using HttpHost.Domain.Models.GameModels;
+using HttpHost.Domain.Models;
 
 namespace HttpHost.Domain.Abstractions
 {
