@@ -1,24 +1,27 @@
-using HttpHost.Dto;
-using HttpHost.Database.Data;
-using HttpHost.Models;
 using System.Diagnostics;
+using HttpHost.Domain.Dto;
+using HttpHost.Domain.Models;
+using HttpHost.Database.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
+using System.Linq;
+using System;
 
-namespace HttpHost.Controllers
+namespace HttpHost.Services.Controllers
 {
     [ApiController]
     [Route("/friend")]
     public class FriendController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
-        private readonly FriendDb _friendDb;
 
-        public FriendController(ILogger<UserController> logger, FriendDb friendDb)
+        public FriendController(ILogger<UserController> logger)
         {
             _logger = logger;
-            _friendDb = friendDb;
         }
 
         [HttpGet]
@@ -44,16 +47,19 @@ namespace HttpHost.Controllers
         [Route("/friend/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public IActionResult GetFriendsByUserId(string userId)
+        public async Task<IActionResult> GetFriendsByUserId(string userId)
         {
-            var foundFriendRequisition = _friendDb.Friend.
+            var foundFriendsRequisition = _friendDb.Friend.
                 Where(f => f.ReceiverId == userId && f.ConfirmationDate != null).ToArray();
 
-            if (!foundFriendRequisition.Any())
+            if (!foundFriendsRequisition.Any())
             {
-                return NotFound();
+                foreach (var f in foundFriendsRequisition)
+                {
+                    
+                }
             }
-            return Ok(foundFriendRequisition);
+            return NotFound();
         }
 
         [HttpPost]

@@ -1,31 +1,38 @@
 using System.Text;
 using HttpHost.Dto;
-using System.Diagnostics;
 using HttpHost.Domain.Dto;
-using HttpHost.Domain.Models;
+using System.Diagnostics;
 using HttpHost.Database.Data;
 using System.Security.Claims;
+using HttpHost.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using HttpHost.Domain.Dto.Headers;
+using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
+using System.Linq;
+using System;
+using HttpHost.Services.Services;
 
-namespace HttpHost.Controllers
+namespace HttpHost.Services.Controllers
 {
     [ApiController]
     public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
-        private readonly UserDb _userDb;
+        private readonly UserService _userService;
         private IConfiguration _configuration { get; }
 
-        public UserController(ILogger<UserController> logger, IConfiguration configuration, UserDb userDb)
+        public UserController(ILogger<UserController> logger, IConfiguration configuration, UserService userService)
         {
             _logger = logger;
-            _userDb = userDb;
             _configuration = configuration;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -35,11 +42,7 @@ namespace HttpHost.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetUsers()
         {
-            var sw = Stopwatch.StartNew();
-
-            var users = await _userDb.All.ToListAsync();
-            _logger.LogInformation("Time to search > {dur}", sw.ElapsedMilliseconds);
-
+            var users = await _userService.GetUsers();
             if (!users.Any())
                 return NotFound();
 
@@ -52,36 +55,10 @@ namespace HttpHost.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login(LoginUserDto loginDto)
         {
-            var sw = Stopwatch.StartNew();
-
-            var foundUser = _userDb.User.Where(user => user.Email == loginDto.Email).FirstOrDefault();
-            _logger.LogInformation("Time to search > {dur}", sw.ElapsedMilliseconds);
-
-            if (foundUser != null)
-                if (foundUser.PasswordHash == loginDto.Password)
-                {
-                    var issuer = _configuration["Jwt:Issuer"];
-                    var audience = _configuration["Jwt:Audience"];
-                    var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
-                    var tokenDescriptor = new SecurityTokenDescriptor
-                    {
-                        Subject = new ClaimsIdentity(new[]
-                        {
-                            new Claim("Id", foundUser.Id.ToString()),
-                            new Claim(JwtRegisteredClaimNames.Sub, foundUser.UserName),
-                            new Claim(JwtRegisteredClaimNames.Email, foundUser.UserName),
-                            new Claim(JwtRegisteredClaimNames.Jti,
-                            Guid.NewGuid().ToString())
-                        }),
-                        Expires = DateTime.UtcNow.AddMinutes(5),
-                        Issuer = issuer,
-                        Audience = audience,
-                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
-                    };
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var tokenJwt = tokenHandler.CreateEncodedJwt(tokenDescriptor);
-                    return Ok(tokenJwt);
-                }
+            var tokenJwt = await _userService.Login(loginDto);
+            if (!String.IsNullOrEmpty(tokenJwt)) {
+                return Ok(tokenJwt);
+            }
             return Unauthorized();
         }
 
@@ -108,8 +85,8 @@ namespace HttpHost.Controllers
         }
 
         [HttpGet]
-        [Route("/user/{id}")]
         [Authorize]
+        [Route("/user/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -117,25 +94,24 @@ namespace HttpHost.Controllers
         {
             if (string.IsNullOrWhiteSpace(id))
                 return BadRequest();
-
-            var sw = Stopwatch.StartNew();
-
-            Users user = await _userDb.All.FindAsync(id);
-            _logger.LogInformation("Get user by id. Time to search >", sw.ElapsedMilliseconds);
-
-            if (user != null)
+            try
             {
+                var user = _userService.GetUserById(id);
                 return Ok(user);
             }
-            else
+            catch (KeyNotFoundException _)
             {
                 return NotFound();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro na busca: {ErrorMessage}", ex.Message);
             }
         }
 
         [HttpGet]
-        [Route("/user/friend/{usernameOrEmail}")]
         [Authorize]
+        [Route("/user/friend/{usernameOrEmail}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

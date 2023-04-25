@@ -1,4 +1,6 @@
-﻿namespace HttpHost.Domain.Dto
+﻿using System;
+
+namespace HttpHost.Domain.Dto
 {
     public class FriendDto
     {

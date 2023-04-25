@@ -20,6 +20,7 @@
   <ItemGroup>
 	<ProjectReference Include="..\HttpHost.Domain\HttpHost.Domain.csproj" />
 	<ProjectReference Include="..\HttpHost.Database\HttpHost.Database.csproj" />
+	<ProjectReference Include="..\HttpHost.Services\HttpHost.Services.csproj" />
   </ItemGroup>
 
 </Project>

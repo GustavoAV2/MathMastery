@@ -26,3 +26,25 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+
+# Node.js dependencies
+node_modules/
+
+# Build artifacts
+/dist/
+/.nuxt/
+/nuxt.config.js
+/*.log
+
+# Environment variables
+.env*
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.code-workspace
+
+# Other build tools
+/.cache/
+/yarn-error.log
+/.yarn/cache/

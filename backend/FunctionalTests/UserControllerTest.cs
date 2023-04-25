@@ -2,6 +2,7 @@ using FunctionalTests.Factories;
 using HttpHost.Dto;
 using System.Text.Json.Nodes;
 using System.Text;
+using HttpHost.Domain.Dto;
 
 namespace FunctionalTests
 {

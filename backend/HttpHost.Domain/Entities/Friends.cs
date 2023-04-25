@@ -1,4 +1,6 @@
-﻿namespace HttpHost.Domain.Models
+﻿using System;
+
+namespace HttpHost.Domain.Models
 {
     public class Friends
     {

@@ -1,5 +1,6 @@
 ﻿using HttpHost.Domain.Abstractions;
 using HttpHost.Domain.Models.Enums;
+using System.Collections.Generic;
 
 namespace HttpHost.Domain.Models
 {

@@ -1,5 +1,7 @@
 ﻿using HttpHost.Domain.Models.Enums;
 using HttpHost.Domain.Models;
+using System.Collections.Generic;
+using System;
 
 namespace HttpHost.Domain.Abstractions
 {

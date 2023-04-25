@@ -1,25 +1,25 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Authorization;
-using HttpHost.Database.Data;
 using HttpHost.Domain.Dto;
-using HttpHost.Domain.Abstractions;
 using HttpHost.Domain.Models;
+using HttpHost.Database.Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using HttpHost.Domain.Abstractions;
+using Microsoft.AspNetCore.Authorization;
+using HttpHost.Services.Services;
 
-namespace HttpHost.Controllers
+namespace HttpHost.Services.Controllers
 {
     [ApiController]
     public class GameController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
-        private readonly UserDb _userDb;
+        private readonly GameService _gameService;
 
-        public GameController(ILogger<UserController> logger, UserDb userDb)
+        public GameController(ILogger<UserController> logger)
         {
             _logger = logger;
-            _userDb = userDb;
+            _gameService = new GameService();
         }
 
         [HttpGet]
@@ -51,38 +51,8 @@ namespace HttpHost.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult NextChallenge(GameDto gameDto)
         {
-            var game = GenerateGame(
-                    gameDto.Difficulty, gameDto.ChallengesSolve, gameDto.ChallengesUnsolved
-                );
-            game.SetChallenge(gameDto.FirstNumber, gameDto.LastNumber, gameDto.Operation);
-
-            if (game.Challenge.VerifySolution(gameDto.Result))
-                game.ChallengesSolve += 1;
-            else
-                game.ChallengesUnsolved += 1;
-
-            game.GenerateNewChallenge();
+            var game = _gameService.NextChallenge(gameDto);
             return Ok(game);
-        }
-
-        private IGame GenerateGame(string difficulty, int challengeSolve = 0, int challengeUnsolved = 0)
-        {
-            if (difficulty == "normal")
-            {
-                return new NormalGame(challengeSolve, challengeUnsolved);
-            }
-            else if (difficulty == "hard")
-            {
-                return new HardGame(challengeSolve, challengeUnsolved);
-            }
-            else if (difficulty == "genius")
-            {
-                return new GeniusGame(challengeSolve, challengeUnsolved);
-            }
-            else
-            {
-                return new EasyGame(challengeSolve, challengeUnsolved);
-            }
         }
     }
 }
