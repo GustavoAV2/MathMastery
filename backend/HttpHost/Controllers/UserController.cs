@@ -104,7 +104,6 @@ namespace HttpHost.Services.Controllers
             }
         }
 
-
         [HttpGet]
         [Authorize]
         [Route("/user/friend/{username}")]
@@ -125,7 +124,6 @@ namespace HttpHost.Services.Controllers
                 return NotFound();
             }
         }
-
 
         [HttpPost]
         [Route("/user")]
