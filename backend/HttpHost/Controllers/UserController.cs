@@ -69,17 +69,10 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Identity([FromHeader] AuthHeaderDto headerDto)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
             if (headerDto.Authorization != null)
             {
-                var tokenString = headerDto.Authorization.Replace("Bearer ", "");
-                var token = tokenHandler.ReadJwtToken(tokenString);
-                var id = token.Payload["Id"];
-                var foundUser = await _userDb.All.FindAsync(id);
-                if (foundUser != null)
-                {
-                    return Ok(foundUser);
-                }
+                var foundUser = await _userService.GetUserIdentity(headerDto);
+                return Ok(foundUser);
             }
             return Unauthorized();
         }
@@ -96,17 +89,14 @@ namespace HttpHost.Services.Controllers
                 return BadRequest();
             try
             {
-                var user = _userService.GetUserById(id);
+                var user = await _userService.GetUserById(id);
                 return Ok(user);
-            }
-            catch (KeyNotFoundException _)
-            {
-                return NotFound();
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro na busca: {ErrorMessage}", ex.Message);
             }
+            return NotFound();
         }
 
         [HttpGet]

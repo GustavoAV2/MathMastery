@@ -1,5 +1,6 @@
 ﻿using HttpHost.Database.Data;
 using HttpHost.Domain.Dto;
+using HttpHost.Domain.Dto.Headers;
 using HttpHost.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -46,7 +47,6 @@ namespace HttpHost.Services.Services
             var user = await _userDb.All.FirstOrDefaultAsync(u => u.Id == userId);
 
             _logger.LogInformation($"Busca de usuário pelo ID concluída em {sw.ElapsedMilliseconds} ms.");
-
             if (user == null)
             {
                 throw new KeyNotFoundException($"Usuário com ID {userId} não encontrado.");
@@ -54,24 +54,40 @@ namespace HttpHost.Services.Services
             return user;
         }
 
-        public async Task<string> Login(LoginUserDto loginDto)
+        public async Task<Users> GetUserByEmail(string userEmail)
         {
             var sw = Stopwatch.StartNew();
-
-            var foundUser = _userDb.User.Where(user => user.Email == loginDto.Email).FirstOrDefault();
-            _logger.LogInformation("Time to search > {dur}", sw.ElapsedMilliseconds);
+            var foundUser = _userDb.User.Where(user => user.Email == userEmail).FirstOrDefault();
+            _logger.LogInformation($"Busca de usuário pelo e-mail concluída em {sw.ElapsedMilliseconds} ms.");
 
             if (foundUser == null)
             {
                 throw new KeyNotFoundException();
             }
+            return foundUser;
+        }
 
+        public async Task<string> Login(LoginUserDto loginDto)
+        {
+            var foundUser = await GetUserByEmail(loginDto.Email);
+            
             if (ValidLogin(foundUser, loginDto) == true)
             {
                 var tokenJwt = GenerateToken(foundUser);
                 return tokenJwt;
             }
             return "";
+        }
+
+        public async Task<Users> GetUserIdentity(AuthHeaderDto headerDto)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenString = headerDto.Authorization.Replace("Bearer ", "");
+            var token = tokenHandler.ReadJwtToken(tokenString);
+            var id = token.Payload["Id"];
+
+            var foundUser = await _userDb.All.FindAsync(id);
+            return foundUser;
         }
 
         private bool ValidLogin(Users foundUser, LoginUserDto loginDto)
