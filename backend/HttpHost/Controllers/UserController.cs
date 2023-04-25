@@ -1,23 +1,8 @@
-using System.Text;
-using HttpHost.Dto;
 using HttpHost.Domain.Dto;
-using System.Diagnostics;
-using HttpHost.Database.Data;
-using System.Security.Claims;
-using HttpHost.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using HttpHost.Domain.Dto.Headers;
-using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Configuration;
-using System.Threading.Tasks;
-using System.Linq;
-using System;
 using HttpHost.Services.Services;
+using HttpHost.Domain.Dto.Headers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HttpHost.Services.Controllers
 {
@@ -26,12 +11,10 @@ namespace HttpHost.Services.Controllers
     {
         private readonly ILogger<UserController> _logger;
         private readonly UserService _userService;
-        private IConfiguration _configuration { get; }
 
-        public UserController(ILogger<UserController> logger, IConfiguration configuration, UserService userService)
+        public UserController(ILogger<UserController> logger, UserService userService)
         {
             _logger = logger;
-            _configuration = configuration;
             _userService = userService;
         }
 
@@ -101,34 +84,48 @@ namespace HttpHost.Services.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("/user/friend/{usernameOrEmail}")]
+        [Route("/user/friend/{userEmail}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetUserByUsernameOrEmail([FromRoute] string usernameOrEmail)
+        public async Task<IActionResult> GetUserByEmail([FromRoute] string userEmail)
         {
-            Users foundUser;
-
-            if (string.IsNullOrWhiteSpace(usernameOrEmail))
+            if (string.IsNullOrWhiteSpace(userEmail))
                 return BadRequest();
 
-            if (usernameOrEmail.Contains("@"))
+            try
             {
-                foundUser = _userDb.User.
-                    Where(user => user.Email == usernameOrEmail).FirstOrDefault();
-            }
-            else
-            {
-                foundUser = _userDb.User.
-                    Where(user => user.UserName == usernameOrEmail).FirstOrDefault();
-            }
-
-            if (foundUser != null)
-            {
+                var foundUser = await _userService.GetUserByEmail(userEmail);
                 return Ok(foundUser);
             }
-            return NotFound();
+            catch (Exception _)
+            {
+                return NotFound();
+            }
         }
+
+
+        [HttpGet]
+        [Authorize]
+        [Route("/user/friend/{username}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetUserByUsername([FromRoute] string username)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+                return BadRequest();
+            try
+            {
+                var foundUser = await _userService.GetUserByUsername(username);
+                return Ok(foundUser);
+            }
+            catch(Exception _)
+            {
+                return NotFound();
+            }
+        }
+
 
         [HttpPost]
         [Route("/user")]
@@ -137,14 +134,7 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateUser(UserDto inputUser)
         {
-            var newUser = new Users(
-                    email : inputUser.Email, passwordHash : inputUser.Password, 
-                    userName: inputUser.UserName, firstName : inputUser.FirstName, 
-                    lastName : inputUser.LastName
-                );
-            _userDb.All.Add(newUser);
-            await _userDb.SaveChangesAsync();
-
+            var newUser = await _userService.CreateUser(inputUser);
             return Ok(newUser);
         }
 
@@ -156,37 +146,22 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PutUser(string id, UserDto inputUser)
         {
-            var foundUser = await _userDb.All.FindAsync(id);
-
-            if (foundUser is null) return NotFound();
-
-            foundUser.FirstName = inputUser.FirstName;
-            foundUser.LastName = inputUser.LastName;
-            foundUser.UserName = inputUser.UserName;
-            foundUser.PasswordHash = inputUser.Password;
-
-            await _userDb.SaveChangesAsync();
-
+            var foundUser = await _userService.PutUser(id, inputUser);
             return Ok(foundUser);
         }
 
-        [HttpPut]
-        [Authorize]
-        [Route("/user/game/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> PutGameUserStatus(string id, UserGameStatusDto statusDto)
-        {
-            var foundUser = await _userDb.All.FindAsync(id);
-            if (foundUser is null) return NotFound();
-
-            foundUser.NumberUnresolvedAccounts = statusDto.NumberUnresolvedAccounts + foundUser.NumberUnresolvedAccounts;
-            foundUser.NumberResolvedAccounts = statusDto.NumberResolvedAccounts + foundUser.NumberResolvedAccounts;
-
-            await _userDb.SaveChangesAsync();
-            return Ok();
-        }
+        //[HttpPut]
+        //[Authorize]
+        //[Route("/user/game/{id}")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //public async Task<IActionResult> PutGameUserStatus(string id, UserGameStatusDto statusDto)
+        //{
+        //    TODO Adaptar PutUser para atualizar status do game
+        //    var foundUser = await _userService.PutUser(id, statusDto);
+        //    return Ok(foundUser);
+        //}
 
         [HttpDelete]
         [Authorize]
@@ -196,14 +171,15 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteUser(string id)
         {
-            if (await _userDb.All.FindAsync(id) is Users user)
+            try
             {
-                _userDb.All.Remove(user);
-                await _userDb.SaveChangesAsync();
-
+                var user = await DeleteUser(id);
                 return Ok(user);
             }
-            return NotFound();
+            catch (Exception _)
+            {
+                return NotFound();
+            }
         }
     }
 }

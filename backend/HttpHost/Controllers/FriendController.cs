@@ -1,15 +1,7 @@
-using System.Diagnostics;
 using HttpHost.Domain.Dto;
-using HttpHost.Domain.Models;
-using HttpHost.Database.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
+using HttpHost.Services.Services;
 using Microsoft.AspNetCore.Authorization;
-using System.Threading.Tasks;
-using System.Linq;
-using System;
 
 namespace HttpHost.Services.Controllers
 {
@@ -17,11 +9,13 @@ namespace HttpHost.Services.Controllers
     [Route("/friend")]
     public class FriendController : ControllerBase
     {
-        private readonly ILogger<UserController> _logger;
+        private readonly ILogger<FriendController> _logger;
+        private readonly FriendService _friendService;
 
-        public FriendController(ILogger<UserController> logger)
+        public FriendController(ILogger<FriendController> logger, FriendService friendService)
         {
             _logger = logger;
+            _friendService = friendService;
         }
 
         [HttpGet]
@@ -31,11 +25,7 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetFriends()
         {
-            var sw = Stopwatch.StartNew();
-
-            var friends = await _friendDb.All.ToListAsync();
-            _logger.LogInformation("Time to search > {dur}", sw.ElapsedMilliseconds);
-
+            var friends = await _friendService.GetFriends();
             if (!friends.Any())
                 return NotFound();
 
@@ -49,15 +39,10 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetFriendsByUserId(string userId)
         {
-            var foundFriendsRequisition = _friendDb.Friend.
-                Where(f => f.ReceiverId == userId && f.ConfirmationDate != null).ToArray();
-
-            if (!foundFriendsRequisition.Any())
+            var friends = _friendService.GetUserFriendsByUserId(userId);
+            if (friends != null)
             {
-                foreach (var f in foundFriendsRequisition)
-                {
-                    
-                }
+                return Ok(friends);
             }
             return NotFound();
         }
@@ -70,14 +55,7 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RequestFriend(FriendDto friend)
         {
-            var newFriend = new Friends(
-                   requesterId : friend.RequesterId, 
-                   receiverId : friend.ReceiverId,
-                   status : friend.Status
-                );
-            _friendDb.All.Add(newFriend);
-            await _friendDb.SaveChangesAsync();
-
+            var newFriend = await _friendService.CreateRequestFriend(friend);
             return Ok(newFriend);
         }
 
@@ -89,15 +67,7 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> ConfirmFriend(FriendDto friend)
         {
-            var foundFriendRequisition = _friendDb.Friend.
-                Where(f => f.RequesterId == friend.RequesterId 
-                && f.ReceiverId == friend.ReceiverId).FirstOrDefault();
-
-            if (foundFriendRequisition is null) return NotFound();
-
-            foundFriendRequisition.ConfirmationDate = DateTime.Now;
-            await _friendDb.SaveChangesAsync();
-
+            var foundFriendRequisition = await _friendService.ConfirmFriendRequest(friend);
             return Ok(foundFriendRequisition);
         }
     }

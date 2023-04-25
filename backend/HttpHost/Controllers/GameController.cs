@@ -1,24 +1,17 @@
 using HttpHost.Domain.Dto;
-using HttpHost.Domain.Models;
-using HttpHost.Database.Data;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using HttpHost.Domain.Abstractions;
-using Microsoft.AspNetCore.Authorization;
 using HttpHost.Services.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HttpHost.Services.Controllers
 {
     [ApiController]
     public class GameController : ControllerBase
     {
-        private readonly ILogger<UserController> _logger;
         private readonly GameService _gameService;
 
-        public GameController(ILogger<UserController> logger)
+        public GameController()
         {
-            _logger = logger;
             _gameService = new GameService();
         }
 
@@ -32,20 +25,20 @@ namespace HttpHost.Services.Controllers
         }
 
         [HttpGet]
-        [Route("/game/create/{difficulty}")]
         [Authorize]
+        [Route("/game/create/{difficulty}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult CreateGame(string difficulty)
         {
-            var game = GenerateGame(difficulty);
+            var game = _gameService.GenerateGame(difficulty);
             game.GenerateNewChallenge();
             return Ok(game);
         }
 
         [HttpPost]
-        [Route("/game/next")]
         [Authorize]
+        [Route("/game/next")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
