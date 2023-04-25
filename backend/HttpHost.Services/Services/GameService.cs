@@ -2,7 +2,7 @@
 using HttpHost.Domain.Models;
 using HttpHost.Domain.Abstractions;
 
-namespace HttpHost.Services.Services
+namespace HttpHost.Services
 {
     public class GameService
     {

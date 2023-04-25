@@ -8,16 +8,17 @@ using HttpHost.Domain.Models;
 using HttpHost.Database.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using HttpHost.Domain.Interfaces.Services;
 
-namespace HttpHost.Services.Services
+namespace HttpHost.Services
 {
-    public class FriendService
+    public class FriendService : IFriendService
     {
         private readonly ILogger<FriendService> _logger;
         private readonly FriendDb _friendDb;
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        public FriendService(ILogger<FriendService> logger, UserService userService, FriendDb friendDb)
+        public FriendService(ILogger<FriendService> logger, IUserService userService, FriendDb friendDb)
         {
             _logger = logger;
             _friendDb = friendDb;

@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using HttpHost.Domain.Dto;
-using HttpHost.Domain.Dto.Headers;
-using HttpHost.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using HttpHost.Domain.Dto;
+using HttpHost.Domain.Dto.Headers;
+using HttpHost.Domain.Models;
+using HttpHost.Domain.Interfaces.Services;
 
-
-namespace HttpHost.Services.Services
+namespace HttpHost.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly ILogger<UserService> _logger;
         private readonly UserDb _userDb;
