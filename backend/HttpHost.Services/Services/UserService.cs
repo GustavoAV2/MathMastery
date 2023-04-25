@@ -1,20 +1,20 @@
-﻿using HttpHost.Database.Data;
+﻿using System;
+using System.Linq;
+using System.Text;
+using System.Diagnostics;
+using HttpHost.Database.Data;
+using System.Threading.Tasks;
+using System.Security.Claims;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using HttpHost.Domain.Dto;
 using HttpHost.Domain.Dto.Headers;
 using HttpHost.Domain.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace HttpHost.Services.Services
 {
@@ -29,6 +29,53 @@ namespace HttpHost.Services.Services
             _logger = logger;
             _userDb = userDb;
             _configuration = configuration;
+        }
+
+        public async Task<Users> DeleteUser(string userId)
+        {
+            if (await _userDb.All.FindAsync(userId) is Users user)
+            {
+                _userDb.All.Remove(user);
+                await _userDb.SaveChangesAsync();
+
+                return user;
+            }
+            throw new KeyNotFoundException($"Usuário com ID {userId} não encontrado.");
+        }
+
+        public async Task<Users> CreateUser(UserDto inputUser)
+        {
+            var newUser = new Users(
+                    email: inputUser.Email, passwordHash: inputUser.Password,
+                    userName: inputUser.UserName, firstName: inputUser.FirstName,
+                    lastName: inputUser.LastName
+                );
+
+            _userDb.All.Add(newUser);
+            await _userDb.SaveChangesAsync();
+            return newUser;
+        }
+
+        public async Task<Users> PutUser(string userId, UserDto inputUser)
+        {
+            var foundUser = await _userDb.All.FindAsync(userId);
+            if (foundUser is null)
+            {
+                throw new KeyNotFoundException($"Usuário com ID {userId} não encontrado.");
+            }
+
+            foundUser.FirstName = inputUser.FirstName;
+            foundUser.LastName = inputUser.LastName;
+            foundUser.UserName = inputUser.UserName;
+            foundUser.PasswordHash = inputUser.Password;
+            if (inputUser.NumberUnresolvedAccounts.HasValue)
+            {
+                foundUser.NumberUnresolvedAccounts = inputUser.NumberUnresolvedAccounts.Value + foundUser.NumberUnresolvedAccounts;
+                foundUser.NumberResolvedAccounts = inputUser.NumberResolvedAccounts.Value + foundUser.NumberResolvedAccounts;
+            }
+
+            await _userDb.SaveChangesAsync();
+            return foundUser;
         }
 
         public async Task<List<Users>> GetUsers()
@@ -59,6 +106,19 @@ namespace HttpHost.Services.Services
             var sw = Stopwatch.StartNew();
             var foundUser = _userDb.User.Where(user => user.Email == userEmail).FirstOrDefault();
             _logger.LogInformation($"Busca de usuário pelo e-mail concluída em {sw.ElapsedMilliseconds} ms.");
+
+            if (foundUser == null)
+            {
+                throw new KeyNotFoundException();
+            }
+            return foundUser;
+        }
+
+        public async Task<Users> GetUserByUsername(string userName)
+        {
+            var sw = Stopwatch.StartNew();
+            var foundUser = _userDb.User.Where(user => user.UserName == userName).FirstOrDefault();
+            _logger.LogInformation($"Busca de usuário pelo username concluída em {sw.ElapsedMilliseconds} ms.");
 
             if (foundUser == null)
             {

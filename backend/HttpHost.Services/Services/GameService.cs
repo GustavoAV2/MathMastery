@@ -1,12 +1,6 @@
-﻿using HttpHost.Domain.Abstractions;
-using HttpHost.Domain.Dto;
+﻿using HttpHost.Domain.Dto;
 using HttpHost.Domain.Models;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HttpHost.Domain.Abstractions;
 
 namespace HttpHost.Services.Services
 {
@@ -28,7 +22,7 @@ namespace HttpHost.Services.Services
             return game;
         }
 
-        private IGame GenerateGame(string difficulty, int challengeSolve = 0, int challengeUnsolved = 0)
+        public IGame GenerateGame(string difficulty, int challengeSolve = 0, int challengeUnsolved = 0)
         {
             if (difficulty == "normal")
             {
