@@ -2,10 +2,12 @@
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
-using HttpHost.Middlewares.Identification;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using HttpHost.Domain.Interfaces.Services;
+using HttpHost.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace HttpHost
 {
@@ -24,6 +26,8 @@ namespace HttpHost
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<UserDb>(opt => opt.UseSqlServer(connectionString));
             services.AddDbContext<FriendDb>(opt => opt.UseSqlServer(connectionString));
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IFriendService, FriendService>();
 
             services
                 .AddControllers()
@@ -72,8 +76,6 @@ namespace HttpHost
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseMiddleware<AdminMiddleware>();
 
             app.Use(async (context, next) =>
             {

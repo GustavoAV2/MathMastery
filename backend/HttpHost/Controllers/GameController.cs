@@ -1,5 +1,5 @@
 using HttpHost.Domain.Dto;
-using HttpHost.Services.Services;
+using HttpHost.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 

@@ -1,7 +1,7 @@
 using HttpHost.Domain.Dto;
-using Microsoft.AspNetCore.Mvc;
-using HttpHost.Services.Services;
 using HttpHost.Domain.Dto.Headers;
+using HttpHost.Domain.Interfaces.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 namespace HttpHost.Services.Controllers
@@ -10,9 +10,9 @@ namespace HttpHost.Services.Controllers
     public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        public UserController(ILogger<UserController> logger, UserService userService)
+        public UserController(ILogger<UserController> logger, IUserService userService)
         {
             _logger = logger;
             _userService = userService;
@@ -46,8 +46,8 @@ namespace HttpHost.Services.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [Route("/user/me")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Identity([FromHeader] AuthHeaderDto headerDto)
@@ -61,8 +61,8 @@ namespace HttpHost.Services.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [Route("/user/{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -83,8 +83,8 @@ namespace HttpHost.Services.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [Route("/user/friend/{userEmail}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -105,8 +105,8 @@ namespace HttpHost.Services.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [Route("/user/friend/{username}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -127,6 +127,7 @@ namespace HttpHost.Services.Controllers
 
         [HttpPost]
         [Route("/user")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -137,8 +138,8 @@ namespace HttpHost.Services.Controllers
         }
 
         [HttpPut]
-        [Authorize]
         [Route("/user/{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -162,8 +163,8 @@ namespace HttpHost.Services.Controllers
         //}
 
         [HttpDelete]
-        [Authorize]
         [Route("/user")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -171,7 +172,7 @@ namespace HttpHost.Services.Controllers
         {
             try
             {
-                var user = await DeleteUser(id);
+                var user = await _userService.DeleteUser(id);
                 return Ok(user);
             }
             catch (Exception _)

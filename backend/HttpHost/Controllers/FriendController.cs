@@ -1,7 +1,7 @@
 using HttpHost.Domain.Dto;
 using Microsoft.AspNetCore.Mvc;
-using HttpHost.Services.Services;
 using Microsoft.AspNetCore.Authorization;
+using HttpHost.Domain.Interfaces.Services;
 
 namespace HttpHost.Services.Controllers
 {
@@ -9,12 +9,10 @@ namespace HttpHost.Services.Controllers
     [Route("/friend")]
     public class FriendController : ControllerBase
     {
-        private readonly ILogger<FriendController> _logger;
-        private readonly FriendService _friendService;
+        private readonly IFriendService _friendService;
 
-        public FriendController(ILogger<FriendController> logger, FriendService friendService)
+        public FriendController(IFriendService friendService)
         {
-            _logger = logger;
             _friendService = friendService;
         }
 
@@ -39,7 +37,7 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetFriendsByUserId(string userId)
         {
-            var friends = _friendService.GetUserFriendsByUserId(userId);
+            var friends = await _friendService.GetUserFriendsByUserId(userId);
             if (friends != null)
             {
                 return Ok(friends);
