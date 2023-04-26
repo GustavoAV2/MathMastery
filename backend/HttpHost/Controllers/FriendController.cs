@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using HttpHost.Domain.Interfaces.Services;
 using HttpHost.Domain.Dto.Headers;
 using HttpHost.Domain.Dtos;
+using HttpHost.Domain.Models;
 
 namespace HttpHost.Services.Controllers
 {
@@ -71,7 +72,7 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> RequestFriend([FromHeader] AuthHeaderDto headerDto, Domain.Dtos.CreateFriendRequestDto friendRequest)
+        public async Task<IActionResult> RequestFriend([FromHeader] AuthHeaderDto headerDto, CreateFriendRequestDto friendRequest)
         {
             var currentUser = await _userService.GetUserIdentity(headerDto);
             var newFriend = await _friendService.CreateRequestFriend(currentUser.Id, friendRequest.Username);
@@ -80,13 +81,25 @@ namespace HttpHost.Services.Controllers
 
         [HttpPut]
         [Authorize]
-        [Route("/friend")]
+        [Route("/friend/accept/{friendRequestId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> ConfirmFriend(Domain.Dto.FriendRequestDto friend)
+        public async Task<IActionResult> ConfirmFriend(string friendRequestId)
         {
-            var foundFriendRequisition = await _friendService.ConfirmFriendRequest(friend);
+            var foundFriendRequisition = await _friendService.ReplyFriendRequest(friendRequestId, FriendRequestStatus.Approved);
+            return Ok(foundFriendRequisition);
+        }
+
+        [HttpPut]
+        [Authorize]
+        [Route("/friend/decline/{friendRequestId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeclineFriend(string friendRequestId)
+        {
+            var foundFriendRequisition = await _friendService.ReplyFriendRequest(friendRequestId, FriendRequestStatus.Decline);
             return Ok(foundFriendRequisition);
         }
     }

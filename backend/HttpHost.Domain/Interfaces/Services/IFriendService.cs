@@ -13,6 +13,6 @@ namespace HttpHost.Domain.Interfaces.Services
         Task<List<User>> GetUserFriendsByUserId(string userId);
         Task<List<FriendNotification>> GetFriendsNotificationByUserId(string userId);
         Task<FriendRequest> CreateRequestFriend(string requesterId, string receiverUsername);
-        Task<FriendRequest> ConfirmFriendRequest(Dto.FriendRequestDto friend);
+        Task<FriendRequest> ReplyFriendRequest(string friendRequestId, FriendRequestStatus newStatus);
     }
 }

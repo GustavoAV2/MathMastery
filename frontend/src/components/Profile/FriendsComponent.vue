@@ -22,22 +22,29 @@
                     </router-link>
                     <hr>
                     <ul class="list-group">
-                        <li class="list-group-item">Friend 1</li>
-                        <li class="list-group-item">Friend 2</li>
-                        <li class="list-group-item">Friend 3</li>
-                        <li v-for="user in users" class="list-group-item" @click="selectUser(user)">{{ user.firstName }} {{user.lastName}}</li>
+                        <li class="list-group-item" v-for="user in friends" @click="selectUser(user)">{{ user.firstName }} {{user.lastName}}</li>
                     </ul>
                 </div>
-                <div class="col-12 col-sm-8">
-                    <br>
-                    <div class="friend-info">
-                        <h2>{{selected_friend.firstName}} {{selected_friend.lastName}}</h2>
-                        <p>Email: {{selected_friend.email}}</p>
-                        <p>Taxa de acertos: {{ selected_friend.winRate }}%</p>
-                        <p>Acertos: {{selected_friend.numberResolvedAccounts}} </p>
-                        <p>Erros: {{selected_friend.numberUnresolvedAccounts}}</p>
+                <template v-if="selected_friend != null">
+                    <div class="col-12 col-sm-8">
+                        <br>
+                        <div class="friend-info">
+                            <h2>{{selected_friend.firstName}} {{selected_friend.lastName}}</h2>
+                            <p>Email: {{selected_friend.email}}</p>
+                            <p>Taxa de acertos: {{ selected_friend.winRate }}%</p>
+                            <p>Acertos: {{selected_friend.numberResolvedAccounts}} </p>
+                            <p>Erros: {{selected_friend.numberUnresolvedAccounts}}</p>
+                        </div>
                     </div>
-                </div>
+                </template>
+                <template v-else>
+                    <div class="col-12 col-sm-8">
+                        <br>
+                        <div class="friend-info">
+                            <h2>Nenhum amigo selecionado</h2>
+                        </div>
+                    </div>
+                </template>
             </div>
         </div>
 
@@ -52,28 +59,20 @@ export default {
     data(){
         return{
             loading: true,
-            userId: "",
-            selected_friend: {
-                firstName: "Gustavo",
-                lastName: "Voltolini",
-                email: "guga@gmail.com",
-                winRate: 0,
-                numberResolvedAccounts: "1",
-                numberUnresolvedAccounts: "12"
-            },
+            selected_friend: null,
             friends: []
         }
     },
     methods:{
-        selectUser(){
-
+        selectUser(user){
+            this.selected_friend = user;
         }
     },
     mounted() {
         User.getByToken().then(response => {
-            this.userId = response.data.id;
+            var userId = response.data.id;
             return Promise.all([
-                Friend.getFriendsByUserId(this.userId),
+                Friend.getFriendsByUserId(userId),
             ]);
         })
         .then(([friendsResponse]) => {

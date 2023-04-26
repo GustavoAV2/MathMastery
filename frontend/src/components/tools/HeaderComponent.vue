@@ -67,10 +67,9 @@ import Friend from '@/services/friends'
 export default {
     data(){
         return{
+            userId: null,
             token: null,
-            notifications: [
-                {username: 'Joao'},{username: 'Junior'}
-            ],
+            notifications: [],
         }
     },
     methods:{
@@ -81,29 +80,42 @@ export default {
                 console.log(response.data)
             }).catch(()=>{});
         },
-
+        getFriendsNotifications(){
+            Friend.getFriendsNotifications(this.userId).then(response => {
+                this.notifications = response.data;
+            })
+        },
         accept(notification) {
-        console.log(`Aceitando solicitação de amizade de ${notificacao.user}...`)
+            Friend.acceptFriendRequest(notification.id).then(response => {
+                alert(`Solicitação de amizade de ${notification.username} aceita!`);
+                this.getFriendsNotifications()
+            }).catch(error =>{
+                alert(`Não foi possível aceitar a solicitação de amizade.`);
+            })
         },
         decline(notification) {
-        console.log(`Negando solicitação de amizade de ${notificacao.user}...`)
+            Friend.declineFriendRequest(notification.id).then(response => {
+                alert(`Solicitação de amizade de ${notification.username} negada!`);
+                this.getFriendsNotifications()
+            }).
+            catch(error => {
+                console.log(`Não foi possivel negar a solicitação de amizade.`)
+            })
         }
     },
     mounted() {
         User.getByToken().then(response => {
-            this.token = localStorage.getItem('token')
-            var userId = response.data.id;
+            this.token = localStorage.getItem('token');
+            this.userId = response.data.id;
             return Promise.all([
-                Friend.getFriendsNotifications(userId),
+                Friend.getFriendsNotifications(this.userId),
             ]);
         })
         .then(([notificationsResponse]) => {
             console.log(notificationsResponse.data);
             this.notifications = notificationsResponse.data;
+        }).catch(() => {
         })
-        .catch(error => {
-            console.log(error);
-        });
     }
 }
 </script>

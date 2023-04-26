@@ -7,10 +7,13 @@ export default{
     getFriendsNotifications(userId){
         return http.get('/friend/notifications/' + userId);
     },
-    putFriendRequest(friendRequest){
-        return http.put('/friend' + friendRequest)
-    },
     getFriendsByUserId(userId){
         return http.get('/friend/' + userId)
+    },
+    acceptFriendRequest(friendRequestId){
+        return http.put('/friend/accept/' + friendRequestId)
+    },
+    declineFriendRequest(friendRequestId){
+        return http.put('/friend/decline/' + friendRequestId)
     }
 }

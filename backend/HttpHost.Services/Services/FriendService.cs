@@ -45,7 +45,9 @@ namespace HttpHost.Services
             {
                 var user = await _userService.GetUserById(friendRequest.RequesterId);
                 notifications.Add(
-                    new FriendNotification() { 
+                    new FriendNotification()
+                    {
+                        Id = friendRequest.Id,
                         Username = user.UserName,
                         Status = friendRequest.Status
                     }
@@ -56,14 +58,19 @@ namespace HttpHost.Services
         public async Task<List<User>> GetUserFriendsByUserId(string userId)
         {
             var foundFriendsRequisition = _friendDb.Friend.
-                Where(f => f.ReceiverId == userId && f.ConfirmationDate != null).ToArray();
-            
+                Where(f => f.Status == FriendRequestStatus.Approved && f.ReceiverId == userId || f.RequesterId == userId).ToArray();
+
             List<User> friends = new List<User>();
-            if (!foundFriendsRequisition.Any())
+            if (foundFriendsRequisition.Any())
             {
                 foreach (var f in foundFriendsRequisition)
                 {
-                    User user = await _userService.GetUserById(f.RequesterId);
+                    var friendId = f.ReceiverId;
+                    if (f.ReceiverId == userId)
+                    {
+                        friendId = f.RequesterId;
+                    }
+                    User user = await _userService.GetUserById(friendId);
                     friends.Add(user);
                 }
             }
@@ -72,30 +79,51 @@ namespace HttpHost.Services
 
         public async Task<FriendRequest> CreateRequestFriend(string requesterId, string receiverUsername)
         {
-            var user = _userService.GetUserByUsername(receiverUsername);
-            var newFriend = new FriendRequest(
-                   requesterId: requesterId,
-                   receiverId: user.Id,
-                   status: FriendRequestStatus.Waiting
-                );
-            _friendDb.All.Add(newFriend);
-            await _friendDb.SaveChangesAsync();
+            if (await requestAlreadyExists(requesterId) == false)
+            {
+                var user = _userService.GetUserByUsername(receiverUsername);
+                var newFriend = new FriendRequest(
+                       requesterId: requesterId,
+                       receiverId: user.Id,
+                       status: FriendRequestStatus.Waiting
+                    );
+                _friendDb.All.Add(newFriend);
+                await _friendDb.SaveChangesAsync();
 
-            return newFriend;
+                return newFriend;
+            }
+            throw new InvalidOperationException();
         }
 
-        public async Task<FriendRequest> ConfirmFriendRequest(Domain.Dto.FriendRequestDto friend)
+        public async Task<FriendRequest> ReplyFriendRequest(string friendRequestId, FriendRequestStatus newStatus)
         {
-            var foundFriendRequisition = _friendDb.Friend.
-                Where(f => f.RequesterId == friend.RequesterId
-                && f.ReceiverId == friend.ReceiverId).FirstOrDefault();
+            var foundFriendRequisition = await _friendDb.All.FirstOrDefaultAsync(f => f.Id == friendRequestId);
 
-            if (foundFriendRequisition is null) throw new KeyNotFoundException("Nenhuma requisição de amizade de UserID {userId} encontrada.\"");
+            if (foundFriendRequisition is null) throw new KeyNotFoundException("Nenhuma requisição de amizade de ID {friendRequestId} encontrada.\"");
 
-            foundFriendRequisition.ConfirmationDate = DateTime.Now;
-            await _friendDb.SaveChangesAsync();
-
+            if (newStatus == FriendRequestStatus.Approved)
+            {
+                foundFriendRequisition.Status = FriendRequestStatus.Approved;
+                foundFriendRequisition.ConfirmationDate = DateTime.Now;
+                await _friendDb.SaveChangesAsync();
+            }
+            else
+            {
+                foundFriendRequisition.Status = FriendRequestStatus.Decline;
+                await _friendDb.SaveChangesAsync();
+            }
             return foundFriendRequisition;
         }
-    }
+
+        private async Task<bool> requestAlreadyExists(string requesterId)
+        {
+            var friendNotification = await GetFriendsNotificationByUserId(requesterId);
+            if (friendNotification.Any())
+            {
+                return true;
+            }
+            return false;
+        }
+
+}
 }
