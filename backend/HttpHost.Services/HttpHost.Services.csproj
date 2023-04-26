@@ -13,8 +13,4 @@
     <ProjectReference Include="..\HttpHost.Database\HttpHost.Database.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Middlewares\Identification\" />
-  </ItemGroup>
-
 </Project>

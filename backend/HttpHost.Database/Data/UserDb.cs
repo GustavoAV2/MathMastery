@@ -11,10 +11,10 @@ namespace HttpHost.Database.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Users>().HasKey(t => t.Id);
+            modelBuilder.Entity<User>().HasKey(t => t.Id);
         }
 
-        public DbSet<Users> User { get; set; }
-        public DbSet<Users> All => Set<Users>();
+        public DbSet<User> User { get; set; }
+        public DbSet<User> All => Set<User>();
     }
 }

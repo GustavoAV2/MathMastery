@@ -31,9 +31,9 @@ namespace HttpHost.Services
             _configuration = configuration;
         }
 
-        public async Task<Users> DeleteUser(string userId)
+        public async Task<User> DeleteUser(string userId)
         {
-            if (await _userDb.All.FindAsync(userId) is Users user)
+            if (await _userDb.All.FindAsync(userId) is User user)
             {
                 _userDb.All.Remove(user);
                 await _userDb.SaveChangesAsync();
@@ -43,9 +43,9 @@ namespace HttpHost.Services
             throw new KeyNotFoundException($"Usuário com ID {userId} não encontrado.");
         }
 
-        public async Task<Users> CreateUser(UserDto inputUser)
+        public async Task<User> CreateUser(UserDto inputUser)
         {
-            var newUser = new Users(
+            var newUser = new User(
                     email: inputUser.Email, passwordHash: inputUser.Password,
                     userName: inputUser.UserName, firstName: inputUser.FirstName,
                     lastName: inputUser.LastName
@@ -56,7 +56,7 @@ namespace HttpHost.Services
             return newUser;
         }
 
-        public async Task<Users> PutUser(string userId, UserDto inputUser)
+        public async Task<User> PutUser(string userId, UserDto inputUser)
         {
             var foundUser = await _userDb.All.FindAsync(userId);
             if (foundUser is null)
@@ -78,7 +78,7 @@ namespace HttpHost.Services
             return foundUser;
         }
 
-        public async Task<List<Users>> GetUsers()
+        public async Task<List<User>> GetUsers()
         {
             var sw = Stopwatch.StartNew();
             
@@ -88,7 +88,7 @@ namespace HttpHost.Services
             return users;
         }
 
-        public async Task<Users> GetUserById(string userId)
+        public async Task<User> GetUserById(string userId)
         {
             var sw = Stopwatch.StartNew();
             var user = await _userDb.All.FirstOrDefaultAsync(u => u.Id == userId);
@@ -101,7 +101,7 @@ namespace HttpHost.Services
             return user;
         }
 
-        public Users GetUserByEmail(string userEmail)
+        public User GetUserByEmail(string userEmail)
         {
             var sw = Stopwatch.StartNew();
             var foundUser = _userDb.User.Where(user => user.Email == userEmail).FirstOrDefault();
@@ -114,7 +114,7 @@ namespace HttpHost.Services
             return foundUser;
         }
 
-        public Users GetUserByUsername(string userName)
+        public User GetUserByUsername(string userName)
         {
             var sw = Stopwatch.StartNew();
             var foundUser = _userDb.User.Where(user => user.UserName == userName).FirstOrDefault();
@@ -139,7 +139,7 @@ namespace HttpHost.Services
             return "";
         }
 
-        public async Task<Users> GetUserIdentity(AuthHeaderDto headerDto)
+        public async Task<User> GetUserIdentity(AuthHeaderDto headerDto)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenString = headerDto.Authorization.Replace("Bearer ", "");
@@ -150,7 +150,7 @@ namespace HttpHost.Services
             return foundUser;
         }
 
-        private bool ValidLogin(Users foundUser, LoginUserDto loginDto)
+        private bool ValidLogin(User foundUser, LoginUserDto loginDto)
         {
             if (foundUser.PasswordHash == loginDto.Password)
             {
@@ -159,7 +159,7 @@ namespace HttpHost.Services
             return false;
         }
 
-        private string GenerateToken(Users foundUser)
+        private string GenerateToken(User foundUser)
         {
             var issuer = _configuration["Jwt:Issuer"];
             var audience = _configuration["Jwt:Audience"];

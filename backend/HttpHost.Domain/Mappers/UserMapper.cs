@@ -12,7 +12,7 @@ namespace Gestor.BackWorks.Domain.Mappers
 
         private void MapFriend()
         {
-            CreateMap<Users, Friends>();
+            CreateMap<User, FriendRequest>();
         }
     }
 }

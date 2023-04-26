@@ -16,17 +16,17 @@ namespace HttpHost.Services
     public class FriendService : IFriendService
     {
         private readonly ILogger<FriendService> _logger;
-        private readonly FriendDb _friendDb;
+        private readonly FriendRequestDb _friendDb;
         private readonly IUserService _userService;
 
-        public FriendService(ILogger<FriendService> logger, IUserService userService, FriendDb friendDb)
+        public FriendService(ILogger<FriendService> logger, IUserService userService, FriendRequestDb friendDb)
         {
             _logger = logger;
             _friendDb = friendDb;
             _userService = userService;
         }
 
-        public async Task<List<Friends>> GetFriends()
+        public async Task<List<FriendRequest>> GetFriends()
         {
             var sw = Stopwatch.StartNew();
             var friends = await _friendDb.All.ToListAsync();
@@ -35,37 +35,37 @@ namespace HttpHost.Services
             return friends;
         }
 
-        public List<Friends> GetFriendsRequestByUserId(string userId)
+        public List<FriendRequest> GetFriendsRequestByUserId(string userId)
         {
             var foundFriendsRequisition = _friendDb.Friend.
                 Where(f => f.ReceiverId == userId && f.ConfirmationDate == null).ToList();
 
             return foundFriendsRequisition;
         }
-        public async Task<List<Users>> GetUserFriendsByUserId(string userId)
+        public async Task<List<User>> GetUserFriendsByUserId(string userId)
         {
             var foundFriendsRequisition = _friendDb.Friend.
                 Where(f => f.ReceiverId == userId && f.ConfirmationDate != null).ToArray();
             
-            List<Users> friends = new List<Users>();
+            List<User> friends = new List<User>();
             if (!foundFriendsRequisition.Any())
             {
                 foreach (var f in foundFriendsRequisition)
                 {
-                    Users user = await _userService.GetUserById(f.RequesterId);
+                    User user = await _userService.GetUserById(f.RequesterId);
                     friends.Add(user);
                 }
             }
             return friends;
         }
 
-        public async Task<Friends> CreateRequestFriend(string requesterId, string receiverUsername)
+        public async Task<FriendRequest> CreateRequestFriend(string requesterId, string receiverUsername)
         {
             var user = _userService.GetUserByUsername(receiverUsername);
-            var newFriend = new Friends(
+            var newFriend = new FriendRequest(
                    requesterId: requesterId,
                    receiverId: user.Id,
-                   status: Status.Waiting
+                   status: FriendRequestStatus.Waiting
                 );
             _friendDb.All.Add(newFriend);
             await _friendDb.SaveChangesAsync();
@@ -73,7 +73,7 @@ namespace HttpHost.Services
             return newFriend;
         }
 
-        public async Task<Friends> ConfirmFriendRequest(FriendDto friend)
+        public async Task<FriendRequest> ConfirmFriendRequest(Domain.Dto.FriendRequestDto friend)
         {
             var foundFriendRequisition = _friendDb.Friend.
                 Where(f => f.RequesterId == friend.RequesterId

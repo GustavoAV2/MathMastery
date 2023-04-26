@@ -70,7 +70,7 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> RequestFriend([FromHeader] AuthHeaderDto headerDto, FriendRequestDto friendRequest)
+        public async Task<IActionResult> RequestFriend([FromHeader] AuthHeaderDto headerDto, Domain.Dtos.CreateFriendRequestDto friendRequest)
         {
             var currentUser = await _userService.GetUserIdentity(headerDto);
             var newFriend = await _friendService.CreateRequestFriend(currentUser.Id, friendRequest.Username);
@@ -83,7 +83,7 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> ConfirmFriend(FriendDto friend)
+        public async Task<IActionResult> ConfirmFriend(Domain.Dto.FriendRequestDto friend)
         {
             var foundFriendRequisition = await _friendService.ConfirmFriendRequest(friend);
             return Ok(foundFriendRequisition);

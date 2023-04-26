@@ -25,7 +25,7 @@ namespace HttpHost
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<UserDb>(opt => opt.UseSqlServer(connectionString));
-            services.AddDbContext<FriendDb>(opt => opt.UseSqlServer(connectionString));
+            services.AddDbContext<FriendRequestDb>(opt => opt.UseSqlServer(connectionString));
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IFriendService, FriendService>();
 

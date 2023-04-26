@@ -9,10 +9,10 @@ namespace HttpHost.Domain.Interfaces.Services
 {
     public interface IFriendService
     {
-        Task<List<Friends>> GetFriends();
-        Task<List<Users>> GetUserFriendsByUserId(string userId);
-        List<Friends> GetFriendsRequestByUserId(string userId);
-        Task<Friends> CreateRequestFriend(string requesterId, string receiverUsername);
-        Task<Friends> ConfirmFriendRequest(FriendDto friend);
+        Task<List<FriendRequest>> GetFriends();
+        Task<List<User>> GetUserFriendsByUserId(string userId);
+        List<FriendRequest> GetFriendsRequestByUserId(string userId);
+        Task<FriendRequest> CreateRequestFriend(string requesterId, string receiverUsername);
+        Task<FriendRequest> ConfirmFriendRequest(Dto.FriendRequestDto friend);
     }
 }

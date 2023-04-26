@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace HttpHost.Migrations
+namespace HttpHost.Database.Migrations.FriendRequestDbMigrations
 {
-    [DbContext(typeof(FriendDb))]
-    partial class FriendDbModelSnapshot : ModelSnapshot
+    [DbContext(typeof(FriendRequestDb))]
+    partial class FriendRequestDbModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -22,7 +22,7 @@ namespace HttpHost.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("HttpHost.Models.Friends", b =>
+            modelBuilder.Entity("HttpHost.Domain.Models.FriendRequest", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -31,23 +31,20 @@ namespace HttpHost.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ReceiverId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RequestDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RequesterId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Friends");
+                    b.ToTable("FriendRequest");
                 });
 #pragma warning restore 612, 618
         }

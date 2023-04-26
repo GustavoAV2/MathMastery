@@ -2,7 +2,7 @@
 
 namespace HttpHost.Domain.Models
 {
-    public class Users
+    public class User
     {
         public string Id { get; set; }
         public string Email { get; set; }
@@ -16,12 +16,12 @@ namespace HttpHost.Domain.Models
         public int NumberResolvedAccounts { get; set; } = 0;
         public int NumberUnresolvedAccounts { get; set; } = 0;
 
-        public Users()
+        public User()
         {
             Id = Guid.NewGuid().ToString();
         }
 
-        public Users(string email, string passwordHash, string userName, string firstName, string lastName, int numberResolvedAccounts = 0, int numberUnresolvedAccounts = 0)
+        public User(string email, string passwordHash, string userName, string firstName, string lastName, int numberResolvedAccounts = 0, int numberUnresolvedAccounts = 0)
         {
             Id = Guid.NewGuid().ToString();
             Email = email;
