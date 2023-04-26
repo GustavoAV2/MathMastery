@@ -1,33 +1,47 @@
 <template>
     <!-- v-for="user in users" -->
-    <div class="container-fluid">
-		<div class="row">
-			<div class="col-12 col-sm-4">
-                <h2>Friends List</h2>
-                <router-link to="/friends/request">
-                    <button class="btn btn-success btn-sm">Enviar convite de amizade</button>
-                </router-link>
-                <hr>
-				<ul class="list-group">
-					<li class="list-group-item">Friend 1</li>
-					<li class="list-group-item">Friend 2</li>
-					<li class="list-group-item">Friend 3</li>
-					<li v-for="user in users" class="list-group-item" @click="selectUser()">{{ user.firstName }} {{user.lastName}}</li>
-				</ul>
-			</div>
-			<div class="col-12 col-sm-8">
-                <br>
-				<div class="friend-info">
-					<h2>{{actual_friend.firstName}} {{actual_friend.lastName}}</h2>
-					<p>Email: {{actual_friend.email}}</p>
-					<p>Taxa de acertos: {{ actual_friend.winRate }}%</p>
-					<p>Acertos: {{actual_friend.numberResolvedAccounts}} </p>
-					<p>Erros: {{actual_friend.numberUnresolvedAccounts}}</p>
-				</div>
-			</div>
-		</div>
-    </div>
+    <template v-if="loading">
+        <div class="container">
+            <br>
+            <div class="spinner-border text-dark" role="status">
+            </div>
+        </div>
+    </template>
+    
+    <template v-else>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-sm-4">
+                    <div class="row">
+                        <div class="col">
+                            <h2>Friends List</h2>
+                        </div>
+                    </div>
+                    <router-link to="/friends/request">
+                        <button class="btn btn-success btn-sm">Enviar convite de amizade</button>
+                    </router-link>
+                    <hr>
+                    <ul class="list-group">
+                        <li class="list-group-item">Friend 1</li>
+                        <li class="list-group-item">Friend 2</li>
+                        <li class="list-group-item">Friend 3</li>
+                        <li v-for="user in users" class="list-group-item" @click="selectUser(user)">{{ user.firstName }} {{user.lastName}}</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-sm-8">
+                    <br>
+                    <div class="friend-info">
+                        <h2>{{selected_friend.firstName}} {{selected_friend.lastName}}</h2>
+                        <p>Email: {{selected_friend.email}}</p>
+                        <p>Taxa de acertos: {{ selected_friend.winRate }}%</p>
+                        <p>Acertos: {{selected_friend.numberResolvedAccounts}} </p>
+                        <p>Erros: {{selected_friend.numberUnresolvedAccounts}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+    </template>
 </template>
 
 <script >
@@ -37,8 +51,9 @@ import Friend from '@/services/friends'
 export default {
     data(){
         return{
+            loading: true,
             userId: "",
-            actual_friend: {
+            selected_friend: {
                 firstName: "Gustavo",
                 lastName: "Voltolini",
                 email: "guga@gmail.com",
@@ -46,7 +61,7 @@ export default {
                 numberResolvedAccounts: "1",
                 numberUnresolvedAccounts: "12"
             },
-            friendUsers: [],
+            friends: []
         }
     },
     methods:{
@@ -55,22 +70,20 @@ export default {
         }
     },
     mounted() {
-        this.token = localStorage.getItem("token");
-        User.getByToken().then(response =>{
+        User.getByToken().then(response => {
             this.userId = response.data.id;
-        }).catch(er => {
-            console.log(er);
-            this.$router.push('/error');
+            return Promise.all([
+                Friend.getFriendsByUserId(this.userId),
+            ]);
         })
-        
-        if (this.userId){
-            Friend.getFriendsByUserId().then(response => {
-                this.friendUsers = response.data;
-            }).catch(er => {
-                console.log(er);
-                this.friendUsers = [];
-            })
-        }
+        .then(([friendsResponse]) => {
+            this.friends = friendsResponse.data;
+            this.loading = false;
+        })
+        .catch(error => {
+            console.log(error);
+            this.$router.push('/error');
+        });
     }
 }
 </script>

@@ -38,7 +38,7 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login(LoginUserDto loginDto)
         {
-            var tokenJwt = await _userService.Login(loginDto);
+            var tokenJwt = _userService.Login(loginDto);
             if (!String.IsNullOrEmpty(tokenJwt)) {
                 return Ok(tokenJwt);
             }
@@ -95,7 +95,7 @@ namespace HttpHost.Services.Controllers
 
             try
             {
-                var foundUser = await _userService.GetUserByEmail(userEmail);
+                var foundUser = _userService.GetUserByEmail(userEmail);
                 return Ok(foundUser);
             }
             catch (Exception _)
@@ -116,7 +116,7 @@ namespace HttpHost.Services.Controllers
                 return BadRequest();
             try
             {
-                var foundUser = await _userService.GetUserByUsername(username);
+                var foundUser = _userService.GetUserByUsername(username);
                 return Ok(foundUser);
             }
             catch(Exception _)

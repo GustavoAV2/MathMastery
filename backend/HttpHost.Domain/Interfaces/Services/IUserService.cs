@@ -14,9 +14,9 @@ namespace HttpHost.Domain.Interfaces.Services
         Task<Users> PutUser(string userId, UserDto inputUser);
         Task<List<Users>> GetUsers();
         Task<Users> GetUserById(string userId);
-        Task<Users> GetUserByEmail(string userEmail);
-        Task<Users> GetUserByUsername(string userName);
-        Task<string> Login(LoginUserDto loginDto);
+        Users GetUserByEmail(string userEmail);
+        Users GetUserByUsername(string userName);
+        string Login(LoginUserDto loginDto);
         Task<Users> GetUserIdentity(AuthHeaderDto headerDto);
     }
 }

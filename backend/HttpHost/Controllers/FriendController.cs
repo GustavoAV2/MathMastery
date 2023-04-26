@@ -2,6 +2,8 @@ using HttpHost.Domain.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using HttpHost.Domain.Interfaces.Services;
+using HttpHost.Domain.Dto.Headers;
+using HttpHost.Domain.Dtos;
 
 namespace HttpHost.Services.Controllers
 {
@@ -9,10 +11,12 @@ namespace HttpHost.Services.Controllers
     [Route("/friend")]
     public class FriendController : ControllerBase
     {
+        private readonly IUserService _userService;
         private readonly IFriendService _friendService;
 
-        public FriendController(IFriendService friendService)
+        public FriendController(IFriendService friendService, IUserService userService)
         {
+            _userService = userService;
             _friendService = friendService;
         }
 
@@ -32,7 +36,7 @@ namespace HttpHost.Services.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("/friend/{id}")]
+        [Route("/friend/{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetFriendsByUserId(string userId)
@@ -45,15 +49,31 @@ namespace HttpHost.Services.Controllers
             return NotFound();
         }
 
+        [HttpGet]
+        [Authorize]
+        [Route("/friend/notifications/{userId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public IActionResult GetFriendsRequestByUserId(string userId)
+        {
+            var friendsRequest = _friendService.GetFriendsRequestByUserId(userId);
+            if (friendsRequest != null)
+            {
+                return Ok(friendsRequest);
+            }
+            return NotFound();
+        }
+
         [HttpPost]
         [Authorize]
         [Route("/friend")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> RequestFriend(FriendDto friend)
+        public async Task<IActionResult> RequestFriend([FromHeader] AuthHeaderDto headerDto, FriendRequestDto friendRequest)
         {
-            var newFriend = await _friendService.CreateRequestFriend(friend);
+            var currentUser = await _userService.GetUserIdentity(headerDto);
+            var newFriend = await _friendService.CreateRequestFriend(currentUser.Id, friendRequest.Username);
             return Ok(newFriend);
         }
 

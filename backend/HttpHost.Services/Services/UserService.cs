@@ -101,7 +101,7 @@ namespace HttpHost.Services
             return user;
         }
 
-        public async Task<Users> GetUserByEmail(string userEmail)
+        public Users GetUserByEmail(string userEmail)
         {
             var sw = Stopwatch.StartNew();
             var foundUser = _userDb.User.Where(user => user.Email == userEmail).FirstOrDefault();
@@ -114,7 +114,7 @@ namespace HttpHost.Services
             return foundUser;
         }
 
-        public async Task<Users> GetUserByUsername(string userName)
+        public Users GetUserByUsername(string userName)
         {
             var sw = Stopwatch.StartNew();
             var foundUser = _userDb.User.Where(user => user.UserName == userName).FirstOrDefault();
@@ -127,9 +127,9 @@ namespace HttpHost.Services
             return foundUser;
         }
 
-        public async Task<string> Login(LoginUserDto loginDto)
+        public string Login(LoginUserDto loginDto)
         {
-            var foundUser = await GetUserByEmail(loginDto.Email);
+            var foundUser = GetUserByEmail(loginDto.Email);
             
             if (ValidLogin(foundUser, loginDto) == true)
             {

@@ -9,9 +9,9 @@ namespace HttpHost.Domain.Models
         public string ReceiverId { get; set; }
         public DateTime? RequestDate { get; set; }
         public DateTime? ConfirmationDate { get; set; }
-        public char Status { get; set; }
+        public Status Status { get; set; }
 
-        public Friends(string requesterId, string receiverId, char status)
+        public Friends(string requesterId, string receiverId, Status status)
         {
             Id = Guid.NewGuid().ToString();
             RequesterId = requesterId;
@@ -22,7 +22,15 @@ namespace HttpHost.Domain.Models
 
         public void Confirm()
         {
+            Status = Status.Approved;
             ConfirmationDate = DateTime.Now;
         }
+    }
+
+    public enum Status
+    {
+        Approved,
+        Decline,
+        Waiting
     }
 }

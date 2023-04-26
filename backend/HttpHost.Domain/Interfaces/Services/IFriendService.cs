@@ -1,5 +1,6 @@
 ﻿
 using HttpHost.Domain.Dto;
+using HttpHost.Domain.Dtos;
 using HttpHost.Domain.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,7 +11,8 @@ namespace HttpHost.Domain.Interfaces.Services
     {
         Task<List<Friends>> GetFriends();
         Task<List<Users>> GetUserFriendsByUserId(string userId);
-        Task<Friends> CreateRequestFriend(FriendDto friend);
+        List<Friends> GetFriendsRequestByUserId(string userId);
+        Task<Friends> CreateRequestFriend(string requesterId, string receiverUsername);
         Task<Friends> ConfirmFriendRequest(FriendDto friend);
     }
 }

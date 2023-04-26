@@ -9,6 +9,7 @@ using HttpHost.Database.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using HttpHost.Domain.Interfaces.Services;
+using HttpHost.Domain.Dtos;
 
 namespace HttpHost.Services
 {
@@ -34,6 +35,13 @@ namespace HttpHost.Services
             return friends;
         }
 
+        public List<Friends> GetFriendsRequestByUserId(string userId)
+        {
+            var foundFriendsRequisition = _friendDb.Friend.
+                Where(f => f.ReceiverId == userId && f.ConfirmationDate == null).ToList();
+
+            return foundFriendsRequisition;
+        }
         public async Task<List<Users>> GetUserFriendsByUserId(string userId)
         {
             var foundFriendsRequisition = _friendDb.Friend.
@@ -51,12 +59,13 @@ namespace HttpHost.Services
             return friends;
         }
 
-        public async Task<Friends> CreateRequestFriend(FriendDto friend)
+        public async Task<Friends> CreateRequestFriend(string requesterId, string receiverUsername)
         {
+            var user = _userService.GetUserByUsername(receiverUsername);
             var newFriend = new Friends(
-                   requesterId: friend.RequesterId,
-                   receiverId: friend.ReceiverId,
-                   status: friend.Status
+                   requesterId: requesterId,
+                   receiverId: user.Id,
+                   status: Status.Waiting
                 );
             _friendDb.All.Add(newFriend);
             await _friendDb.SaveChangesAsync();

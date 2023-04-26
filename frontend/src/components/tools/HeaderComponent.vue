@@ -25,12 +25,18 @@
                     
                     <ul class="navbar-nav">
                         <template v-if="token != null">
-                            <li class="nav-item" style="cursor:pointer;">
-                                <a class="nav-link text-dark">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 30px;">
-                                    <!-- {{ user.name }} -->
-                                </a>
-                            </li>
+                            <template v-if="notifications">
+                                <div class="dropdown">
+                                    <span><span class="n-notification">{{ notifications.length }}</span> notificações</span>
+                                    <div class="dropdown-content">
+                                        <p v-for="(notification, index) in notifications" :key="index">
+                                            {{ notification.username }} solicitou amizade
+                                            <button @click="accept(notification)" class="btn btn-success btn-sm">Aceitar</button>
+                                            <button @click="decline(notification)" class="btn btn-danger btn-sm">Negar</button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </template>
                             <li class="nav-item">
                                 <form class="form-inline" >
                                     <button type="submit" class="btn btn-danger" @click="logout()">Logout</button>
@@ -56,30 +62,48 @@
 
 <script>
 import User from '@/services/users'
+import Friend from '@/services/friends'
 
 export default {
     data(){
         return{
             token: null,
-            user: {"username": ""}
+            notifications: [
+                {username: 'Joao'},{username: 'Junior'}
+            ],
         }
     },
     methods:{
         logout(){
             localStorage.clear();
-            User.logout(this.token).then(response => {
+            var token = localStorage.getItem('token');
+            User.logout(token).then(response => {
                 console.log(response.data)
             }).catch(()=>{});
+        },
+
+        accept(notification) {
+        console.log(`Aceitando solicitação de amizade de ${notificacao.user}...`)
+        },
+        decline(notification) {
+        console.log(`Negando solicitação de amizade de ${notificacao.user}...`)
         }
     },
     mounted() {
-        this.token = localStorage.getItem("token");
-        // if (this.token != null){
-        //     User.getByToken(this.token).then(response => {
-        //         console.log(response.data)
-        //         this.user = response.data;
-        //     }).catch(()=>{})
-        // }
+        User.getByToken().then(response => {
+            this.token = localStorage.getItem('token')
+            var userId = response.data.id;
+            return Promise.all([
+                Friend.getFriendsNotifications(userId),
+            ]);
+        })
+        .then(([notificationsResponse]) => {
+            console.log(notificationsResponse.data);
+            // this.notifications = notificationsResponse.data;
+        })
+        .catch(error => {
+            console.log(error);
+        });
     }
 }
 </script>
@@ -102,5 +126,30 @@ export default {
 }
 header{
     background-color: black;
+}
+.n-notification{
+    color: #E67E22;
+}
+.dropdown {
+    cursor: pointer;
+    color: #f9f9f9;
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    margin-top: 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 </style>
