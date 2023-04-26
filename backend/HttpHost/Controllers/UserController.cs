@@ -127,7 +127,6 @@ namespace HttpHost.Services.Controllers
 
         [HttpPost]
         [Route("/user")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -27,10 +27,6 @@
         <label for="confirmar-senha">Confirmar senha:</label>
         <input type="password" v-model="confirm_password" class="form-control" id="confirmar-senha">
       </div>
-      <div class="form-group">
-        <label for="data-nascimento">Data de nascimento:</label>
-        <input type="date" v-model="user.birthdate" class="form-control" id="data-nascimento">
-      </div>
       <hr>
       <button class="btn register-btn" @click="save()">Registrar</button>
     </div>
