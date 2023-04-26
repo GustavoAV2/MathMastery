@@ -99,7 +99,7 @@ export default {
         })
         .then(([notificationsResponse]) => {
             console.log(notificationsResponse.data);
-            // this.notifications = notificationsResponse.data;
+            this.notifications = notificationsResponse.data;
         })
         .catch(error => {
             console.log(error);

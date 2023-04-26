@@ -54,11 +54,12 @@ namespace HttpHost.Services.Controllers
         [Route("/friend/notifications/{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public IActionResult GetFriendsRequestByUserId(string userId)
+        public async Task<IActionResult> GetFriendsNotificationByUserId(string userId)
         {
-            var friendsRequest = _friendService.GetFriendsRequestByUserId(userId);
+            var friendsRequest = await _friendService.GetFriendsNotificationByUserId(userId);
             if (friendsRequest != null)
             {
+
                 return Ok(friendsRequest);
             }
             return NotFound();

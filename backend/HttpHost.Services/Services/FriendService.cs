@@ -35,12 +35,23 @@ namespace HttpHost.Services
             return friends;
         }
 
-        public List<FriendRequest> GetFriendsRequestByUserId(string userId)
+        public async Task<List<FriendNotification>> GetFriendsNotificationByUserId(string userId)
         {
             var foundFriendsRequisition = _friendDb.Friend.
                 Where(f => f.ReceiverId == userId && f.ConfirmationDate == null).ToList();
 
-            return foundFriendsRequisition;
+            var notifications = new List<FriendNotification>();
+            foreach (var friendRequest in foundFriendsRequisition)
+            {
+                var user = await _userService.GetUserById(friendRequest.RequesterId);
+                notifications.Add(
+                    new FriendNotification() { 
+                        Username = user.UserName,
+                        Status = friendRequest.Status
+                    }
+                );
+            }
+            return notifications;
         }
         public async Task<List<User>> GetUserFriendsByUserId(string userId)
         {

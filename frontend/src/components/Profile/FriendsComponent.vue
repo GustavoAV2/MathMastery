@@ -14,7 +14,7 @@
                 <div class="col-12 col-sm-4">
                     <div class="row">
                         <div class="col">
-                            <h2>Friends List</h2>
+                            <h2>Amigos:</h2>
                         </div>
                     </div>
                     <router-link to="/friends/request">

@@ -6,7 +6,12 @@
             <input type="text" v-model="friendRequestDto.username" class="form-control" id="friend-email" name="friend-email" required>
         </div>
         <br>
-        <button type="submit" @click="sendFriendRequest()" class="btn btn-success">Enviar solicitação</button>
+        <div class="friend-links">
+            <button type="submit" @click="sendFriendRequest()" class="btn btn-success">Enviar solicitação</button>
+            <a href="">
+                <router-link to="/friends" class="nav-link text-dark">Voltar</router-link>
+            </a>
+        </div>
 	</div>
 </template>
 
@@ -42,3 +47,10 @@ export default {
     }
 }
 </script>
+
+<style>
+.friend-links{
+    display: flex;
+    justify-content: space-between;
+}
+</style>

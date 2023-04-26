@@ -11,7 +11,7 @@ namespace HttpHost.Domain.Interfaces.Services
     {
         Task<List<FriendRequest>> GetFriends();
         Task<List<User>> GetUserFriendsByUserId(string userId);
-        List<FriendRequest> GetFriendsRequestByUserId(string userId);
+        Task<List<FriendNotification>> GetFriendsNotificationByUserId(string userId);
         Task<FriendRequest> CreateRequestFriend(string requesterId, string receiverUsername);
         Task<FriendRequest> ConfirmFriendRequest(Dto.FriendRequestDto friend);
     }
