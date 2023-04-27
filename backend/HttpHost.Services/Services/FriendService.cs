@@ -38,7 +38,7 @@ namespace HttpHost.Services
         public async Task<List<FriendNotification>> GetFriendsNotificationByUserId(string userId)
         {
             var foundFriendsRequisition = _friendDb.Friend.
-                Where(f => f.ReceiverId == userId && f.ConfirmationDate == null).ToList();
+                Where(f => f.ReceiverId == userId && f.Status == FriendRequestStatus.Waiting).ToList();
 
             var notifications = new List<FriendNotification>();
             foreach (var friendRequest in foundFriendsRequisition)
@@ -58,7 +58,7 @@ namespace HttpHost.Services
         public async Task<List<User>> GetUserFriendsByUserId(string userId)
         {
             var foundFriendsRequisition = _friendDb.Friend.
-                Where(f => f.Status == FriendRequestStatus.Approved && f.ReceiverId == userId || f.RequesterId == userId).ToArray();
+                Where(f => f.Status == FriendRequestStatus.Approved && (f.ReceiverId == userId || f.RequesterId == userId)).ToArray();
 
             List<User> friends = new List<User>();
             if (foundFriendsRequisition.Any())
