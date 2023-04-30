@@ -64,10 +64,10 @@ namespace HttpHost.Services
                 throw new KeyNotFoundException($"Usuário com ID {userId} não encontrado.");
             }
 
-            foundUser.FirstName = inputUser.FirstName.Any() ? inputUser.FirstName : foundUser.FirstName;
-            foundUser.LastName = inputUser.LastName.Any() ? inputUser.LastName : foundUser.LastName;
-            foundUser.UserName = inputUser.UserName.Any() ? inputUser.UserName : foundUser.UserName;
-            foundUser.PasswordHash = inputUser.Password.Any() ? inputUser.Password : foundUser.PasswordHash;
+            foundUser.FirstName = inputUser.FirstName.IsNullOrEmpty() ? foundUser.FirstName : inputUser.FirstName;
+            foundUser.LastName = inputUser.LastName.IsNullOrEmpty() ? foundUser.LastName : inputUser.LastName;
+            foundUser.UserName = inputUser.UserName.IsNullOrEmpty() ? foundUser.UserName : inputUser.UserName;
+            foundUser.PasswordHash = inputUser.Password.IsNullOrEmpty() ? foundUser.PasswordHash : inputUser.Password;
             if (inputUser.NumberUnresolvedAccounts.HasValue && inputUser.NumberResolvedAccounts.HasValue)
             {
                 foundUser.NumberUnresolvedAccounts = inputUser.NumberUnresolvedAccounts.Value;

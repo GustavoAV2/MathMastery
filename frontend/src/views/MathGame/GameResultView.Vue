@@ -48,6 +48,8 @@ export default {
           NumberResolvedAccounts: this.resolvedAccounts,
           NumberUnresolvedAccounts: this.unresolvedAccounts
         }
+        console.log(payload);
+        console.log(response.data);
         return Promise.all([
           User.update(payload, response.data.id)
         ])
