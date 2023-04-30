@@ -69,7 +69,7 @@
 
 <script >
 import Game from '@/services/game'
-export default {
+export default{
     props:{
         difficulty: String,
     },
@@ -125,15 +125,14 @@ export default {
                     break;
                 }
                 else if (input.id == inputs.length){
-                    this.setInputResult();
-                    this.sendActualGameAndRequestNextGame();
-                    this.setNewProgressBar();
+                    this.generateNewGame();
                     var firstInput = document.getElementsByClassName("number")[0];
                     firstInput.focus();
                 }
             }
         },
         setNewProgressBar(){
+            console.log("Reestruturando tempo e elementos;")
             this.seconds = 30;
             this.width = 100;
             var div = document.getElementById("loading");
@@ -145,11 +144,12 @@ export default {
             this.inputResult = "";
             var inputs = document.getElementsByClassName("number");
             for (var i = 0; i < inputs.length; i++) {
-                this.inputResult += inputs[i].value;
+                this.inputResult += inputs[i].value ? inputs[i].value : "0";
                 inputs[i].value = "";
             }
         },
-        sendActualGameAndRequestNextGame(){
+        requestNextGame(){
+            console.log("Requisitando próximo game")
             this.game.result = parseInt(this.inputResult);
             var game = { ...this.game, ...this.game.challenge}
             game.difficulty = this.difficulty;
@@ -185,10 +185,13 @@ export default {
                 this.runProgressBar();
             }
             if (this.seconds == 0){
-                this.setInputResult();
-                this.sendActualGameAndRequestNextGame();
-                this.setNewProgressBar();
+                this.generateNewGame();
             }
+        },
+        generateNewGame(){
+            this.setInputResult();
+            this.requestNextGame();
+            this.setNewProgressBar();
         }
     },
     async created(){
