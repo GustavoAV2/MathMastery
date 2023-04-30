@@ -44,20 +44,22 @@ export default {
     },
     updateUserResults(){
       User.getByToken().then(response => {
-        if (response.data.id){
-          var payload = {
-            NumberResolvedAccounts: this.resolvedAccounts,
-            NumberUnresolvedAccounts: this.unresolvedAccounts
-          }
-          User.updateGameUserStatus(payload, response.data.id).then(response => {
-            console.log(response.data);
-          }).catch(er => {
-            this.$router.push("/error");
-          })
+        var payload = {
+          NumberResolvedAccounts: this.resolvedAccounts,
+          NumberUnresolvedAccounts: this.unresolvedAccounts
         }
-      }).catch(er => {
-        this.$router.push("/error");
+        console.log(payload);
+        console.log(response.data);
+        return Promise.all([
+          User.update(payload, response.data.id)
+        ])
+      }).then(([updateResponse]) => {
+        console.log(updateResponse.data);
       })
+      .catch(error => {
+        console.log(error);
+        this.$router.push('/error');
+      });
       
     }
   },
