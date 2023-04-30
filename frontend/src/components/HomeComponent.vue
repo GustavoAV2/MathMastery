@@ -37,11 +37,17 @@
             </div>  
         </div>
         <hr class="my-4 cards-divisor">
-        <router-link to="/register">
-            <button type="button" class="btn btn-primary btn-lg btn-block" @click="moveToGame('normal')">Registrar</button>
-        </router-link>
-        <button class="btn btn-game btn-lg btn-block" @click="createGame(info)">Iniciar desafio</button>
-        <p class="home-message">Registre-se para rankear seu perfil, adicionar amigos e evoluir com eles.</p>
+        <template v-if="!token">
+            <router-link to="/register">
+                <button type="button" class="btn btn-primary btn-lg btn-block" @click="moveToGame('normal')">Registrar</button>
+            </router-link>
+            <button class="btn btn-game btn-lg btn-block" @click="createGame(info)">Iniciar desafio</button>
+            <p class="home-message">Registre-se para rankear seu perfil, adicionar amigos e evoluir com eles.</p>
+        </template>
+        <template v-else>
+            <button class="btn btn-game full-with btn-lg btn-block" @click="createGame(info)">Iniciar desafio</button>
+            <p class="home-message">(Este botão te levara para o modo normal)</p>
+        </template>
     </div>
 </template>
 
@@ -95,6 +101,9 @@ body{
     border-color:#8E44AD;
     background-color: white;
     
+}
+.full-with{
+    width: 100%;
 }
 .btn-game:hover{
     box-shadow: 0px 8px 15px #8E44AD;
