@@ -13,11 +13,8 @@ export default{
     getByUsernameOrEmail(username){
         return http.get('/user/friend/' + username)
     },
-    update(user, id){
-        return http.put('/user/' + id, user)
-    },
-    updateGameUserStatus(payload, id){
-        return http.put('/user/game/' + id, payload)
+    update(user_payload, id){
+        return http.put('/user/' + id, user_payload)
     },
     desactive(id){
         return http.delete('/user/desactive/' + id)

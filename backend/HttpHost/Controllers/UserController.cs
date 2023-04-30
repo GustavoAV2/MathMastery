@@ -148,19 +148,6 @@ namespace HttpHost.Services.Controllers
             return Ok(foundUser);
         }
 
-        //[HttpPut]
-        //[Authorize]
-        //[Route("/user/game/{id}")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public async Task<IActionResult> PutGameUserStatus(string id, UserGameStatusDto statusDto)
-        //{
-        //    TODO Adaptar PutUser para atualizar status do game
-        //    var foundUser = await _userService.PutUser(id, statusDto);
-        //    return Ok(foundUser);
-        //}
-
         [HttpDelete]
         [Route("/user")]
         [Authorize]

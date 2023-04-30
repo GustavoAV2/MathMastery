@@ -64,14 +64,14 @@ namespace HttpHost.Services
                 throw new KeyNotFoundException($"Usuário com ID {userId} não encontrado.");
             }
 
-            foundUser.FirstName = inputUser.FirstName;
-            foundUser.LastName = inputUser.LastName;
-            foundUser.UserName = inputUser.UserName;
-            foundUser.PasswordHash = inputUser.Password;
-            if (inputUser.NumberUnresolvedAccounts.HasValue)
+            foundUser.FirstName = inputUser.FirstName.Any() ? inputUser.FirstName : foundUser.FirstName;
+            foundUser.LastName = inputUser.LastName.Any() ? inputUser.LastName : foundUser.LastName;
+            foundUser.UserName = inputUser.UserName.Any() ? inputUser.UserName : foundUser.UserName;
+            foundUser.PasswordHash = inputUser.Password.Any() ? inputUser.Password : foundUser.PasswordHash;
+            if (inputUser.NumberUnresolvedAccounts.HasValue && inputUser.NumberResolvedAccounts.HasValue)
             {
-                foundUser.NumberUnresolvedAccounts = inputUser.NumberUnresolvedAccounts.Value + foundUser.NumberUnresolvedAccounts;
-                foundUser.NumberResolvedAccounts = inputUser.NumberResolvedAccounts.Value + foundUser.NumberResolvedAccounts;
+                foundUser.NumberUnresolvedAccounts = inputUser.NumberUnresolvedAccounts.Value;
+                foundUser.NumberResolvedAccounts = inputUser.NumberResolvedAccounts.Value;
             }
 
             await _userDb.SaveChangesAsync();
