@@ -16,6 +16,7 @@ using HttpHost.Domain.Dto.Headers;
 using HttpHost.Domain.Models;
 using HttpHost.Domain.Interfaces.Services;
 
+
 namespace HttpHost.Services
 {
     public class UserService : IUserService
@@ -43,13 +44,16 @@ namespace HttpHost.Services
             throw new KeyNotFoundException($"Usuário com ID {userId} não encontrado.");
         }
 
+
         public async Task<User> CreateUser(UserDto inputUser)
         {
+            var passwordHash = BCrypt.Net.BCrypt.HashPassword(inputUser.Password);
+
             var newUser = new User(
-                    email: inputUser.Email, passwordHash: inputUser.Password,
-                    userName: inputUser.UserName, firstName: inputUser.FirstName,
-                    lastName: inputUser.LastName
-                );
+                email: inputUser.Email, passwordHash: passwordHash,
+                userName: inputUser.UserName, firstName: inputUser.FirstName,
+                lastName: inputUser.LastName
+            );
 
             _userDb.All.Add(newUser);
             await _userDb.SaveChangesAsync();
@@ -67,7 +71,6 @@ namespace HttpHost.Services
             foundUser.FirstName = inputUser.FirstName.IsNullOrEmpty() ? foundUser.FirstName : inputUser.FirstName;
             foundUser.LastName = inputUser.LastName.IsNullOrEmpty() ? foundUser.LastName : inputUser.LastName;
             foundUser.UserName = inputUser.UserName.IsNullOrEmpty() ? foundUser.UserName : inputUser.UserName;
-            foundUser.PasswordHash = inputUser.Password.IsNullOrEmpty() ? foundUser.PasswordHash : inputUser.Password;
             if (inputUser.NumberUnresolvedAccounts.HasValue && inputUser.NumberResolvedAccounts.HasValue)
             {
                 foundUser.NumberUnresolvedAccounts = inputUser.NumberUnresolvedAccounts.Value;
