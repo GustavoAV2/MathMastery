@@ -5,11 +5,10 @@
   
   <script>
   import WebHeader from '../../components/tools/HeaderComponent.vue';
-  import Friends from '../../components/Profile/FriendsComponent.vue';
   import Social from '../../components/Profile/SocialComponent.vue';
   
   export default {
-    components:{WebHeader, Friends, Social},
+    components:{WebHeader, Social},
   }
   </script>
   
