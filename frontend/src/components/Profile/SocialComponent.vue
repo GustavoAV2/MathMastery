@@ -27,20 +27,19 @@
                         <li class="list-group-item" v-for="user in friends" @click="selectUser(user)">{{ user.firstName }} {{user.lastName}}</li>
                     </ul>
                 </div>
-                <template v-if="selected_user != null">
-                    <div class="col-12 col-sm-8">
+                <div class="col-12 col-sm-8">
+                    <template v-if="selected_user != null">
                         <br>
                         <div class="friend-info">
                             <h2>{{selected_user.firstName}} {{selected_user.lastName}}</h2>
                             <p>Email: {{selected_user.email}}</p>
+                            <!-- <p>Username: {{selected_user.username}}</p> -->
                             <p>Taxa de acertos: {{ selected_user.winRate }}%</p>
                             <p>Acertos: {{selected_user.numberResolvedAccounts}} </p>
                             <p>Erros: {{selected_user.numberUnresolvedAccounts}}</p>
                         </div>
-                    </div>
-                </template>
-                <template v-else>
-                    <div class="col-12 col-sm-8">
+                    </template>
+                    <template v-else>
                         <br>
                         <div class="friend-info">
                             <div class="flex-line">
@@ -48,23 +47,28 @@
                                 <button class="btn btn-warning mb-1">Editar</button>
                             </div>
                             <p>Email: {{current_user.email}}</p>
+                            <!-- <p>Username: {{selected_user.username}}</p> -->
                             <p>Taxa de acertos: {{ current_user.winRate }}%</p>
                             <p>Acertos: {{current_user.numberResolvedAccounts}} </p>
                             <p>Erros: {{current_user.numberUnresolvedAccounts}}</p>
                         </div>
-                    </div>
-                </template>
+                    </template>
+                </div>
             </div>
         </div>
-
     </template>
+    
+    <hr>
+    <FooterComponent />
 </template>
 
 <script>
 import User from '@/services/users'
 import Friend from '@/services/friends'
+import FooterComponent from '../../components/tools/FooterComponent.vue';
 
 export default {
+    components: {FooterComponent},
     data(){
         return{
             loading: true,

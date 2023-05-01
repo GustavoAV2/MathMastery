@@ -55,19 +55,17 @@
         jornada de aprimorar suas habilidades matemáticas enquanto se diverte com os desafios. 
         Boa sorte e divirta-se!
     </p>
-    <h4>Meu perfil:</h4>
-    <a href="https://github.com/GustavoAV2">GitHub</a><br>
-    <a href="https://www.linkedin.com/in/gustavo-voltolini/">Linkedin</a>
-
   </div>
-
+  
+  <FooterComponent />
 </template>
 
 <script>
 import WebHeader from '../components/tools/HeaderComponent.vue';
+import FooterComponent from '../components/tools/FooterComponent.vue';
 
 export default {
-  components:{WebHeader},
+  components:{WebHeader, FooterComponent},
 }
 </script>
 

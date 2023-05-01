@@ -34,16 +34,19 @@
       <p>Já tem uma conta? <router-link to="/sign">Faça login</router-link>.</p>
     </div>
   </div>
+  
+  <FooterComponent />
 </template>
 
 <script>
 import WebHeader from '../../components/tools/HeaderComponent.vue';
+import FooterComponent from '../../components/tools/FooterComponent.vue';
 import alertMixin from '@/mixins/alertMixin'
 import User from '@/services/users'
 
 export default {
   mixins: [alertMixin],
-  components: { WebHeader },
+  components: { WebHeader, FooterComponent},
 
   data() {
     return {

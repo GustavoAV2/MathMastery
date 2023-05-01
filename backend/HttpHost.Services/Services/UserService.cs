@@ -134,13 +134,14 @@ namespace HttpHost.Services
         {
             var foundUser = GetUserByEmail(loginDto.Email);
             
-            if (ValidLogin(foundUser, loginDto) == true)
+            if (ValidLogin(loginDto.Password, foundUser.PasswordHash) == true)
             {
                 var tokenJwt = GenerateToken(foundUser);
                 return tokenJwt;
             }
             return "";
         }
+
 
         public async Task<User> GetUserIdentity(AuthHeaderDto headerDto)
         {
@@ -153,13 +154,9 @@ namespace HttpHost.Services
             return foundUser;
         }
 
-        private bool ValidLogin(User foundUser, LoginUserDto loginDto)
+        private bool ValidLogin(string Password, string PasswordHash)
         {
-            if (foundUser.PasswordHash == loginDto.Password)
-            {
-                return true;
-            }
-            return false;
+            return BCrypt.Net.BCrypt.Verify(Password, PasswordHash);
         }
 
         private string GenerateToken(User foundUser)

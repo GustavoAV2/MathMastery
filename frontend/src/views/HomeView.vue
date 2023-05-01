@@ -1,15 +1,17 @@
 <template>
   <WebHeader current-page="home" />
   <HomeComponent />
+  <FooterComponent />
 </template>
 
 <script>
 import WebHeader from '../components/tools/HeaderComponent.vue';
 import HomeComponent from '../components/HomeComponent.vue';
+import FooterComponent from '../components/tools/FooterComponent.vue';
 
 
 export default {
-  components:{WebHeader, HomeComponent},
+  components:{WebHeader, HomeComponent, FooterComponent},
 }
 </script>
 

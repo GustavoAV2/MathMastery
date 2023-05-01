@@ -1,7 +1,3 @@
-<script setup>
-import WebHeader from '../components/tools/HeaderComponent.vue';
-</script>
-
 <template>
   <WebHeader current-page="home" />
   <br>
@@ -11,4 +7,11 @@ import WebHeader from '../components/tools/HeaderComponent.vue';
       <hr>
       <router-link to="/" class="navbar-link" id="sign-nav-link">Voltar para o inicio...</router-link>
   </div>
+  
+  <FooterComponent />
 </template>
+
+<script setup>
+  import FooterComponent from '../components/tools/FooterComponent.vue';
+  import WebHeader from '../components/tools/HeaderComponent.vue';
+</script>

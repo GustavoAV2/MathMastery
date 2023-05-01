@@ -67,13 +67,16 @@
             Divirta-se jogando e desafiando seus amigos para ver quem se sai melhor nos desafios matemáticos!
         </p>
     </div>
+    
+  <FooterComponent />
 </template>
 
 <script>
 import WebHeader from '../components/tools/HeaderComponent.vue';
+import FooterComponent from '../components/tools/FooterComponent.vue';
 
 export default {
-  components:{WebHeader},
+  components:{WebHeader, FooterComponent},
 }
 </script>
 
