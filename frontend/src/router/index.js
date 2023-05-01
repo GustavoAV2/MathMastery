@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import PageNotFound from '../views/PageNotFound.vue'
+import AboutView from '../views/AboutView.vue'
+import HowToPlayView from '../views/HowToPlayView.vue'
 
 import FriendsRequestView from '../views/Profile/FriendsRequestView.vue'
 import SignView from '../views/Profile/SignView.vue'
@@ -60,6 +62,16 @@ const router = createRouter({
       path: '/mathgame/test',
       name: 'test_game',
       component: ChallengeForTestView
+    },
+    {
+      path: '/howtoplay',
+      name: 'howtoplay',
+      component: HowToPlayView
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: AboutView
     },
     {
       path: '/error',
