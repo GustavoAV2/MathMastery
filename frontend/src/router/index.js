@@ -2,11 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import PageNotFound from '../views/PageNotFound.vue'
 
-import ProfileView from '../views/Profile/ProfileView.vue'
-import FriendsView from '../views/Profile/FriendsView.vue'
 import FriendsRequestView from '../views/Profile/FriendsRequestView.vue'
 import SignView from '../views/Profile/SignView.vue'
 import RegisterView from '../views/Profile/RegisterView.vue'
+import SocialView from '../views/Profile/SocialView.vue'
 
 import ErrorView from '../views/ErrorView.vue'
 import GameView from '../views/MathGame/GameView.vue'
@@ -33,14 +32,9 @@ const router = createRouter({
       component: RegisterView
     },
     {
-      path: '/profile',
-      name: 'profile',
-      component: ProfileView
-    },
-    {
-      path: '/friends',
-      name: 'friends',
-      component: FriendsView
+      path: '/social',
+      name: 'social',
+      component: SocialView
     },
     {
       path: '/friends/request',

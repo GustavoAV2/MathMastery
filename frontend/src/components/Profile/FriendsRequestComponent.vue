@@ -9,7 +9,7 @@
         <div class="friend-links">
             <button type="submit" @click="sendFriendRequest()" class="btn btn-success">Enviar solicitação</button>
             <a href="">
-                <router-link to="/friends" class="nav-link text-dark">Voltar</router-link>
+                <router-link to="/social" class="nav-link text-dark">Voltar</router-link>
             </a>
         </div>
 	</div>
@@ -52,5 +52,13 @@ export default {
 .friend-links{
     display: flex;
     justify-content: space-between;
+}
+.btn-success{
+    border-color: #1ABC9C;
+    background-color: #1ABC9C;
+}
+.btn-success:hover{
+    border-color: #198754;
+    background-color: #198754;
 }
 </style>
