@@ -3,7 +3,6 @@
 		<div class="container">
 			<h1 class="home-message">Teste suas habilidades matemáticas!</h1>
 			<p class="lead home-message">Desafie-se com problemas matemáticos de diferentes níveis de dificuldade e expanda seu conhecimento.</p>
-			<hr class="my-4">
 		</div>
 	</div>
     <div class="container">
@@ -36,7 +35,7 @@
                 <h4>Cinco desafios</h4>
             </div>  
         </div>
-        <hr class="my-4 cards-divisor">
+        <br>
         <template v-if="!token">
             <router-link to="/register">
                 <button type="button" class="btn btn-primary btn-lg btn-block" @click="moveToGame('normal')">Registrar</button>

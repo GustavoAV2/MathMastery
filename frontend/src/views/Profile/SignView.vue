@@ -18,15 +18,17 @@
       <p>Não tem uma conta? <router-link to="/register">Registre-se</router-link>.</p>
     </div>
   </div>
+  <FooterComponent />
 </template>
 
 <script>
 import User from '@/services/users'
 import alertMixin from '@/mixins/alertMixin'
 import WebHeader from '../../components/tools/HeaderComponent.vue';
+import FooterComponent from '../../components/tools/FooterComponent.vue';
 
 export default {
-  components:{WebHeader},
+  components:{WebHeader, FooterComponent},
   mixins:[alertMixin],
   data(){
     return{
