@@ -14,11 +14,15 @@
                         
                         <template v-if="token != null">
                             <li class="nav-item">
-                                <router-link to="/profile" class="nav-link">Perfil</router-link>
+                                <router-link to="/social" class="nav-link">Social</router-link>
                             </li>
 
                             <li class="nav-item">
-                                <router-link to="/friends" class="nav-link">Amigos</router-link>
+                                <router-link to="/howtoplay" class="nav-link">Como jogar</router-link>
+                            </li>
+
+                            <li class="nav-item">
+                                <router-link to="/about" class="nav-link">Sobre</router-link>
                             </li>
                         </template> 
                     </ul>
