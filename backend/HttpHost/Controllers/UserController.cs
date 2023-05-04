@@ -136,6 +136,17 @@ namespace HttpHost.Services.Controllers
             return Ok(newUser);
         }
 
+        [HttpPost]
+        [Route("/user")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> InitializeUser(UserDto inputUser)
+        {
+            var newUser = await _userService.CreateUser(inputUser);
+            return Ok(newUser);
+        }
+
         [HttpPut]
         [Route("/user/{id}")]
         [Authorize]
