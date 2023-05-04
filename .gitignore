@@ -106,8 +106,8 @@ frontend/dist-ssr
 frontend/coverage
 frontend/*.local
 
-frontend//cypress/videos/
-frontend//cypress/screenshots/
+frontend/cypress/videos/
+frontend/cypress/screenshots/
 
 # Editor directories and files
 frontend/.vscode/*
@@ -123,10 +123,10 @@ frontend/*.sw?
 frontend/node_modules/
 
 # Build artifacts
-frontend//dist/
-frontend//.nuxt/
-frontend//nuxt.config.js
-frontend//*.log
+frontend/dist/
+frontend/.nuxt/
+frontend/nuxt.config.js
+frontend/*.log
 
 # Environment variables
 frontend/.env*
