@@ -1,148 +1,142 @@
 # ----- BACKEND -----
 
 # Build results
-[Dd]ebug/
-[Rr]elease/
-x64/
-x86/
-[Oo]bj/
+backend/[Dd]ebug/
+backend/[Rr]elease/
+backend/x64/
+backend/x86/
+backend/[Oo]bj/
 
 # NuGet packages
-*/packages/
+backend/*/packages/
 
 # MSTest test Results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
+backend/[Tt]est[Rr]esult*/
+backend/[Bb]uild[Ll]og.*
 
 # NCrunch
-_NCrunch_*
+backend/_NCrunch_*
 
 # Visual Studio 2017/2019 cache/options directory
-.vs/
+backend/.vs/
 
 # Rider
-.idea/
+backend/.idea/
 
 # User-specific files
-*.user
-*.suo
-*.sln.docstates
-*.cache
+backend/*.user
+backend/*.suo
+backend/*.sln.docstates
+backend/*.cache
 
 # .NET Core
-project.lock.json
-project.fragment.lock.json
-artifacts/
+backend/project.lock.json
+backend/project.fragment.lock.json
+backend/artifacts/
 
 # StyleCop
-StyleCopReport.xml
+backend/StyleCopReport.xml
 
 # Files built by Visual Studio
-*_i.c
-*_p.c
-*.ilk
-*.meta
-*.obj
-*.pch
-*.pdb
-*.pgc
-*.pgd
-*.rsp
-*.sbr
-*.tlb
-*.tli
-*.tlh
-*.tmp
-*.log
-*.vspscc
-*.vssscc
-.builds
-*.pidb
-*.svclog
-*.scc
+backend/*_i.c
+backend/*_p.c
+backend/*.ilk
+backend/*.meta
+backend/*.obj
+backend/*.pch
+backend/*.pdb
+backend/*.pgc
+backend/*.pgd
+backend/*.rsp
+backend/*.sbr
+backend/*.tlb
+backend/*.tli
+backend/*.tlh
+backend/*.tmp
+backend/*.log
+backend/*.vspscc
+backend/*.vssscc
+backend/.builds
+backend/*.pidb
+backend/*.svclog
+backend/*.scc
 
 # Chutzpah Test files
-_Chutzpah*
+backend/_Chutzpah*
 
 # Visual Studio code coverage
-*.coverage
-*.coveragexml
+backend/*.coverage
+backend/*.coveragexml
 
 # TeamCity
-_TeamCity*
+backend/_TeamCity*
 
 # DotCover
-*.dotCover
+backend/*.dotCover
 
 # ReSharper
-_ReSharper*/
+backend/_ReSharper*/
 
 # JustCode
-.JustCode
+backend/.JustCode
 
 # Azure
-*.deployment
-
-# Flutter
-.buildinfo
-.packages
-.pub-cache
-.dart_tool
+backend/*.deployment
 
 # Files for debugging Visual Studio Code
-.vscode/
-launch.json
+backend/.vscode/
+backend/launch.json
 
 
 # ----- FRONTEND -------
 
 # Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+frontend/logs
+frontend/*.log
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+frontend/lerna-debug.log*
 
-node_modules
-.DS_Store
-dist
-dist-ssr
-coverage
-*.local
+frontend/node_modules
+frontend/.DS_Store
+frontend/dist
+frontend/dist-ssr
+frontend/coverage
+frontend/*.local
 
-/cypress/videos/
-/cypress/screenshots/
+frontend//cypress/videos/
+frontend//cypress/screenshots/
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+frontend/.vscode/*
+frontend/!.vscode/extensions.json
+frontend/.idea
+frontend/*.suo
+frontend/*.ntvs*
+frontend/*.njsproj
+frontend/*.sln
+frontend/*.sw?
 
 # Node.js dependencies
-node_modules/
+frontend/node_modules/
 
 # Build artifacts
-/dist/
-/.nuxt/
-/nuxt.config.js
-/*.log
+frontend//dist/
+frontend//.nuxt/
+frontend//nuxt.config.js
+frontend//*.log
 
 # Environment variables
-.env*
+frontend/.env*
 
 # IDE and editor settings
-.vscode/
-.idea/
-*.code-workspace
+frontend/.vscode/
+frontend/.idea/
+frontend/*.code-workspace
 
 # Other build tools
-/.cache/
-/yarn-error.log
-/.yarn/cache/
+frontend/.cache/
+frontend/yarn-error.log
+frontend/.yarn/cache/

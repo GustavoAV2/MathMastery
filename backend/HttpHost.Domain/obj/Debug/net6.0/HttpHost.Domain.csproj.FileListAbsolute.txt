@@ -1,0 +1,12 @@
+C:\MyCode\MathMastery\backend\HttpHost.Domain\bin\Debug\net6.0\HttpHost.Domain.deps.json
+C:\MyCode\MathMastery\backend\HttpHost.Domain\bin\Debug\net6.0\HttpHost.Domain.dll
+C:\MyCode\MathMastery\backend\HttpHost.Domain\bin\Debug\net6.0\HttpHost.Domain.pdb
+C:\MyCode\MathMastery\backend\HttpHost.Domain\obj\Debug\net6.0\HttpHost.Domain.csproj.AssemblyReference.cache
+C:\MyCode\MathMastery\backend\HttpHost.Domain\obj\Debug\net6.0\HttpHost.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\MyCode\MathMastery\backend\HttpHost.Domain\obj\Debug\net6.0\HttpHost.Domain.AssemblyInfoInputs.cache
+C:\MyCode\MathMastery\backend\HttpHost.Domain\obj\Debug\net6.0\HttpHost.Domain.AssemblyInfo.cs
+C:\MyCode\MathMastery\backend\HttpHost.Domain\obj\Debug\net6.0\HttpHost.Domain.csproj.CoreCompileInputs.cache
+C:\MyCode\MathMastery\backend\HttpHost.Domain\obj\Debug\net6.0\HttpHost.Domain.dll
+C:\MyCode\MathMastery\backend\HttpHost.Domain\obj\Debug\net6.0\refint\HttpHost.Domain.dll
+C:\MyCode\MathMastery\backend\HttpHost.Domain\obj\Debug\net6.0\HttpHost.Domain.pdb
+C:\MyCode\MathMastery\backend\HttpHost.Domain\obj\Debug\net6.0\ref\HttpHost.Domain.dll
