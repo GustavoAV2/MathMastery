@@ -1,3 +1,5 @@
+# ----- BACKEND -----
+
 # Build results
 [Dd]ebug/
 [Rr]elease/
@@ -90,3 +92,57 @@ _ReSharper*/
 # Files for debugging Visual Studio Code
 .vscode/
 launch.json
+
+
+# ----- FRONTEND -------
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+.DS_Store
+dist
+dist-ssr
+coverage
+*.local
+
+/cypress/videos/
+/cypress/screenshots/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Node.js dependencies
+node_modules/
+
+# Build artifacts
+/dist/
+/.nuxt/
+/nuxt.config.js
+/*.log
+
+# Environment variables
+.env*
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.code-workspace
+
+# Other build tools
+/.cache/
+/yarn-error.log
+/.yarn/cache/
