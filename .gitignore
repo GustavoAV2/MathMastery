@@ -1,0 +1,142 @@
+# ----- BACKEND -----
+
+# Build results
+backend/[Dd]ebug/
+backend/[Rr]elease/
+backend/x64/
+backend/x86/
+backend/[Oo]bj/
+
+# NuGet packages
+backend/*/packages/
+
+# MSTest test Results
+backend/[Tt]est[Rr]esult*/
+backend/[Bb]uild[Ll]og.*
+
+# NCrunch
+backend/_NCrunch_*
+
+# Visual Studio 2017/2019 cache/options directory
+backend/.vs/
+
+# Rider
+backend/.idea/
+
+# User-specific files
+backend/*.user
+backend/*.suo
+backend/*.sln.docstates
+backend/*.cache
+
+# .NET Core
+backend/project.lock.json
+backend/project.fragment.lock.json
+backend/artifacts/
+
+# StyleCop
+backend/StyleCopReport.xml
+
+# Files built by Visual Studio
+backend/*_i.c
+backend/*_p.c
+backend/*.ilk
+backend/*.meta
+backend/*.obj
+backend/*.pch
+backend/*.pdb
+backend/*.pgc
+backend/*.pgd
+backend/*.rsp
+backend/*.sbr
+backend/*.tlb
+backend/*.tli
+backend/*.tlh
+backend/*.tmp
+backend/*.log
+backend/*.vspscc
+backend/*.vssscc
+backend/.builds
+backend/*.pidb
+backend/*.svclog
+backend/*.scc
+
+# Chutzpah Test files
+backend/_Chutzpah*
+
+# Visual Studio code coverage
+backend/*.coverage
+backend/*.coveragexml
+
+# TeamCity
+backend/_TeamCity*
+
+# DotCover
+backend/*.dotCover
+
+# ReSharper
+backend/_ReSharper*/
+
+# JustCode
+backend/.JustCode
+
+# Azure
+backend/*.deployment
+
+# Files for debugging Visual Studio Code
+backend/.vscode/
+backend/launch.json
+
+
+# ----- FRONTEND -------
+
+# Logs
+frontend/logs
+frontend/*.log
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+frontend/lerna-debug.log*
+
+frontend/node_modules
+frontend/.DS_Store
+frontend/dist
+frontend/dist-ssr
+frontend/coverage
+frontend/*.local
+
+frontend/cypress/videos/
+frontend/cypress/screenshots/
+
+# Editor directories and files
+frontend/.vscode/*
+frontend/!.vscode/extensions.json
+frontend/.idea
+frontend/*.suo
+frontend/*.ntvs*
+frontend/*.njsproj
+frontend/*.sln
+frontend/*.sw?
+
+# Node.js dependencies
+frontend/node_modules/
+
+# Build artifacts
+frontend/dist/
+frontend/.nuxt/
+frontend/nuxt.config.js
+frontend/*.log
+
+# Environment variables
+frontend/.env*
+
+# IDE and editor settings
+frontend/.vscode/
+frontend/.idea/
+frontend/*.code-workspace
+
+# Other build tools
+frontend/.cache/
+frontend/yarn-error.log
+frontend/.yarn/cache/
