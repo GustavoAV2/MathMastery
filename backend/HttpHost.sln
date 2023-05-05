@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpHost", "HttpHost\HttpHo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{11E7FA54-50D2-4009-ADCE-D260FF5D4A23}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalTests", "FunctionalTests\FunctionalTests.csproj", "{2F523EE7-D7A6-42FE-976C-8E312D1B9FB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpHost.Tests", "FunctionalTests\HttpHost.Tests.csproj", "{2F523EE7-D7A6-42FE-976C-8E312D1B9FB3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{931DEB7B-6CC9-4801-9DEE-D6B5346F5025}"
 EndProject
@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpHost.Domain", "HttpHost
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpHost.Services", "HttpHost.Services\HttpHost.Services.csproj", "{DB8610FB-1571-4499-9483-2D9C4F878BEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpHost.Database", "HttpHost.Database\HttpHost.Database.csproj", "{C63965EB-E860-4FDC-A5A4-CECD2F410EC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpHost.Database", "HttpHost.Database\HttpHost.Database.csproj", "{C63965EB-E860-4FDC-A5A4-CECD2F410EC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

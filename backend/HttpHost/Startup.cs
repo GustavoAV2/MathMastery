@@ -28,6 +28,7 @@ namespace HttpHost
             services.AddDbContext<FriendRequestDb>(opt => opt.UseSqlServer(connectionString));
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IFriendService, FriendService>();
+            services.AddTransient<IEmailService, EmailService>();
 
             services
                 .AddControllers()
