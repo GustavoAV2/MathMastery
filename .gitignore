@@ -140,3 +140,4 @@ frontend/*.code-workspace
 frontend/.cache/
 frontend/yarn-error.log
 frontend/.yarn/cache/
+/backend/HttpHost/appsettings.json
