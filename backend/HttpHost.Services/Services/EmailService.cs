@@ -1,13 +1,13 @@
-﻿using HttpHost.Database.Data;
+﻿using HttpHost.Domain.Interfaces.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Net;
 using System.Net.Mail;
 
-namespace HttpHost.Services.Services
+namespace HttpHost.Services
 {
-    public class EmailService
+    public class EmailService : IEmailService
     {
         private readonly ILogger<EmailService> _logger;
         private IConfiguration _configuration { get; }
@@ -19,10 +19,10 @@ namespace HttpHost.Services.Services
         }
 
 
-        public void SendEmail(string recipientEmail, string subject, string body)
+        public bool SendEmail(string recipientEmail, string subject, string body)
         {
-            string senderEmail = _configuration.GetValue<string>("SenderEmail:Email");
-            string senderPassword = _configuration.GetValue<string>("SenderEmail:Password");
+            string senderEmail = _configuration["SenderEmail:Email"];
+            string senderPassword = _configuration["SenderEmail:Password"];
 
             MailMessage message = new MailMessage();
             message.From = new MailAddress(senderEmail);
@@ -39,10 +39,12 @@ namespace HttpHost.Services.Services
             {
                 smtpClient.Send(message);
                 _logger.LogInformation("E-mail enviado com sucesso!");
+                return true;
             }
             catch (Exception ex)
             {
                 _logger.LogWarning("Ocorreu um erro ao enviar o e-mail: " + ex.Message);
+                return false;
             }
         }
     }
