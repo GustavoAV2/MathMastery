@@ -38,9 +38,16 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login(LoginUserDto loginDto)
         {
-            var tokenJwt = _userService.Login(loginDto);
-            if (!String.IsNullOrEmpty(tokenJwt)) {
-                return Ok(tokenJwt);
+            try
+            {
+                var tokenJwt = _userService.Login(loginDto);
+                if (!String.IsNullOrEmpty(tokenJwt)) {
+                    return Ok(tokenJwt);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro no Login do usuário: {ErrorMessage}", ex.Message);
             }
             return Unauthorized();
         }

@@ -1,5 +1,4 @@
 using HttpHost.Domain.Dto;
-using HttpHost.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
@@ -31,9 +30,16 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult CreateGame(string difficulty)
         {
-            var game = _gameService.GenerateGame(difficulty);
-            game.GenerateNewChallenge();
-            return Ok(game);
+            try
+            {
+                var game = _gameService.GenerateGame(difficulty);
+                game.GenerateNewChallenge();
+                return Ok(game);
+            }
+            catch (Exception)
+            {
+                return BadRequest(); ;
+            }
         }
 
         [HttpPost]
@@ -44,8 +50,15 @@ namespace HttpHost.Services.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult NextChallenge(GameDto gameDto)
         {
-            var game = _gameService.NextChallenge(gameDto);
-            return Ok(game);
+            try
+            {
+                var game = _gameService.NextChallenge(gameDto);
+                return Ok(game);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }
