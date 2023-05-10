@@ -1,6 +1,7 @@
 ﻿using HttpHost.Domain.Dto;
 using HttpHost.Domain.Models;
 using HttpHost.Domain.Abstractions;
+using HttpHost.Domain.Models.Enums;
 
 namespace HttpHost.Services
 {
@@ -22,23 +23,19 @@ namespace HttpHost.Services
             return game;
         }
 
-        public IGame GenerateGame(string difficulty, int challengeSolve = 0, int challengeUnsolved = 0)
+        public IGame GenerateGame(GameDifficulty difficulty, int challengeSolve = 0, int challengeUnsolved = 0)
         {
-            if (difficulty == "normal")
-            {
-                return new NormalGame(challengeSolve, challengeUnsolved);
-            }
-            else if (difficulty == "hard")
-            {
-                return new HardGame(challengeSolve, challengeUnsolved);
-            }
-            else if (difficulty == "genius")
+            if (difficulty == GameDifficulty.Genius)
             {
                 return new GeniusGame(challengeSolve, challengeUnsolved);
             }
+            else if (difficulty == GameDifficulty.Hard)
+            {
+                return new HardGame(challengeSolve, challengeUnsolved);
+            }
             else
             {
-                return new EasyGame(challengeSolve, challengeUnsolved);
+                return new NormalGame(challengeSolve, challengeUnsolved);
             }
         }
     }

@@ -3,9 +3,8 @@
     public enum GameDifficulty
     {
         None = 0,
-        Easy = 2,
-        Normal = 2,
-        Hard = 3,
-        Genius = 4
+        Normal = 1,
+        Hard = 2,
+        Genius = 3
     }
 }

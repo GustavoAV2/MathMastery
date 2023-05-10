@@ -11,9 +11,7 @@ import SocialView from '../views/Profile/SocialView.vue'
 
 import ErrorView from '../views/ErrorView.vue'
 import GameView from '../views/MathGame/GameView.vue'
-import CreateGameView from '../views/MathGame/CreateGameView.vue'
 import GameResultView from '../views/MathGame/GameResultView.vue'
-import ChallengeForTestView from '../views/MathGame/ChallengeForTestView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,11 +42,6 @@ const router = createRouter({
       component: FriendsRequestView
     },
     {
-      path: '/mathgame/create',
-      name: 'create_game',
-      component: CreateGameView
-    },
-    {
       path: '/mathgame/:difficulty',
       name: 'mathgame',
       component: GameView
@@ -57,11 +50,6 @@ const router = createRouter({
       path: '/mathgame/result',
       name: 'result',
       component: GameResultView
-    },
-    {
-      path: '/mathgame/test',
-      name: 'test_game',
-      component: ChallengeForTestView
     },
     {
       path: '/howtoplay',

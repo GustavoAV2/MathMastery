@@ -1,7 +1,6 @@
 <template>
-
 <div class="container">
-    <template v-if="loading == false">
+<template v-if="!loading == true">
     <section class="jumbotron text-center">
         <p style="font-size: 20px;">{{game.challengesPlayed + 1}} / 5</p>
 
@@ -21,26 +20,20 @@
         </div>
     </div>
 
-    <template v-if="difficulty == 'hard' || difficulty == 'genius'">
-        <section class ="jumbotron text-center">
-            <div id="options">
-                <div id="form-high-level">
-                    <input v-for="index in lenOfResult" :id="index" v-on:input="limit(index)" type="text" class="number" placeholder="0">
-                </div>
-            </div>
-        </section>
+    <template v-if="difficulty == '2' || difficulty == '3'">
+        <div class="container-numbers">
+            <label class="form-label" for="typeNumber">Reposta do cálculo</label>
+            <input v-model="inputResult" type="number" class="form-control shadow-none" />
+            <button class="btn btn-dark" @click="generateNewGame()">Enviar</button>
+        </div>
     </template>
     
     <template v-else>
-        <section class ="jumbotron text-center">
-            <div id="options">
-                <p>
-                    <div v-for="result in results">
-                        <button class="btn-alternative btn-dark" >{{result}}</button>
-                    </div>
-                </p>
-            </div>
-        </section>
+        <div id="options">
+                <div v-for="result in game.randomResults">
+                    <button class="btn-alternative btn-dark" @click="sendValueAndRequestGame(result)">{{result}}</button>
+                </div>
+        </div>
     </template>
     
     <div style="padding-right: 20%; padding-left: 20%;">
@@ -55,15 +48,15 @@
             </div>
         </div>
     </div>
-    </template>
+</template>
 
-    <template v-else>
-        <div class="loading-container">
-            <div class="spinner-border" role="status">
-                <span class="sr-only"></span>
-            </div>
+<template v-else>
+    <div class="loading-container">
+        <div class="spinner-border" role="status">
+            <span class="sr-only"></span>
         </div>
-    </template>
+    </div>
+</template>
 </div>
 </template>
 
@@ -83,11 +76,12 @@ export default{
                     operation: "",
                     firstNumber: "",
                     lastNumber: "",
-                    actualResult: ""
+                    actualResult: "",
                 },
+                randomResults: [],    
                 challengesSolve: "",
                 challengesUnsolved: "",
-                challengesPlayed: ""                
+                challengesPlayed: ""
             },
             inputResult: ""
         }
@@ -110,27 +104,6 @@ export default{
         }
     },
     methods:{
-        limit(index){
-            var inputs = document.getElementsByClassName("number");
-
-            for (var i = 0; i < inputs.length; i++) {
-                var input = inputs[i];
-                if (input.id == index.toString()){
-                    if (input.value.length > 1){
-                        input.value = input.value.substr(1,2);
-                    }
-                }
-                if (input.id > index){
-                    inputs[i].focus();
-                    break;
-                }
-                else if (input.id == inputs.length){
-                    this.generateNewGame();
-                    var firstInput = document.getElementsByClassName("number")[0];
-                    firstInput.focus();
-                }
-            }
-        },
         setNewProgressBar(){
             console.log("Reestruturando tempo e elementos;")
             this.seconds = 30;
@@ -140,19 +113,12 @@ export default{
             div.style.backgroundColor = "#673FD7";
             div.style.border = "solid #673FD7";   
         },
-        setInputResult() {
-            this.inputResult = "";
-            var inputs = document.getElementsByClassName("number");
-            for (var i = 0; i < inputs.length; i++) {
-                this.inputResult += inputs[i].value ? inputs[i].value : "0";
-                inputs[i].value = "";
-            }
-        },
         requestNextGame(){
             console.log("Requisitando próximo game")
             this.game.result = parseInt(this.inputResult);
             var game = { ...this.game, ...this.game.challenge}
             game.difficulty = this.difficulty;
+            console.log(this.game)
             Game.nextGame(game).then(response => {
                 this.game = response.data
                 if (this.game.challengesPlayed >= 5){
@@ -179,6 +145,10 @@ export default{
                 div.style.border = "none";   
             }
         },
+        sendValueAndRequestGame(value){
+            this.inputResult = value;
+            this.generateNewGame();
+        },
         async runGame(){
             while (this.seconds != 0){
                 await new Promise(r => setTimeout(r, 1000));
@@ -189,7 +159,6 @@ export default{
             }
         },
         generateNewGame(){
-            this.setInputResult();
             this.requestNextGame();
             this.setNewProgressBar();
         }
@@ -203,6 +172,7 @@ export default{
     mounted() {
         Game.createGame(this.difficulty).then(response => {
             this.game = response.data;
+            console.log(this.game);
         }).
         catch(() => {
             this.$router.push("/error");
@@ -211,3 +181,46 @@ export default{
 }
 </script>
 
+<style scoped>
+#typeNumber{
+    width: 50%;
+}
+.container-numbers{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 30%;
+    margin-left: 30%;
+}
+
+.form-control{
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+#options{
+    display: flex;
+    flex-direction: row;
+}
+
+.btn-alternative:hover {
+    transition: 0.5s;
+    background-color: #673FD7;
+}
+
+.btn-alternative:focus {
+    background-color: #673FD7;
+    color: black;
+}
+</style>

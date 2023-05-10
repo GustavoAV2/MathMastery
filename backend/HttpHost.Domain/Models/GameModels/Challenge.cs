@@ -22,7 +22,7 @@ namespace HttpHost.Domain.Models
             FirstNumber = firstNumber > 0 ? firstNumber : GenerateValueByOperation(MaxNumber);
             LastNumber = lastNumber > 0 ? lastNumber : GenerateValueByOperation(FirstNumber);
         }
-        public float ActualResult
+        public int ActualResult
         {
             get
             {
@@ -50,16 +50,16 @@ namespace HttpHost.Domain.Models
             return _random.Next(1, maxNumber);
         }
 
-        public IOrderedEnumerable<float> GeneratorResultsWithFakes()
+        public List<int> GeneratorResultsWithFakes()
         {
-            var list = new List<float>()
+            var list = new List<int>()
             {
                 ActualResult + _random.Next(1000),
                 ActualResult + _random.Next(100),
                 ActualResult - _random.Next(100),
                 ActualResult
             };
-            return list.OrderBy(item => _random.Next());
+            return list.OrderBy(item => _random.Next()).ToList();
         }
     }
 }

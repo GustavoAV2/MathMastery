@@ -10,6 +10,6 @@ namespace HttpHost.Domain.Dto
         public int FirstNumber { get; set; }
         public int LastNumber { get; set; }
         public int Result { get; set; }
-        public string Difficulty { get; set; }
+        public GameDifficulty Difficulty { get; set; }
     }
 }

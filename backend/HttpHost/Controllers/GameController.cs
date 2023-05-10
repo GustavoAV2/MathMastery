@@ -1,6 +1,7 @@
 using HttpHost.Domain.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using HttpHost.Domain.Models.Enums;
 
 namespace HttpHost.Services.Controllers
 {
@@ -28,7 +29,7 @@ namespace HttpHost.Services.Controllers
         [Route("/game/create/{difficulty}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public IActionResult CreateGame(string difficulty)
+        public IActionResult CreateGame(GameDifficulty difficulty)
         {
             try
             {

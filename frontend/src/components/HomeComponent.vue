@@ -7,7 +7,7 @@
 	</div>
     <div class="container">
         <div class="row">
-            <div class="col-sm" @click="moveToGame('normal')">
+            <div class="col-sm" @click="moveToGame('1')">
                 <h3>Normal</h3>
                 <img src="@/assets/img/ICONS/black-hole-1.png"/>
                 <hr class="my-4 cards-divisor"/>
@@ -16,7 +16,7 @@
                 <h4>Multiplas escolhas</h4>
                 <h4>Cinco desafios</h4>
             </div>
-            <div class="col-sm" @click="moveToGame('hard')">
+            <div class="col-sm" @click="moveToGame('2')">
                 <h3>Dificil</h3>
                 <img src="@/assets/img/ICONS/black-hole-2.png"/>
                 <hr class="my-4 cards-divisor"/>
@@ -25,7 +25,7 @@
                 <h4>Multiplas escolhas</h4>
                 <h4>Cinco desafios</h4>
             </div>
-            <div class="col-sm" @click="moveToGame('genius')">
+            <div class="col-sm" @click="moveToGame('3')">
                 <h3>Genial</h3>
                 <img src="@/assets/img/ICONS/black-hole-3.png"/>
                 <hr />
@@ -38,13 +38,13 @@
         <br>
         <template v-if="!token">
             <router-link to="/register">
-                <button type="button" class="btn btn-primary btn-lg btn-block" @click="moveToGame('normal')">Registrar</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block" @click="moveToRegister()">Registrar</button>
             </router-link>
-            <button class="btn btn-game btn-lg btn-block" @click="createGame(info)">Iniciar desafio</button>
+            <button class="btn btn-game btn-lg btn-block" @click="moveToGame('1')">Iniciar desafio</button>
             <p class="home-message">Registre-se para rankear seu perfil, adicionar amigos e evoluir com eles.</p>
         </template>
         <template v-else>
-            <button class="btn btn-game full-with btn-lg btn-block" @click="createGame(info)">Iniciar desafio</button>
+            <button class="btn btn-game full-with btn-lg btn-block" @click="moveToGame('1')">Iniciar desafio</button>
             <p class="home-message">(Este botão te levara para o modo normal)</p>
         </template>
     </div>
@@ -58,6 +58,9 @@ export default {
         }
     },
     methods:{
+        moveToRegister(){
+            this.$router.push('/register');
+        },
         moveToGame(difficultyParam){
             this.$router.push('/mathgame/' + difficultyParam);
         }
@@ -111,5 +114,35 @@ body{
 }
 .home-message{
     color: black;
+}
+.button-36{
+    width: 50%;
+}
+.col-sm{
+    margin:5px;
+    border-width:2px;
+    border-style:solid;
+    border-color:black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.col-sm:hover{
+    margin:5px;
+    border-width:2px;
+    border-style:solid;
+    border-color:#1ABC9C;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+.col-sm img{
+    width: 120px;
+}
+.card {
+    background-color: #FFFFFF;
+    color: #34495E;
+}
+
+.cards-divisor{
+    border-color: black;
 }
 </style>

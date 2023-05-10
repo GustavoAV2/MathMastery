@@ -8,6 +8,7 @@ namespace HttpHost.Domain.Abstractions
     public abstract class IGame
     {
         public int MaxChallenges = 5;
+        public List<int> RandomResults { get; set; }
         public int ChallengesPlayed
         {
             get
@@ -15,17 +16,19 @@ namespace HttpHost.Domain.Abstractions
                 return ChallengesSolve + ChallengesUnsolved;
             }
         }
-        public abstract int MaxNumber { get; set; }
-        public abstract List<ChallengeOperation> Operations { get; set; }
-        public abstract int ChallengesSolve { get; set; }
-        public abstract int ChallengesUnsolved { get; set; }
-        public abstract Challenge? Challenge { get; set; }
+        public int MaxNumber { get; set; }
+        public List<ChallengeOperation> Operations { get; set; }
+        public int ChallengesSolve { get; set; }
+        public int ChallengesUnsolved { get; set; }
+        public GameDifficulty Difficulty { get; set; }
+        public Challenge? Challenge { get; set; }
 
         public void GenerateNewChallenge()
         {
             Random rnd = new Random();
             int index = rnd.Next(Operations.Count);
             Challenge = new Challenge(operation: Operations[index], maxNumber: MaxNumber);
+            RandomResults = Challenge.GeneratorResultsWithFakes();
         }
 
         public void SetChallenge(int firstNumber, int lastNumber, string operation)
