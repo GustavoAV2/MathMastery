@@ -1,14 +1,14 @@
 # Math Mastery API
 
-Uma plataforma com desafios interativos que visa desenvolver 
-o raciocínio rápido, lógico e matemático. Esse site oferece diferentes níveis de dificuldade 
-para os desafios matemáticos, permitindo que você escolha aqueles que se adequam ao 
+Uma plataforma com desafios interativos que visa desenvolver
+o raciocínio rápido, lógico e matemático. Esse site oferece diferentes níveis de dificuldade
+para os desafios matemáticos, permitindo que você escolha aqueles que se adequam ao
 seu nível de habilidade. Isso significa que iniciantes e especialistas em matemática (em desenvolvimento)
 podem encontrar desafios adequados às suas necessidades e continuar progredindo em suas habilidades.
 
-O objetivo deste projeto é meu próprio desenvolvimento pessoal e 
+O objetivo deste projeto é meu próprio desenvolvimento pessoal e
 criar um ambiente de aprendizado interativo e estimulante para todos os usuários.
-Onde você pode aprimorar suas habilidades e se conectar com 
+Onde você pode aprimorar suas habilidades e se conectar com
 outros colegas para competir e evoluir juntos.
 
 ## Requisitos
@@ -49,6 +49,32 @@ dotnet restore
 
 O servidor estará disponível em `https://localhost:7224/` por padrão.
 
+## Configuração de Docker
+
+1. Criar imagem:
+
+```bash
+docker build -t user/api_mathmastery .
+```
+
+2. Criar e iniciar Container:
+
+```bash
+docker run -p 3000:5173 -d user/api_mathmastery
+```
+
+ou
+
+- Com Docker Compose: [Link para download](https://docs.docker.com/compose/install/)
+
+1. Criar imagem e iniciar container:
+
+```bash
+docker-compose up
+```
+
+Lembrando que as portas seguem a seguinte ordem `suaPorta:portaDoContainer`
+
 ## Endpoints da API
 
 - `GET /api/exemplo`: Retorna todos os exemplos.
@@ -62,18 +88,22 @@ O servidor estará disponível em `https://localhost:7224/` por padrão.
 Explicação breve sobre a estrutura de diretórios da aplicação:
 
 MathMastery:
+
 - `Controllers/`: Contém os controladores da API.
 - `appsettings.json`: Arquivo de configuração da aplicação.
 
 MathMastery.Domain:
+
 - `Models/`: Contém os modelos de dados do projeto.
 - `Entities/`: Contém as entidades que representam os objetos do banco de dados.
 - `Dtos/`: Obejtos de transferencia de dados (Futuramente serão removidos).
 
 MathMastery.Service
+
 - `Services/`: Contém as classes de serviço para manipulação de dados.
 
 MathMastery.Database
+
 - `Data/`: Contém as configurações e o contexto do banco de dados.
 
 ## Contribuindo
@@ -90,8 +120,7 @@ Se você deseja contribuir para este projeto, siga as etapas abaixo:
 
 ## Licença
 
-Este projeto está licenciado sob a Licença _. Consulte o arquivo LICENSE para obter mais informações.
-
+Este projeto está licenciado sob a Licença \_. Consulte o arquivo LICENSE para obter mais informações.
 
 # Frontend
 
