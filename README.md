@@ -1,4 +1,4 @@
-# Math Mastery API
+# Resumo
 
 Uma plataforma com desafios interativos que visa desenvolver
 o raciocínio rápido, lógico e matemático. Esse site oferece diferentes níveis de dificuldade
@@ -10,6 +10,10 @@ O objetivo deste projeto é meu próprio desenvolvimento pessoal e
 criar um ambiente de aprendizado interativo e estimulante para todos os usuários.
 Onde você pode aprimorar suas habilidades e se conectar com
 outros colegas para competir e evoluir juntos.
+
+# API Math Mastery
+
+API desenvolvida em C# ASP .NET Core 6, alimenta e consome o banco de dados SQL e gerencia os desafios do site.
 
 ## Requisitos
 
@@ -41,9 +45,11 @@ dotnet restore
 
 4. Criar banco de dados local
 
-`Add-Migration MigrationName`
+```PM
+Add-Migration MigrationName
 
-`Update-Database`
+Update-Database
+```
 
 5. Compile e execute o projeto `MathMastery`.
 
@@ -106,6 +112,86 @@ MathMastery.Database
 
 - `Data/`: Contém as configurações e o contexto do banco de dados.
 
+# Frontend Math Mastery
+
+Desenvolvido em Vue.Js, com foco em ser intuitivo e pratico aos usuários.
+
+## Pré-requisitos
+
+Antes de começar, verifique se você possui os seguintes requisitos instalados em seu ambiente de desenvolvimento:
+
+- Node.js (versão 18.16.0)
+- npm (versão 6.4.1)
+- Vue CLI (versão 3.2.45)
+
+## Instalação
+
+Siga as etapas abaixo para configurar e executar o projeto localmente:
+
+1. Clone este repositório em sua máquina local:
+
+   ```bash
+   git clone https://github.com/seu-usuario/nome-do-repositorio.git
+   ```
+
+2. Acesse o diretório do projeto:
+
+   ```bash
+   cd nome-do-repositorio
+   ```
+
+3. Instale as dependências do projeto usando o npm:
+
+   ```bash
+   npm install
+   ```
+
+## Uso
+
+Para iniciar o servidor de desenvolvimento e visualizar o projeto em seu navegador, execute o seguinte comando:
+
+```bash
+npm run serve
+```
+
+Após a compilação bem-sucedida, o projeto estará disponível em `http://localhost:8080`.
+
+## Compilação e Empacotamento
+
+Para compilar e empacotar o projeto para produção, utilize o seguinte comando:
+
+```bash
+npm run build
+```
+
+Os arquivos resultantes serão gerados no diretório `dist/`. Você pode implantar esses arquivos em um servidor web para disponibilizar o projeto online.
+
+---
+
+## Licença
+
+### MIT License
+
+Copyright (c) 2023 Gustavo Voltolini
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 ## Contribuindo
 
 Se você deseja contribuir para este projeto, siga as etapas abaixo:
@@ -117,34 +203,6 @@ Se você deseja contribuir para este projeto, siga as etapas abaixo:
 5. Envie suas alterações: `git commit -m 'Adicionando minha nova funcionalidade'`.
 6. Envie para o repositório original: `git push origin minha-nova-funcionalidade`.
 7. Envie uma pull request explicando suas alterações.
-
-## Licença
-
-Este projeto está licenciado sob a Licença \_. Consulte o arquivo LICENSE para obter mais informações.
-
-# Frontend
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
 
 ## Contato
 
