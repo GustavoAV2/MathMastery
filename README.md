@@ -71,7 +71,7 @@ docker run -p 3000:5173 -d user/api_mathmastery
 
 ou
 
-- Com Docker Compose: [Link para download](https://docs.docker.com/compose/install/)
+Com Docker Compose: [Link para download](https://docs.docker.com/compose/install/)
 
 1. Criar imagem e iniciar container:
 
