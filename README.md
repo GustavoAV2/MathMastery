@@ -13,6 +13,8 @@ outros colegas para competir e evoluir juntos.
 
 # API Math Mastery
 
+API desenvolvida em C# ASP .NET Core 6, alimenta e consome o banco de dados SQL e gerencia os desafios do site. 
+
 ## Requisitos
 
 Certifique-se de ter as seguintes ferramentas instaladas em seu sistema local:
@@ -82,7 +84,7 @@ MathMastery.Database
 
 # Frontend Math Mastery
 
-Descrição breve do projeto em Vue.js.
+Desenvolvido em Vue.Js, com foco em ser intuitivo e pratico aos usuários.
 
 ## Pré-requisitos
 
