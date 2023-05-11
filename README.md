@@ -41,9 +41,11 @@ dotnet restore
 
 4. Criar banco de dados local
 
-`Add-Migration MigrationName`
+```PM
+Add-Migration MigrationName
 
-`Update-Database`
+Update-Database
+```
 
 5. Compile e execute o projeto `MathMastery`.
 
