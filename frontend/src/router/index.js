@@ -6,12 +6,12 @@ import HowToPlayView from '../views/HowToPlayView.vue'
 
 import FriendsRequestView from '../views/Profile/FriendsRequestView.vue'
 import SignView from '../views/Profile/SignView.vue'
-import RegisterView from '../views/Profile/RegisterView.vue'
-import SocialView from '../views/Profile/SocialView.vue'
+import RegisterView from '@/views/Profile/RegisterView.vue'
+import SocialView from '@/views/Profile/SocialView.vue'
 
-import ErrorView from '../views/ErrorView.vue'
-import GameView from '../views/MathGame/GameView.vue'
-import GameResultView from '../views/MathGame/GameResultView.vue'
+import ErrorView from '@/views/ErrorView.vue'
+import GameView from '@/views/MathGame/GameView.vue'
+import GameResultView from '@/views/MathGame/GameResultView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

@@ -61,8 +61,8 @@
 </template>
 
 <script>
-import WebHeader from '../components/tools/HeaderComponent.vue';
-import FooterComponent from '../components/tools/FooterComponent.vue';
+import WebHeader from '@/components/tools/HeaderComponent.vue';
+import FooterComponent from '@/components/tools/FooterComponent.vue';
 
 export default {
   components:{WebHeader, FooterComponent},

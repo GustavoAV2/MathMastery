@@ -24,8 +24,8 @@
 <script>
 import User from '@/services/users'
 import alertMixin from '@/mixins/alertMixin'
-import WebHeader from '../../components/tools/HeaderComponent.vue';
-import FooterComponent from '../../components/tools/FooterComponent.vue';
+import WebHeader from '@/components/tools/HeaderComponent.vue';
+import FooterComponent from '@/components/tools/FooterComponent.vue';
 
 export default {
   components:{WebHeader, FooterComponent},

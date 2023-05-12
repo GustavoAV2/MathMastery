@@ -38,8 +38,8 @@
 </template>
 
 <script>
-import WebHeader from '../../components/tools/HeaderComponent.vue';
-import FooterComponent from '../../components/tools/FooterComponent.vue';
+import WebHeader from '@/components/tools/HeaderComponent.vue';
+import FooterComponent from '@/components/tools/FooterComponent.vue';
 import alertMixin from '@/mixins/alertMixin'
 import User from '@/services/users'
 

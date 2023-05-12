@@ -4,8 +4,8 @@
   </template>
   
   <script>
-  import WebHeader from '../../components/tools/HeaderComponent.vue';
-  import Social from '../../components/Profile/SocialComponent.vue';
+  import WebHeader from '@/components/tools/HeaderComponent.vue';
+  import Social from '@/components/Profile/SocialComponent.vue';
   
   export default {
     components:{WebHeader, Social},

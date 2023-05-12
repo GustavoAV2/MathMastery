@@ -12,6 +12,6 @@
 </template>
 
 <script setup>
-  import FooterComponent from '../components/tools/FooterComponent.vue';
+  import FooterComponent from '@/components/tools/FooterComponent.vue';
   import WebHeader from '../components/tools/HeaderComponent.vue';
 </script>

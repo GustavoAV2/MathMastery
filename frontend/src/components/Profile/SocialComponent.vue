@@ -65,7 +65,7 @@
 <script>
 import User from '@/services/users'
 import Friend from '@/services/friends'
-import FooterComponent from '../../components/tools/FooterComponent.vue';
+import FooterComponent from '@/components/tools/FooterComponent.vue';
 
 export default {
     components: {FooterComponent},

@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import WebHeader from '../components/tools/HeaderComponent.vue';
-import HomeComponent from '../components/HomeComponent.vue';
-import FooterComponent from '../components/tools/FooterComponent.vue';
+import WebHeader from '@/components/tools/HeaderComponent.vue';
+import HomeComponent from '@/components/HomeComponent.vue';
+import FooterComponent from '@/components/tools/FooterComponent.vue';
 
 
 export default {
