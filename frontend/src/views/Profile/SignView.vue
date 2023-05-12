@@ -1,7 +1,7 @@
 <template>
   <WebHeader current-page="sign" />
   <div class="container">
-    <h1 class="text-center mt-5">Entrar</h1>
+    <h1 class="text-center mt-3">Entrar</h1>
     <div class="form-fields">
       <div class="form-group">
         <label for="email">Email:</label>
