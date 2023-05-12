@@ -1,7 +1,7 @@
 <template>
   <WebHeader current-page="sign" />
   <div class="container">
-    <h1 class="text-center mt-5">Entrar</h1>
+    <h1 class="text-center mt-3">Entrar</h1>
     <div class="form-fields">
       <div class="form-group">
         <label for="email">Email:</label>
@@ -24,8 +24,8 @@
 <script>
 import User from '@/services/users'
 import alertMixin from '@/mixins/alertMixin'
-import WebHeader from '../../components/tools/HeaderComponent.vue';
-import FooterComponent from '../../components/tools/FooterComponent.vue';
+import WebHeader from '@/components/tools/HeaderComponent.vue';
+import FooterComponent from '@/components/tools/FooterComponent.vue';
 
 export default {
   components:{WebHeader, FooterComponent},

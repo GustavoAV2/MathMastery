@@ -1,7 +1,7 @@
 <template>
   <WebHeader current-page="sign" />
   <div class="container">
-    <h1 class="text-center mt-5">Registro de usuário</h1>
+    <h1 class="text-center mt-3">Registro de usuário</h1>
     <div class="form-fields">
       <div class="form-group">
         <label for="primeiro-nome">Primeiro nome:</label>
@@ -27,7 +27,6 @@
         <label for="confirmar-senha">Confirmar senha:</label>
         <input type="password" v-model="confirm_password" class="form-control" id="confirmar-senha">
       </div>
-      <hr>
       <button class="btn register-btn" @click="save()">Registrar</button>
     </div>
     <div class="text-center mt-3">
@@ -39,8 +38,8 @@
 </template>
 
 <script>
-import WebHeader from '../../components/tools/HeaderComponent.vue';
-import FooterComponent from '../../components/tools/FooterComponent.vue';
+import WebHeader from '@/components/tools/HeaderComponent.vue';
+import FooterComponent from '@/components/tools/FooterComponent.vue';
 import alertMixin from '@/mixins/alertMixin'
 import User from '@/services/users'
 

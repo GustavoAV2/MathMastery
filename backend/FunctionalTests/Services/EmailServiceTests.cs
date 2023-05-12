@@ -20,11 +20,11 @@ namespace HttpHost.Tests.Services
             emailService = new EmailService(loggerMock.Object, configuration);
         }
 
-        [Fact]
-        public void sendEmailTest()
-        {
-            var sent = emailService.SendEmail("gustavoant.voltolini@gmail.com", "Test Email", "Test Email");
-            Assert.True(sent);
-        }
+        //[Fact]
+        //public void sendEmailTest()
+        //{
+        //    var sent = emailService.SendEmail("gustavoant.voltolini@gmail.com", "Test Email", "Test Email");
+        //    Assert.True(sent);
+        //}
     }
 }

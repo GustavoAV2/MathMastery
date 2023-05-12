@@ -24,7 +24,7 @@
 
 <script>
 import User from '@/services/users'
-import WebHeader from '../../components/tools/HeaderComponent.vue';
+import WebHeader from '@/components/tools/HeaderComponent.vue';
 
 export default {
   components:{WebHeader},

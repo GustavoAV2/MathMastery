@@ -142,7 +142,6 @@ namespace HttpHost.Services
             return "";
         }
 
-
         public async Task<User> GetUserIdentity(AuthHeaderDto headerDto)
         {
             var tokenHandler = new JwtSecurityTokenHandler();

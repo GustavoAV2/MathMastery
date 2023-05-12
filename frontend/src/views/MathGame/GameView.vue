@@ -6,8 +6,8 @@
 </template>
   
 <script>
-  import WebHeader from '../../components/tools/HeaderComponent.vue';
-  import Game from '../../components/MathGame/GameComponent.vue';
+  import WebHeader from '@/components/tools/HeaderComponent.vue';
+  import Game from '@/components/MathGame/GameComponent.vue';
   
   export default {
     components:{WebHeader, Game},
