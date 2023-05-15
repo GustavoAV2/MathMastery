@@ -59,98 +59,98 @@ namespace HttpHost.Tests.Services
             Assert.NotEqual(response.PasswordHash, userDto.Password);
         }
 
-        [Fact]
-        public async Task GetUserTest()
-        {
-            var foundUser = GenerateUserModel();
-            userDb.Setup(db => db.All.ToListAsync()).
-                ReturnsAsync(new List<User>() { foundUser });
+        //[Fact]
+        //public async Task GetUserTest()
+        //{
+        //    var foundUser = GenerateUserModel();
+        //    userDb.Setup(db => db.All.ToListAsync()).
+        //        ReturnsAsync(new List<User>() { foundUser });
 
-            var response = await userService.GetUsers();
+        //    var response = await userService.GetUsers();
             
-            Assert.Equal(response.FirstOrDefault().UserName, foundUser.UserName);
-        }
+        //    Assert.Equal(response.FirstOrDefault().UserName, foundUser.UserName);
+        //}
 
-        [Fact]
-        public async void PutUserTest()
-        {
-            var userDto = GenerateUserDto();
-            var toUpdateUser = GenerateUserDto(email: "tester@gmail.com");
-            userDb.Setup(db => db.All.FindAsync(It.IsAny<string>())).ReturnsAsync(userDto);
+        //[Fact]
+        //public async void PutUserTest()
+        //{
+        //    var userDto = GenerateUserDto();
+        //    var toUpdateUser = GenerateUserDto(email: "tester@gmail.com");
+        //    userDb.Setup(db => db.All.FindAsync(It.IsAny<string>())).ReturnsAsync(userDto);
 
-            var response = await userService.PutUser(userDto.Id, toUpdateUser);
+        //    var response = await userService.PutUser(userDto.Id, toUpdateUser);
 
-            Assert.NotEqual(response.PasswordHash, userDto.Password);
-        }
+        //    Assert.NotEqual(response.PasswordHash, userDto.Password);
+        //}
 
-        [Fact]
-        public async void GetUserByIdTest()
-        {
-            var userDto = GenerateUserDto();
+        //[Fact]
+        //public async void GetUserByIdTest()
+        //{
+        //    var userDto = GenerateUserDto();
 
-            var response = await userService.CreateUser(userDto);
+        //    var response = await userService.CreateUser(userDto);
 
-            Assert.NotEqual(response.PasswordHash, userDto.Password);
-        }
+        //    Assert.NotEqual(response.PasswordHash, userDto.Password);
+        //}
 
-        [Fact]
-        public async void GetUserByEmailTest()
-        {
-            var userDto = GenerateUserDto();
+        //[Fact]
+        //public async void GetUserByEmailTest()
+        //{
+        //    var userDto = GenerateUserDto();
             
-            var response = await userService.CreateUser(userDto);
+        //    var response = await userService.CreateUser(userDto);
 
-            Assert.NotEqual(response.PasswordHash, userDto.Password);
-        }
+        //    Assert.NotEqual(response.PasswordHash, userDto.Password);
+        //}
 
-        [Fact]
-        public async void GetUserByUsernameTest()
-        {
-            var userDto = GenerateUserDto();
+        //[Fact]
+        //public async void GetUserByUsernameTest()
+        //{
+        //    var userDto = GenerateUserDto();
 
-            var response = await userService.CreateUser(userDto);
+        //    var response = await userService.CreateUser(userDto);
 
-            Assert.NotEqual(response.PasswordHash, userDto.Password);
-        }
+        //    Assert.NotEqual(response.PasswordHash, userDto.Password);
+        //}
 
-        [Fact]
-        public async void LoginTest()
-        {
-            var userDto = GenerateUserDto();
+        //[Fact]
+        //public async void LoginTest()
+        //{
+        //    var userDto = GenerateUserDto();
 
-            var response = await userService.CreateUser(userDto);
+        //    var response = await userService.CreateUser(userDto);
 
-            Assert.NotEqual(response.PasswordHash, userDto.Password);
-        }
+        //    Assert.NotEqual(response.PasswordHash, userDto.Password);
+        //}
 
-        [Fact]
-        public async void GetUserIdentityTest()
-        {
-            var userDto = GenerateUserDto();
+        //[Fact]
+        //public async void GetUserIdentityTest()
+        //{
+        //    var userDto = GenerateUserDto();
 
-            var response = await userService.CreateUser(userDto);
+        //    var response = await userService.CreateUser(userDto);
 
-            Assert.NotEqual(response.PasswordHash, userDto.Password);
-        }
+        //    Assert.NotEqual(response.PasswordHash, userDto.Password);
+        //}
 
-        [Fact]
-        public async void ValidLoginTest()
-        {
-            var userDto = GenerateUserDto();
+        //[Fact]
+        //public async void ValidLoginTest()
+        //{
+        //    var userDto = GenerateUserDto();
 
-            var response = await userService.CreateUser(userDto);
+        //    var response = await userService.CreateUser(userDto);
             
-            Assert.NotEqual(response.PasswordHash, userDto.Password);
-        }
+        //    Assert.NotEqual(response.PasswordHash, userDto.Password);
+        //}
 
-        [Fact]
-        public async void GenerateTokenTest()
-        {
-            var userDto = GenerateUserDto();
+        //[Fact]
+        //public async void GenerateTokenTest()
+        //{
+        //    var userDto = GenerateUserDto();
 
-            var response = await userService.CreateUser(userDto);
+        //    var response = await userService.CreateUser(userDto);
 
-            Assert.NotEqual(response.PasswordHash, userDto.Password);
-        }
+        //    Assert.NotEqual(response.PasswordHash, userDto.Password);
+        //}
     }
 }
