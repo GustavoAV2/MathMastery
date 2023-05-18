@@ -55,32 +55,6 @@ Update-Database
 
 O servidor estará disponível em `https://localhost:7224/` por padrão.
 
-## Configuração de Docker
-
-1. Criar imagem:
-
-```bash
-docker build -t user/api_mathmastery .
-```
-
-2. Criar e iniciar Container:
-
-```bash
-docker run -p 3000:5173 -d user/api_mathmastery
-```
-
-ou
-
-Com Docker Compose: [Link para download](https://docs.docker.com/compose/install/)
-
-1. Criar imagem e iniciar container:
-
-```bash
-docker-compose up
-```
-
-Lembrando que as portas seguem a seguinte ordem `suaPorta:portaDoContainer`
-
 ## Endpoints da API
 
 - `GET /api/exemplo`: Retorna todos os exemplos.
@@ -165,6 +139,32 @@ npm run build
 ```
 
 Os arquivos resultantes serão gerados no diretório `dist/`. Você pode implantar esses arquivos em um servidor web para disponibilizar o projeto online.
+
+## Configuração de Docker
+
+1. Criar imagem:
+
+```bash
+docker build -t user/api_mathmastery .
+```
+
+2. Criar e iniciar Container:
+
+```bash
+docker run -p 3000:5173 -d user/api_mathmastery
+```
+
+ou
+
+Com Docker Compose: [Link para download](https://docs.docker.com/compose/install/)
+
+1. Criar imagem e iniciar container:
+
+```bash
+docker-compose up
+```
+
+Lembrando que as portas seguem a seguinte ordem `suaPorta:portaDoContainer`
 
 ---
 
