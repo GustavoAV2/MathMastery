@@ -1,8 +1,17 @@
 version: '3'
 services:
-  app:
+  web:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '5000:7224'
+      - 80:80
+    depends_on:
+      - database
+  database:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: YourPassword123
+      ACCEPT_EULA: Y
+    ports:
+      - 1433:1433
