@@ -21,7 +21,7 @@ WORKDIR /app
 COPY --from=build /app/out ./
 
 # Expõe a porta em que a aplicação irá escutar
-EXPOSE 80
+EXPOSE 8000
 
 # Define o comando de inicialização da aplicação
 ENTRYPOINT ["dotnet", "HttpHost.dll"]
