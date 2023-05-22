@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const http = axios.create({
-    baseURL: 'https://localhost:7224/',
+    baseURL: import.meta.env.BACKEND_URL,
     headers: {
         'Authorization': {
             toString() {
