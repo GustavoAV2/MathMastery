@@ -11,7 +11,7 @@
         <label for="senha">Senha:</label>
         <input type="password" v-model="user.password" class="form-control" id="senha">
       </div>
-      <hr>
+      <br>
       <button class="btn register-btn" @click="loginUser()">Entrar</button>
     </div>
     <div class="text-center mt-3">
