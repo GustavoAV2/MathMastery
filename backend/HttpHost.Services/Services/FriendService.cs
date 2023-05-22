@@ -3,13 +3,11 @@ using System.Linq;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using HttpHost.Domain.Dto;
 using HttpHost.Domain.Models;
 using HttpHost.Database.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using HttpHost.Domain.Interfaces.Services;
-using HttpHost.Domain.Dtos;
 
 namespace HttpHost.Services
 {

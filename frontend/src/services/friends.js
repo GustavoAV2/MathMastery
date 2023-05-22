@@ -1,4 +1,4 @@
-import {http} from '../services/config'
+import {http} from '../services/client'
 
 export default{
     sendFriendRequest(friendRequest){

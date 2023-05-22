@@ -25,7 +25,6 @@ namespace HttpHost.Services.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [Route("/game/create/{difficulty}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -44,7 +43,6 @@ namespace HttpHost.Services.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         [Route("/game/next")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
