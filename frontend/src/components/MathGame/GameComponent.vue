@@ -8,7 +8,7 @@
             <h1 class="jumbotron-heading">
                 {{game.challenge.firstNumber}} {{operation}} {{game.challenge.lastNumber}}
             </h1>
-            <p class="lead text-muted">Solve this challenge if you can!</p>
+            <p class="lead text-muted">Resolva o problema, se for capaz!</p>
         </div>
     </section>
 

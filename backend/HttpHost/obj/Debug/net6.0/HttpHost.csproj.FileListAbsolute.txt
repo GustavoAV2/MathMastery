@@ -1,5 +1,4 @@
 C:\MyCode\MathMastery\backend\HttpHost\bin\Debug\net6.0\appsettings.Development.json
-C:\MyCode\MathMastery\backend\HttpHost\bin\Debug\net6.0\appsettings.json
 C:\MyCode\MathMastery\backend\HttpHost\bin\Debug\net6.0\HttpHost.staticwebassets.runtime.json
 C:\MyCode\MathMastery\backend\HttpHost\bin\Debug\net6.0\HttpHost.exe
 C:\MyCode\MathMastery\backend\HttpHost\bin\Debug\net6.0\HttpHost.deps.json

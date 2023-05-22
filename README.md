@@ -11,6 +11,23 @@ criar um ambiente de aprendizado interativo e estimulante para todos os usuário
 Onde você pode aprimorar suas habilidades e se conectar com
 outros colegas para competir e evoluir juntos.
 
+(Prints V1)
+
+### Paginas principais:
+
+![Pagina inicial (Logado)](./docs/images/HomeLoged.png)
+![Pagina social - Seus amigos e seu perfil](./docs/images/SocialLoged.png)
+
+### Modos de desafios:
+
+![Pagina de jogo - Dificuldade normal](./docs/images/NormalGame.png)
+![Pagina de jogo - Dificuldade normal](./docs/images/HardGame.png)
+
+### Login e cadastro:
+
+![Pagina de Login](./docs/images/Login.png)
+![Pagina de Cadastro](./docs/images/Register.png)
+
 # API Math Mastery
 
 API desenvolvida em C# ASP .NET Core 6, alimenta e consome o banco de dados SQL e gerencia os desafios do site.
@@ -52,6 +69,34 @@ Update-Database
 ```
 
 5. Compile e execute o projeto `MathMastery`.
+
+## Configuração com Docker
+
+1. Criar imagem:
+
+```bash
+docker build -t user/api_mathmastery .
+```
+
+2. Criar e iniciar Container:
+
+```bash
+docker run -p 3000:7224 -d user/api_mathmastery
+```
+
+ou
+
+Com Docker Compose: [Link para download](https://docs.docker.com/compose/install/)
+
+1. Criar imagem e iniciar container:
+
+```bash
+docker-compose up
+```
+
+Lembrando que as portas seguem a seguinte ordem `suaPorta:portaDoContainer`
+
+---
 
 O servidor estará disponível em `https://localhost:7224/` por padrão.
 
@@ -140,18 +185,18 @@ npm run build
 
 Os arquivos resultantes serão gerados no diretório `dist/`. Você pode implantar esses arquivos em um servidor web para disponibilizar o projeto online.
 
-## Configuração de Docker
+## Configuração com Docker
 
 1. Criar imagem:
 
 ```bash
-docker build -t user/api_mathmastery .
+docker build -t user/front_mathmastery .
 ```
 
 2. Criar e iniciar Container:
 
 ```bash
-docker run -p 3000:5173 -d user/api_mathmastery
+docker run -p 3000:5173 -d user/front_mathmastery
 ```
 
 ou
