@@ -43,17 +43,17 @@
                             </template>
                             <li class="nav-item">
                                 <form class="form-inline" >
-                                    <button type="submit" class="btn btn-danger" @click="logout()">Logout</button>
+                                    <button type="submit" class="btn btn-danger" @click="logout()">Sair</button>
                                 </form>
                             </li>
                         </template> 
 
                         <template v-else>
                             <li class="nav-item">
-                                <router-link to="/register" class="nav-link">Register</router-link>
+                                <router-link to="/register" class="nav-link">Cadastre-se</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link to="/sign" class="nav-link">Login</router-link>
+                                <router-link to="/sign" class="nav-link">Entrar</router-link>
                             </li>
                         </template> 
                     </ul>
