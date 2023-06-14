@@ -255,3 +255,4 @@ Para dúvidas ou sugestões, sinta-se à vontade para entrar em contato:
 
 - Nome: Gustavo Antunes Voltolini
 - Email: gustavoant.voltolini@gmail.com
+- [Perfil Linkedin](https://www.linkedin.com/in/gustavo-voltolini/)
