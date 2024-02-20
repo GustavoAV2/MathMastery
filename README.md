@@ -2,7 +2,7 @@
 
 Uma plataforma com desafios interativos que visa desenvolver
 o raciocínio rápido, lógico e matemático. Esse site oferece diferentes níveis de dificuldade
-para os desafios matemáticos, permitindo que você escolha aqueles que se adequam ao
+para desafios matemáticos, permitindo que você escolha aqueles que se adequam ao
 seu nível de habilidade. Isso significa que iniciantes e especialistas em matemática (em desenvolvimento)
 podem encontrar desafios adequados às suas necessidades e continuar progredindo em suas habilidades.
 
